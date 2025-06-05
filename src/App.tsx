@@ -18,7 +18,7 @@ const PartnersPage = React.lazy(() => import('./pages/Partners'));
 const ResourcesPage = React.lazy(() => import('./pages/Resources'));
 const BlogPage = React.lazy(() => import('./pages/Blog'));
 const BlogManagementPage = React.lazy(() => import('./pages/BlogManagement'));
-const ApplyPage = React.lazy(() => import('./pages/Apply'));
+const PartnershipPage = React.lazy(() => import('./pages/Apply'));
 const ContactPage = React.lazy(() => import('./pages/Contact'));
 const NotFoundPage = React.lazy(() => import('./pages/NotFound'));
 
@@ -46,10 +46,10 @@ function App() {
                       <Route path="/resources" element={<ResourcesPage />} />
                       <Route path="/blog" element={<BlogPage />} />
                       <Route path="/blog/manage" element={<BlogManagementPage />} />
-                      <Route path="/apply" element={<ApplyPage />} />
+                      <Route path="/partnership" element={<PartnershipPage />} />
                       <Route path="/contact" element={<ContactPage />} />
                       <Route path="/404" element={<NotFoundPage />} />
-                      <Route path="*" element={<Navigate to="/404\" replace />} />
+                      <Route path="*" element={<Navigate to="/404" replace />} />
                     </Routes>
                   </Suspense>
                 </ErrorBoundary>
