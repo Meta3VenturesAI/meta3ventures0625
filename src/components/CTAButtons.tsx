@@ -13,14 +13,14 @@ export const CTAButtons: React.FC<CTAButtonsProps> = ({ variant = 'light', class
   return (
     <div className={`flex flex-wrap items-center gap-4 ${className}`}>
       <Link 
-        to="/partnership"
+        to="/apply"
         className={`inline-flex items-center justify-center px-8 py-4 rounded-lg font-medium transition-all transform hover:scale-105 ${
           isLight 
             ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white'
             : 'bg-white text-indigo-900 hover:bg-gray-100'
         }`}
       >
-        Partner With Us
+        Apply Now
         <ArrowRight className="ml-2 h-5 w-5" />
       </Link>
       <Link 

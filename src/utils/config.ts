@@ -35,8 +35,8 @@ export const config = {
   },
   cta: {
     primary: {
-      text: "Partner With Us",
-      path: "/partnership",
+      text: "Apply Now",
+      path: "/apply",
       icon: "ArrowRight"
     },
     secondary: {

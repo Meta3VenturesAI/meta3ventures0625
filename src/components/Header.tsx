@@ -101,10 +101,10 @@ export const Header: React.FC = () => {
             </Link>
           ))}
           <Link 
-            to="/partnership"
+            to="/apply"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg"
           >
-            Partner With Us
+            Apply Now
           </Link>
         </nav>
 
@@ -174,11 +174,11 @@ export const Header: React.FC = () => {
             </Link>
           ))}
           <Link 
-            to="/partnership"
+            to="/apply"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg text-center"
             onClick={() => setIsMenuOpen(false)}
           >
-            Partner With Us
+            Apply Now
           </Link>
           <Link
             to="/blog/manage"
@@ -193,12 +193,12 @@ export const Header: React.FC = () => {
       {/* Floating CTA for mobile */}
       <div className="md:hidden fixed bottom-6 right-6 z-50">
         <Link
-          to="/partnership"
+          to="/apply"
           className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
         >
-          Partner With Us
+          Apply Now
         </Link>
       </div>
     </header>
   );
-}
+};
