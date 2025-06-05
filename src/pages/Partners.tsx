@@ -1,6 +1,6 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Users, Target, Network } from 'lucide-react';
 import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
 
@@ -108,62 +108,90 @@ const PartnersPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Join Us Section */}
-        <section className="py-16 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
+        {/* Current Partners */}
+        <section className="py-20">
+          <div className="container mx-auto px-4 md:px-6">
+            <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text">
+              Our Partners
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center max-w-6xl mx-auto">
+              {[
+                { name: "Microsoft", logo: "/images/partners/microsoft.png" },
+                { name: "NVIDIA", logo: "/images/partners/nvidia.png" },
+                { name: "OpenAI", logo: "/images/partners/openai.png" },
+                { name: "Nielsen", logo: "/images/partners/nielsen.png" },
+                { name: "PWC", logo: "/images/partners/pwc.png" }
+              ].map((partner) => (
+                <div
+                  key={partner.name}
+                  className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Join Our Network */}
+        <section className="py-20 bg-gradient-to-br from-indigo-900 to-purple-900 text-white">
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Become a Partner
+                Join Our Network
               </h2>
-              <p className="text-xl text-gray-300 mb-8">
-                Join our ecosystem of innovation and help shape the future of technology. 
-                We're always looking for strategic partners who share our vision.
+              <p className="text-xl text-gray-300 mb-12">
+                We're always looking to expand our network of industry experts, advisors, and partners. 
+                If you're passionate about AI, blockchain, and emerging technologies, we'd love to connect.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                 <div className="bg-white/10 p-8 rounded-xl">
-                  <h3 className="text-2xl font-bold mb-4">Strategic Partners</h3>
-                  <ul className="text-left space-y-4 mb-6">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Access to our portfolio companies</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Co-investment opportunities</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Joint innovation initiatives</span>
-                    </li>
-                  </ul>
+                  <div className="p-3 bg-white/20 rounded-lg w-fit mx-auto mb-4">
+                    <Users className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">Become an Advisor</h3>
+                  <p className="text-gray-300 mb-6">
+                    Share your expertise and help shape the future of technology ventures.
+                  </p>
                   <Link 
                     to="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-white text-indigo-900 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center px-6 py-3 bg-white text-indigo-900 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    Become a Partner
+                    Apply as Advisor
                   </Link>
                 </div>
                 <div className="bg-white/10 p-8 rounded-xl">
-                  <h3 className="text-2xl font-bold mb-4">Technology Partners</h3>
-                  <ul className="text-left space-y-4 mb-6">
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Integration opportunities</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Technical collaboration</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="w-5 h-5 text-green-400 mt-1 mr-3" />
-                      <span>Product development synergies</span>
-                    </li>
-                  </ul>
+                  <div className="p-3 bg-white/20 rounded-lg w-fit mx-auto mb-4">
+                    <Target className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">Partner With Us</h3>
+                  <p className="text-gray-300 mb-6">
+                    Explore strategic partnerships and collaboration opportunities.
+                  </p>
                   <Link 
                     to="/contact"
-                    className="inline-flex items-center px-8 py-4 bg-white text-indigo-900 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="inline-flex items-center px-6 py-3 bg-white text-indigo-900 rounded-lg hover:bg-gray-100 transition-colors"
                   >
-                    Partner With Us
+                    Discuss Partnership
+                  </Link>
+                </div>
+                <div className="bg-white/10 p-8 rounded-xl">
+                  <div className="p-3 bg-white/20 rounded-lg w-fit mx-auto mb-4">
+                    <Network className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">Join Our Network</h3>
+                  <p className="text-gray-300 mb-6">
+                    Connect with our ecosystem of innovators and industry leaders.
+                  </p>
+                  <Link 
+                    to="/contact"
+                    className="inline-flex items-center px-6 py-3 bg-white text-indigo-900 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Join Network
                   </Link>
                 </div>
               </div>
