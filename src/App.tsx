@@ -9,6 +9,7 @@ import LoadingSpinner from './components/LoadingSpinner';
 import { AuthProvider } from './contexts/AuthContext';
 import { initializeTracking } from './lib/tracking';
 import { ErrorFallback } from './components/ErrorFallback';
+import { Toast } from './components/Toast';
 
 // Lazy load pages for better performance
 const ServicesPage = React.lazy(() => import('./pages/Services'));
@@ -49,12 +50,13 @@ function App() {
                       <Route path="/apply" element={<ApplyPage />} />
                       <Route path="/contact" element={<ContactPage />} />
                       <Route path="/404" element={<NotFoundPage />} />
-                      <Route path="*" element={<Navigate to="/404\" replace />} />
+                      <Route path="*" element={<Navigate to="/404" replace />} />
                     </Routes>
                   </Suspense>
                 </ErrorBoundary>
               </main>
               <Footer />
+              <Toast />
             </div>
           </Router>
         </ErrorBoundary>
