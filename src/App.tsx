@@ -49,7 +49,7 @@ function App() {
                       <Route path="/partnership" element={<PartnershipPage />} />
                       <Route path="/contact" element={<ContactPage />} />
                       <Route path="/404" element={<NotFoundPage />} />
-                      <Route path="*" element={<Navigate to="/404" replace />} />
+                      <Route path="*" element={<Navigate to="/404\" replace />} />
                     </Routes>
                   </Suspense>
                 </ErrorBoundary>
