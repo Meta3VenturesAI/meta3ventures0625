@@ -36,7 +36,7 @@ export const Contact: React.FC = () => {
             Get in Touch
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Ready to embark on your Web3 journey? Contact us today to discuss how 
+            Ready to embark on your AI journey? Contact us today to discuss how 
             we can help transform your business through innovative technology solutions.
           </p>
         </div>

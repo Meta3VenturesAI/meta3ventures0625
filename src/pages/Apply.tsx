@@ -50,7 +50,10 @@ const ApplyPage: React.FC = () => {
 
             <form onSubmit={onSubmit} className="space-y-8">
               <div className="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl shadow-lg">
-                <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Company Information</h2>
+                <h2 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white flex items-center">
+                  <Building className="w-6 h-6 mr-3 text-indigo-600 dark:text-indigo-400" />
+                  Company Information
+                </h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -63,7 +66,7 @@ const ApplyPage: React.FC = () => {
                       name="companyName"
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     />
                   </div>
 
@@ -76,7 +79,8 @@ const ApplyPage: React.FC = () => {
                       id="website"
                       name="website"
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      placeholder="https://yourcompany.com"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     />
                   </div>
 
@@ -90,7 +94,7 @@ const ApplyPage: React.FC = () => {
                       name="founderName"
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     />
                   </div>
 
@@ -104,8 +108,28 @@ const ApplyPage: React.FC = () => {
                       name="email"
                       required
                       disabled={isSubmitting}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                     />
+                  </div>
+
+                  <div className="md:col-span-2">
+                    <label htmlFor="stage" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Company Stage *
+                    </label>
+                    <select
+                      id="stage"
+                      name="stage"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    >
+                      <option value="">Select stage</option>
+                      <option value="idea">Idea Stage</option>
+                      <option value="mvp">MVP/Prototype</option>
+                      <option value="early-revenue">Early Revenue</option>
+                      <option value="growth">Growth Stage</option>
+                      <option value="scale">Scale Stage</option>
+                    </select>
                   </div>
                 </div>
 
@@ -119,23 +143,54 @@ const ApplyPage: React.FC = () => {
                     required
                     rows={4}
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                    placeholder="Tell us about your company and vision..."
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    placeholder="Tell us about your company, vision, and what problem you're solving..."
                   />
                 </div>
 
-                <div className="mt-6">
-                  <label htmlFor="fundingNeeds" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    How much funding are you looking to raise? *
-                  </label>
-                  <input
-                    type="text"
-                    id="fundingNeeds"
-                    name="fundingNeeds"
-                    required
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <label htmlFor="fundingNeeds" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Funding Amount Sought *
+                    </label>
+                    <select
+                      id="fundingNeeds"
+                      name="fundingNeeds"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    >
+                      <option value="">Select amount</option>
+                      <option value="under-500k">Under $500K</option>
+                      <option value="500k-1m">$500K - $1M</option>
+                      <option value="1m-5m">$1M - $5M</option>
+                      <option value="5m-10m">$5M - $10M</option>
+                      <option value="over-10m">Over $10M</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="industry" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Industry Focus *
+                    </label>
+                    <select
+                      id="industry"
+                      name="industry"
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    >
+                      <option value="">Select industry</option>
+                      <option value="ai-ml">AI & Machine Learning</option>
+                      <option value="blockchain">Blockchain & Web3</option>
+                      <option value="fintech">FinTech</option>
+                      <option value="healthtech">HealthTech</option>
+                      <option value="edtech">EdTech</option>
+                      <option value="enterprise">Enterprise Software</option>
+                      <option value="consumer">Consumer Technology</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="mt-6">
@@ -147,7 +202,22 @@ const ApplyPage: React.FC = () => {
                     id="pitch"
                     name="pitch"
                     disabled={isSubmitting}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    placeholder="https://drive.google.com/..."
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  />
+                </div>
+
+                <div className="mt-6">
+                  <label htmlFor="additionalInfo" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    Additional Information
+                  </label>
+                  <textarea
+                    id="additionalInfo"
+                    name="additionalInfo"
+                    rows={3}
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    placeholder="Any additional information you'd like to share..."
                   />
                 </div>
               </div>
@@ -156,7 +226,7 @@ const ApplyPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || state.submitting}
-                  className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg flex items-center justify-center transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg flex items-center justify-center transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
                 >
                   {isSubmitting || state.submitting ? (
                     <>

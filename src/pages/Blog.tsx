@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
 import { Search, Calendar, Clock, User, Tag, ArrowRight, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useForm } from '@formspree/react';
-import { BlogPost, filterPosts } from '../utils/blog';
+import { filterPosts } from '../utils/blog';
 import toast from 'react-hot-toast';
 
 const BlogPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [state, handleSubmit] = useForm(
-    import.meta.env.VITE_FORMSPREE_NEWSLETTER_KEY || "xleqwgkp"
+    import.meta.env.VITE_FORMSPREE_NEWSLETTER_KEY || "xdkgwaaa"
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
 

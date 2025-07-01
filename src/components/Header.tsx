@@ -82,7 +82,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center">
           <Link 
             to="/" 
-            className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text"
+            className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text hover:scale-105 transition-transform"
           >
             Meta3Ventures
           </Link>
@@ -93,7 +93,7 @@ export const Header: React.FC = () => {
             <Link 
               key={item.path}
               to={item.path}
-              className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors ${
+              className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium ${
                 isActivePath(item.path) ? 'text-indigo-600 dark:text-indigo-400' : ''
               }`}
             >
@@ -102,7 +102,7 @@ export const Header: React.FC = () => {
           ))}
           <Link 
             to="/apply"
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg"
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg font-medium"
           >
             Apply Now
           </Link>
@@ -137,10 +137,10 @@ export const Header: React.FC = () => {
             </button>
             
             {isAdminMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2">
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50">
                 <Link
                   to="/blog/manage"
-                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   onClick={() => setIsAdminMenuOpen(false)}
                 >
                   Blog Management
@@ -160,12 +160,12 @@ export const Header: React.FC = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg py-4 px-6 flex flex-col space-y-4 animate-fadeIn">
+        <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg py-4 px-6 flex flex-col space-y-4 animate-fadeIn z-40">
           {menuItems.map((item) => (
             <Link 
               key={item.path}
               to={item.path}
-              className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2 ${
+              className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2 font-medium ${
                 isActivePath(item.path) ? 'text-indigo-600 dark:text-indigo-400' : ''
               }`}
               onClick={() => setIsMenuOpen(false)}
@@ -175,14 +175,14 @@ export const Header: React.FC = () => {
           ))}
           <Link 
             to="/apply"
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg text-center"
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg text-center font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
             Apply Now
           </Link>
           <Link
             to="/blog/manage"
-            className="text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2"
+            className="text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2 font-medium"
             onClick={() => setIsMenuOpen(false)}
           >
             Blog Management
