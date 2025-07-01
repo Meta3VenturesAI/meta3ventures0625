@@ -1,14 +1,16 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { RefreshCw, Home } from 'lucide-react';
+import { RefreshCw, Home, AlertTriangle } from 'lucide-react';
 
 interface Props {
   children: ReactNode;
+  FallbackComponent?: React.ComponentType<any>;
 }
 
 interface State {
   hasError: boolean;
   error?: Error;
+  errorInfo?: ErrorInfo;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -22,26 +24,59 @@ class ErrorBoundary extends Component<Props, State> {
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
+    
+    // Log to external service in production
+    if (process.env.NODE_ENV === 'production') {
+      // You can integrate with services like Sentry here
+      console.error('Production error logged:', {
+        error: error.message,
+        stack: error.stack,
+        componentStack: errorInfo.componentStack
+      });
+    }
+    
+    this.setState({ errorInfo });
   }
+
+  private handleRetry = () => {
+    this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+  };
 
   public render() {
     if (this.state.hasError) {
+      if (this.props.FallbackComponent) {
+        return <this.props.FallbackComponent error={this.state.error} resetErrorBoundary={this.handleRetry} />;
+      }
+
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Oops! Something went wrong.
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-md">
-              We apologize for the inconvenience. Please try refreshing the page or return to the homepage.
-            </p>
+          <div className="text-center max-w-md">
+            <div className="mb-6">
+              <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Oops! Something went wrong
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                We apologize for the inconvenience. Please try refreshing the page or return to the homepage.
+              </p>
+            </div>
+            
+            {process.env.NODE_ENV === 'development' && this.state.error && (
+              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-left">
+                <h3 className="text-sm font-medium text-red-800 dark:text-red-200 mb-2">Error Details:</h3>
+                <pre className="text-xs text-red-700 dark:text-red-300 overflow-auto">
+                  {this.state.error.message}
+                </pre>
+              </div>
+            )}
+            
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <button
-                onClick={() => window.location.reload()}
+                onClick={this.handleRetry}
                 className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
               >
                 <RefreshCw className="mr-2 h-5 w-5" />
-                Refresh Page
+                Try Again
               </button>
               <Link 
                 to="/"
