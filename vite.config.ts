@@ -41,7 +41,7 @@ export default defineConfig({
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
               },
-              cacheKeyWillBeUsed: async ({ request }) => {
+              cacheKeyWillBeUsed: ({ request }) => {
                 return `${request.url}?v=1`;
               }
             }
