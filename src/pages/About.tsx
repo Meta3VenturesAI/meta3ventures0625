@@ -77,8 +77,8 @@ const AboutPage: React.FC = () => {
                 <div className="text-gray-600 dark:text-gray-300">Portfolio Companies</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">$250M+</div>
-                <div className="text-gray-600 dark:text-gray-300">Capital Deployed</div>
+                <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">🌀</div>
+                <div className="text-gray-600 dark:text-gray-300">Value Creation Flywheel</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">7+</div>
