@@ -10,27 +10,27 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "Nielsen",
-      logo: "/images/partners/nielsen.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/06/Nielsen-Logo.png",
       link: "https://www.nielsen.com"
     },
     {
       name: "PWC",
-      logo: "/images/partners/pwc.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/06/PwC-Logo.png",
       link: "https://www.pwc.com"
     },
     {
       name: "OpenAI",
-      logo: "/images/partners/openai.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png",
       link: "https://openai.com"
     },
     {
       name: "NVIDIA",
-      logo: "/images/partners/nvidia.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/11/Nvidia-Logo.png",
       link: "https://www.nvidia.com"
     },
     {
       name: "Microsoft",
-      logo: "/images/partners/microsoft.png",
+      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png",
       link: "https://www.microsoft.com"
     }
   ];

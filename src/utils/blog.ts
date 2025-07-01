@@ -46,7 +46,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 15, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
     },
     category: "ai",
     tags: ["Artificial Intelligence", "Machine Learning", "Innovation"],
@@ -107,7 +107,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 10, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
     },
     category: "blockchain",
     tags: ["Web3", "Blockchain", "Infrastructure"],
@@ -172,7 +172,7 @@ export const blogPosts: BlogPost[] = [
     date: "April 5, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
     },
     category: "ai",
     tags: ["Agentic AI", "Automation", "Business Intelligence"],

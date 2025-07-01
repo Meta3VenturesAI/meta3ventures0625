@@ -14,29 +14,29 @@ interface BlogPost {
 export const Blog: React.FC = () => {
   const blogPosts: BlogPost[] = [
     {
-      title: "The Future of DeFi: Trends to Watch in 2025",
-      excerpt: "Explore emerging trends in decentralized finance and how they're reshaping the financial landscape for businesses and consumers alike.",
-      image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg",
+      title: "The Future of AI: Trends Shaping 2025 and Beyond",
+      excerpt: "Explore the transformative AI trends that are revolutionizing industries and creating new opportunities for innovation and growth.",
+      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
       date: "April 15, 2025",
-      author: "Alexandra Chen",
-      category: "DeFi",
+      author: "Liron Langer",
+      category: "AI",
       readTime: "8 min read"
     },
     {
-      title: "Implementing Zero-Knowledge Proofs in Enterprise Solutions",
-      excerpt: "A technical deep dive into how zero-knowledge proofs can enhance privacy and security in enterprise blockchain implementations.",
-      image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg",
+      title: "Building Resilient Web3 Infrastructure",
+      excerpt: "A deep dive into the essential components of robust Web3 infrastructure and best practices for scalable blockchain applications.",
+      image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
       date: "April 2, 2025",
-      author: "David Kim",
-      category: "Security",
+      author: "Liron Langer",
+      category: "Blockchain",
       readTime: "12 min read"
     },
     {
-      title: "AI and Blockchain: Creating Synergies for Business Innovation",
-      excerpt: "How the convergence of artificial intelligence and blockchain technology is opening new frontiers for business transformation.",
-      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+      title: "The Rise of Agentic AI Systems",
+      excerpt: "Understanding how autonomous AI agents are transforming business operations and creating new possibilities for intelligent automation.",
+      image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
       date: "March 27, 2025",
-      author: "Sarah Washington",
+      author: "Liron Langer",
       category: "Innovation",
       readTime: "10 min read"
     }
@@ -50,8 +50,8 @@ export const Blog: React.FC = () => {
             Insights & Perspectives
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Stay informed with the latest trends, insights, and innovations in blockchain,
-            Web3, and emerging technologies.
+            Stay informed with the latest trends, insights, and innovations in AI,
+            blockchain, and emerging technologies.
           </p>
         </div>
 
