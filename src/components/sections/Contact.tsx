@@ -1,9 +1,32 @@
-import React from 'react';
-import { MapPin, Phone, Mail, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { useForm } from '@formspree/react';
+import toast from 'react-hot-toast';
 
 export const Contact: React.FC = () => {
-  const [state, handleSubmit] = useForm("mldbpggn");
+  const [state, handleSubmit] = useForm(
+    import.meta.env.VITE_FORMSPREE_CONTACT_KEY || "mldbpggn"
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      await handleSubmit(e);
+      if (state.succeeded) {
+        toast.success('Message sent successfully! We\'ll get back to you soon.');
+        // Reset form
+        (e.target as HTMLFormElement).reset();
+      }
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+      console.error('Form submission error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section id="contact" className="py-20 bg-white dark:bg-gray-800">
@@ -80,7 +103,7 @@ export const Contact: React.FC = () => {
           </div>
 
           <div className="bg-gray-50 dark:bg-gray-700 p-8 rounded-xl shadow-lg">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Full Name *
@@ -90,7 +113,8 @@ export const Contact: React.FC = () => {
                   type="text"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -103,7 +127,8 @@ export const Contact: React.FC = () => {
                   type="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -116,7 +141,8 @@ export const Contact: React.FC = () => {
                   type="text"
                   name="subject"
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -129,16 +155,17 @@ export const Contact: React.FC = () => {
                   name="message"
                   rows={5}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all"
+                  disabled={isSubmitting}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                disabled={state.submitting}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={isSubmitting || state.submitting}
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {state.submitting ? (
+                {isSubmitting || state.submitting ? (
                   <>
                     <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -155,13 +182,15 @@ export const Contact: React.FC = () => {
               </button>
 
               {state.succeeded && (
-                <div className="mt-4 p-4 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 rounded-lg text-center animate-fadeIn">
+                <div className="mt-4 p-4 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 rounded-lg text-center animate-fadeIn flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 mr-2" />
                   Thank you for your message! We'll get back to you soon.
                 </div>
               )}
 
               {state.errors?.length > 0 && (
-                <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded-lg text-center animate-fadeIn">
+                <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded-lg text-center animate-fadeIn flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 mr-2" />
                   There was an error sending your message. Please try again.
                 </div>
               )}

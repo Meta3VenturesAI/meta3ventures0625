@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
-import { Search, Calendar, Clock, User, Tag, ArrowRight, Mail } from 'lucide-react';
+import { Search, Calendar, Clock, User, Tag, ArrowRight, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useForm } from '@formspree/react';
 import { BlogPost, filterPosts } from '../utils/blog';
+import toast from 'react-hot-toast';
 
 const BlogPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [state, handleSubmit] = useForm("xleqwgkp");
+  const [state, handleSubmit] = useForm(
+    import.meta.env.VITE_FORMSPREE_NEWSLETTER_KEY || "xleqwgkp"
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const categories = [
     { id: 'all', name: 'All Posts' },
@@ -19,6 +23,25 @@ const BlogPage: React.FC = () => {
   ];
 
   const filteredPosts = filterPosts(searchQuery, selectedCategory);
+
+  const onNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      await handleSubmit(e);
+      if (state.succeeded) {
+        toast.success('Thank you for subscribing! You\'ll receive our next newsletter soon.');
+        // Reset form
+        (e.target as HTMLFormElement).reset();
+      }
+    } catch (error) {
+      toast.error('Failed to subscribe. Please try again.');
+      console.error('Newsletter subscription error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -173,21 +196,22 @@ const BlogPage: React.FC = () => {
                 <p className="text-xl text-gray-300 mb-8">
                   Subscribe to our newsletter for the latest insights on AI, blockchain, and emerging technologies.
                 </p>
-                <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+                <form onSubmit={onNewsletterSubmit} className="max-w-md mx-auto">
                   <div className="flex flex-col sm:flex-row gap-4">
                     <input
                       type="email"
                       name="email"
                       required
+                      disabled={isSubmitting}
                       placeholder="Enter your email"
-                      className="flex-grow px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+                      className="flex-grow px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                     <button
                       type="submit"
-                      disabled={state.submitting}
-                      className="px-8 py-3 bg-white text-indigo-900 rounded-lg font-medium hover:bg-gray-100 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                      disabled={isSubmitting || state.submitting}
+                      className="px-8 py-3 bg-white text-indigo-900 rounded-lg font-medium hover:bg-gray-100 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
                     >
-                      {state.submitting ? (
+                      {isSubmitting || state.submitting ? (
                         <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-900"></div>
                       ) : (
                         'Subscribe'
@@ -195,10 +219,19 @@ const BlogPage: React.FC = () => {
                     </button>
                   </div>
                 </form>
+                
                 {state.succeeded && (
-                  <p className="mt-4 text-green-400 animate-fadeIn">
+                  <div className="mt-4 p-3 bg-green-500/20 border border-green-500/30 rounded-lg text-green-200 animate-fadeIn flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 mr-2" />
                     Thank you for subscribing! You'll receive our next newsletter soon.
-                  </p>
+                  </div>
+                )}
+
+                {state.errors?.length > 0 && (
+                  <div className="mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-200 animate-fadeIn flex items-center justify-center">
+                    <AlertCircle className="w-5 h-5 mr-2" />
+                    Failed to subscribe. Please try again.
+                  </div>
                 )}
               </div>
             </div>

@@ -3,12 +3,23 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { performanceMonitor, measureWebVitals } from './lib/performance';
-import { validateEnvironment } from './lib/security';
+import { validateEnvironment } from './lib/validation';
+import { checkSupabaseConnection } from './lib/supabase';
 
 // Validate environment variables
-if (!validateEnvironment()) {
-  console.error('Environment validation failed. Please check your configuration.');
+const envValid = validateEnvironment();
+if (!envValid) {
+  console.warn('Some environment variables are missing. Please check your .env file.');
 }
+
+// Check Supabase connection
+checkSupabaseConnection().then(connected => {
+  if (connected) {
+    console.log('✅ Supabase connection established');
+  } else {
+    console.warn('⚠️ Supabase connection failed - using fallback mode');
+  }
+});
 
 // Initialize performance monitoring
 if (typeof window !== 'undefined') {
