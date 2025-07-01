@@ -10,27 +10,27 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "Nielsen",
-      logo: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/nielsen_logo.png",
+      logo: "/images/partners/nielsen.png",
       link: "https://www.nielsen.com"
     },
     {
       name: "PWC",
-      logo: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/pwc_logo.png",
+      logo: "/images/partners/pwc.png",
       link: "https://www.pwc.com"
     },
     {
       name: "OpenAI",
-      logo: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/openai_logo.png",
+      logo: "/images/partners/openai.png",
       link: "https://openai.com"
     },
     {
       name: "NVIDIA",
-      logo: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/nvidia_logo.png",
+      logo: "/images/partners/nvidia.png",
       link: "https://www.nvidia.com"
     },
     {
       name: "Microsoft",
-      logo: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/microsoft_logo.png",
+      logo: "/images/partners/microsoft.png",
       link: "https://www.microsoft.com"
     }
   ];
@@ -61,6 +61,18 @@ export const Partners: React.FC = () => {
                 alt={partner.name}
                 className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  // Fallback to a simple text representation if image fails
+                  target.style.display = 'none';
+                  const parent = target.parentElement;
+                  if (parent && !parent.querySelector('.fallback-text')) {
+                    const fallback = document.createElement('div');
+                    fallback.className = 'fallback-text text-gray-600 dark:text-gray-300 font-semibold text-sm';
+                    fallback.textContent = partner.name;
+                    parent.appendChild(fallback);
+                  }
+                }}
               />
             </a>
           ))}

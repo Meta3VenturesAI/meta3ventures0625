@@ -113,9 +113,10 @@ const AboutPage: React.FC = () => {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-lg"></div>
                 <img 
-                  src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg"
+                  src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -167,9 +168,14 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
                     <img 
-                      src="https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
+                      src="/images/liron-langer.jpg"
                       alt="Liron Langer"
                       className="w-full h-full object-cover"
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400";
+                      }}
                     />
                   </div>
                   <div className="p-8">
