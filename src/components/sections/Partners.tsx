@@ -61,18 +61,6 @@ export const Partners: React.FC = () => {
                 alt={partner.name}
                 className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  // Fallback to a simple text representation if image fails
-                  target.style.display = 'none';
-                  const parent = target.parentElement;
-                  if (parent && !parent.querySelector('.fallback-text')) {
-                    const fallback = document.createElement('div');
-                    fallback.className = 'fallback-text text-gray-600 dark:text-gray-300 font-semibold text-sm';
-                    fallback.textContent = partner.name;
-                    parent.appendChild(fallback);
-                  }
-                }}
               />
             </a>
           ))}

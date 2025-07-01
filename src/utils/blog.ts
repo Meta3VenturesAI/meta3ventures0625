@@ -112,6 +112,71 @@ export const blogPosts: BlogPost[] = [
     category: "blockchain",
     tags: ["Web3", "Blockchain", "Infrastructure"],
     readTime: "12 min read"
+  },
+  {
+    id: '3',
+    title: "The Rise of Agentic AI Systems",
+    excerpt: "Understanding how autonomous AI agents are transforming business operations and creating new possibilities for intelligent automation.",
+    content: `
+      # The Rise of Agentic AI Systems
+
+      Agentic AI represents a paradigm shift in artificial intelligence, moving beyond reactive systems to proactive, goal-oriented agents that can operate autonomously in complex environments.
+
+      ## What Makes AI Agentic?
+
+      Agentic AI systems possess several key characteristics:
+
+      - **Autonomy**: Ability to operate without constant human oversight
+      - **Goal-oriented behavior**: Working towards specific objectives
+      - **Environmental awareness**: Understanding and adapting to context
+      - **Learning capabilities**: Improving performance over time
+
+      ## Applications in Business
+
+      ### 1. Customer Service
+      - Intelligent chatbots that understand context
+      - Proactive issue resolution
+      - Personalized customer experiences
+
+      ### 2. Operations Management
+      - Supply chain optimization
+      - Predictive maintenance
+      - Resource allocation
+
+      ### 3. Decision Support
+      - Data analysis and insights
+      - Risk assessment
+      - Strategic planning assistance
+
+      ## Implementation Challenges
+
+      While promising, agentic AI systems face several challenges:
+
+      - **Trust and reliability**: Ensuring consistent performance
+      - **Ethical considerations**: Maintaining human oversight
+      - **Integration complexity**: Working with existing systems
+      - **Scalability**: Managing multiple agents effectively
+
+      ## The Future of Agentic AI
+
+      As these systems mature, we can expect to see:
+
+      - More sophisticated multi-agent collaborations
+      - Better human-AI interaction models
+      - Industry-specific specialized agents
+      - Enhanced safety and control mechanisms
+
+      The key to successful implementation lies in thoughtful design, gradual deployment, and continuous monitoring to ensure these powerful systems serve human interests effectively.
+    `,
+    image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
+    date: "April 5, 2025",
+    author: {
+      name: "Liron Langer",
+      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+    },
+    category: "ai",
+    tags: ["Agentic AI", "Automation", "Business Intelligence"],
+    readTime: "10 min read"
   }
 ];
 

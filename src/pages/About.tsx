@@ -172,10 +172,6 @@ const AboutPage: React.FC = () => {
                       alt="Liron Langer"
                       className="w-full h-full object-cover"
                       loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400";
-                      }}
                     />
                   </div>
                   <div className="p-8">
