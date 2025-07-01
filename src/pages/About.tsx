@@ -168,7 +168,7 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
                     <img 
-                      src="/images/liron-langer.jpg"
+                      src="https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
                       alt="Liron Langer"
                       className="w-full h-full object-cover"
                       loading="lazy"
