@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, Clock, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface BlogPost {
   title: string;
@@ -9,6 +10,7 @@ interface BlogPost {
   author: string;
   category: string;
   readTime: string;
+  slug: string;
 }
 
 export const Blog: React.FC = () => {
@@ -20,7 +22,8 @@ export const Blog: React.FC = () => {
       date: "April 15, 2025",
       author: "Liron Langer",
       category: "AI",
-      readTime: "8 min read"
+      readTime: "8 min read",
+      slug: "future-of-ai-trends-2025"
     },
     {
       title: "Building Resilient Web3 Infrastructure",
@@ -29,7 +32,8 @@ export const Blog: React.FC = () => {
       date: "April 2, 2025",
       author: "Liron Langer",
       category: "Blockchain",
-      readTime: "12 min read"
+      readTime: "12 min read",
+      slug: "building-resilient-web3-infrastructure"
     },
     {
       title: "The Rise of Agentic AI Systems",
@@ -38,7 +42,8 @@ export const Blog: React.FC = () => {
       date: "March 27, 2025",
       author: "Liron Langer",
       category: "Innovation",
-      readTime: "10 min read"
+      readTime: "10 min read",
+      slug: "rise-of-agentic-ai-systems"
     }
   ];
 
@@ -86,7 +91,7 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  {post.title}
+                  <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {post.excerpt}
@@ -95,13 +100,13 @@ export const Blog: React.FC = () => {
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     {post.date}
                   </span>
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={`/blog/${post.slug}`}
                     className="text-indigo-600 dark:text-indigo-400 font-medium flex items-center group-hover:underline"
                   >
                     Read More
                     <ArrowRight className="ml-1 w-4 h-4" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -109,13 +114,13 @@ export const Blog: React.FC = () => {
         </div>
 
         <div className="text-center mt-12">
-          <a 
-            href="#" 
+          <Link 
+            to="/blog"
             className="bg-white dark:bg-gray-800 border border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors"
           >
             View All Articles
             <ArrowRight className="ml-2 h-5 w-5" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

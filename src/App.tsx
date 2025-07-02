@@ -26,6 +26,11 @@ const NotFoundPage = React.lazy(() => import('./pages/NotFound'));
 function App() {
   useEffect(() => {
     initializeTracking();
+    
+    // Force HTTPS redirect on client side
+    if (typeof window !== 'undefined' && window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
+      window.location.replace(window.location.href.replace('http:', 'https:'));
+    }
   }, []);
 
   return (
@@ -46,11 +51,12 @@ function App() {
                       <Route path="/partners" element={<PartnersPage />} />
                       <Route path="/resources" element={<ResourcesPage />} />
                       <Route path="/blog" element={<BlogPage />} />
+                      <Route path="/blog/:slug" element={<BlogPage />} />
                       <Route path="/blog/manage" element={<BlogManagementPage />} />
                       <Route path="/apply" element={<ApplyPage />} />
                       <Route path="/contact" element={<ContactPage />} />
                       <Route path="/404" element={<NotFoundPage />} />
-                      <Route path="*" element={<Navigate to="/404\" replace />} />
+                      <Route path="*" element={<Navigate to="/404" replace />} />
                     </Routes>
                   </Suspense>
                 </ErrorBoundary>

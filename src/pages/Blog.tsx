@@ -4,6 +4,7 @@ import { Search, Calendar, Clock, User, Tag, ArrowRight, Mail, CheckCircle, Aler
 import { useForm } from '@formspree/react';
 import { filterPosts } from '../utils/blog';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const BlogPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -134,7 +135,7 @@ const BlogPage: React.FC = () => {
                     </div>
 
                     <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                      <a href={`/blog/${post.id}`}>{post.title}</a>
+                      <Link to={`/blog/${post.id}`}>{post.title}</Link>
                     </h2>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -167,13 +168,13 @@ const BlogPage: React.FC = () => {
                           {post.author.name}
                         </span>
                       </div>
-                      <a
-                        href={`/blog/${post.id}`}
+                      <Link
+                        to={`/blog/${post.id}`}
                         className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline transform hover:translate-x-1 transition-transform"
                       >
                         Read More
                         <ArrowRight size={16} className="ml-1" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </article>

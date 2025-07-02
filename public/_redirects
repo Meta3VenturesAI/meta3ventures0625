@@ -1,7 +1,9 @@
 # Netlify redirects file
 
-# Handle client-side routing
-/*    /index.html   200
+# Force HTTPS
+http://meta3ventures.com/*    https://meta3ventures.com/:splat    301!
+http://www.meta3ventures.com/*    https://meta3ventures.com/:splat    301!
+https://www.meta3ventures.com/*    https://meta3ventures.com/:splat    301!
 
 # Redirect old URLs if any
 /home    /    301
@@ -10,7 +12,5 @@
 /portfolio.html    /portfolio    301
 /contact.html    /contact    301
 
-# Force HTTPS
-http://meta3ventures.com/*    https://meta3ventures.com/:splat    301!
-http://www.meta3ventures.com/*    https://meta3ventures.com/:splat    301!
-https://www.meta3ventures.com/*    https://meta3ventures.com/:splat    301!
+# Handle client-side routing
+/*    /index.html   200
