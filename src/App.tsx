@@ -7,7 +7,6 @@ import { Footer } from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
 import { AuthProvider } from './contexts/AuthContext';
-import { initializeTracking } from './lib/tracking';
 import { ErrorFallback } from './components/ErrorFallback';
 import { Toast } from './components/Toast';
 
@@ -26,11 +25,20 @@ const NotFoundPage = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
   useEffect(() => {
-    initializeTracking();
-    
     // Force HTTPS redirect on client side
     if (typeof window !== 'undefined' && window.location.protocol === 'http:' && window.location.hostname !== 'localhost') {
       window.location.replace(window.location.href.replace('http:', 'https:'));
+    }
+
+    // Initialize performance monitoring
+    if (typeof window !== 'undefined') {
+      // Basic performance tracking
+      window.addEventListener('load', () => {
+        const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+        if (perfData && import.meta.env.DEV) {
+          console.log('Page load time:', perfData.loadEventEnd - perfData.navigationStart, 'ms');
+        }
+      });
     }
   }, []);
 

@@ -5,9 +5,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react({
-      jsxImportSource: '@emotion/react',
+      // Remove Emotion configuration that's causing the error
+      jsxImportSource: 'react',
       babel: {
-        plugins: ['@emotion/babel-plugin']
+        plugins: []
       }
     }),
     VitePWA({
@@ -140,7 +141,7 @@ export default defineConfig({
     strictPort: true
   },
   define: {
-    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '1.0.0'),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString())
   }
 });

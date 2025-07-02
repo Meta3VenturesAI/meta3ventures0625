@@ -11,7 +11,6 @@ interface LazyImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
   srcSet?: string;
-  quality?: number;
 }
 
 export const LazyImage: React.FC<LazyImageProps> = ({
@@ -24,8 +23,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   fallbackText,
   loading = 'lazy',
   sizes,
-  srcSet,
-  quality = 85
+  srcSet
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -49,34 +47,6 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     `;
     return `data:image/svg+xml;base64,${btoa(svg)}`;
   }, [placeholder]);
-
-  // Optimize image URL with quality and format parameters
-  const optimizeImageUrl = useCallback((url: string) => {
-    try {
-      const urlObj = new URL(url);
-      
-      // Add quality parameter for supported services
-      if (urlObj.hostname.includes('pexels.com')) {
-        urlObj.searchParams.set('auto', 'compress');
-        urlObj.searchParams.set('cs', 'tinysrgb');
-        if (quality < 100) {
-          urlObj.searchParams.set('q', quality.toString());
-        }
-      } else if (urlObj.hostname.includes('cloudinary.com')) {
-        // Cloudinary optimization
-        const pathParts = urlObj.pathname.split('/');
-        const uploadIndex = pathParts.indexOf('upload');
-        if (uploadIndex !== -1) {
-          pathParts.splice(uploadIndex + 1, 0, `q_${quality}`, 'f_auto');
-          urlObj.pathname = pathParts.join('/');
-        }
-      }
-      
-      return urlObj.toString();
-    } catch {
-      return url;
-    }
-  }, [quality]);
 
   // Set up intersection observer
   useEffect(() => {
@@ -126,7 +96,6 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     }
   }, [isInView, isLoaded, hasError, isLoading]);
 
-  const optimizedSrc = optimizeImageUrl(src);
   const placeholderSrc = generatePlaceholder();
 
   return (
@@ -153,7 +122,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       {/* Main image */}
       {isInView && !hasError && (
         <img
-          src={optimizedSrc}
+          src={src}
           srcSet={srcSet}
           sizes={sizes}
           alt={alt}
