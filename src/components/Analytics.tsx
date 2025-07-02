@@ -42,6 +42,18 @@ export const Analytics: React.FC = () => {
       setLeads(leadsData);
     } catch (error) {
       console.error('Error loading analytics:', error);
+      // Set fallback data
+      setSummary({
+        totalPageViews: 0,
+        uniqueVisitors: 0,
+        averageSessionDuration: 0,
+        topPages: [],
+        leadsBySource: [],
+        conversionRate: 0,
+        deviceBreakdown: [],
+        countryBreakdown: []
+      });
+      setLeads([]);
     } finally {
       setLoading(false);
     }
@@ -55,6 +67,11 @@ export const Analytics: React.FC = () => {
   };
 
   const exportData = () => {
+    if (leads.length === 0) {
+      alert('No data to export');
+      return;
+    }
+
     const csvData = leads.map(lead => ({
       Name: lead.name,
       Email: lead.email,
@@ -87,6 +104,22 @@ export const Analytics: React.FC = () => {
     );
   }
 
+  if (!summary) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <p className="text-gray-600 dark:text-gray-300 mb-4">Unable to load analytics data</p>
+          <button
+            onClick={() => setRefreshKey(prev => prev + 1)}
+            className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8">
       {/* Date Range Controls */}
@@ -94,9 +127,9 @@ export const Analytics: React.FC = () => {
         <div className="flex items-center gap-2">
           <Calendar className="w-5 h-5 text-gray-500" />
           <select
-            value={dateRange.end}
+            value={30}
             onChange={(e) => handleDateRangeSelect(Number(e.target.value))}
-            className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600"
+            className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             {DATE_RANGES.map(range => (
               <option key={range.days} value={range.days}>
@@ -117,10 +150,10 @@ export const Analytics: React.FC = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: 'Total Page Views', value: summary?.totalPageViews.toLocaleString() },
-          { label: 'Unique Visitors', value: summary?.uniqueVisitors.toLocaleString() },
+          { label: 'Total Page Views', value: summary.totalPageViews.toLocaleString() },
+          { label: 'Unique Visitors', value: summary.uniqueVisitors.toLocaleString() },
           { label: 'Total Leads', value: leads.length.toLocaleString() },
-          { label: 'Conversion Rate', value: `${summary?.conversionRate.toFixed(2)}%` }
+          { label: 'Conversion Rate', value: `${summary.conversionRate.toFixed(2)}%` }
         ].map((stat, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
             <h3 className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</h3>
@@ -135,7 +168,7 @@ export const Analytics: React.FC = () => {
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
           <h3 className="text-lg font-semibold mb-4">Top Pages</h3>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={summary?.topPages}>
+            <BarChart data={summary.topPages}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="page" />
               <YAxis />
@@ -151,7 +184,7 @@ export const Analytics: React.FC = () => {
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
-                data={summary?.leadsBySource}
+                data={summary.leadsBySource}
                 dataKey="count"
                 nameKey="source"
                 cx="50%"
@@ -159,7 +192,7 @@ export const Analytics: React.FC = () => {
                 outerRadius={100}
                 label
               >
-                {summary?.leadsBySource.map((entry, index) => (
+                {summary.leadsBySource.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -183,32 +216,38 @@ export const Analytics: React.FC = () => {
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Interest</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Source</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-              {leads.map(lead => (
-                <tr key={lead.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.company || '-'}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.interest}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.source}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">
-                    {format(new Date(lead.created_at), 'PPP')}
-                  </td>
+          {leads.length > 0 ? (
+            <table className="w-full">
+              <thead className="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Company</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Interest</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Source</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                {leads.map(lead => (
+                  <tr key={lead.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.company || '-'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.interest}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">{lead.source}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-white">
+                      {format(new Date(lead.created_at), 'PPP')}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+              No leads data available for the selected date range.
+            </div>
+          )}
         </div>
       </div>
     </div>

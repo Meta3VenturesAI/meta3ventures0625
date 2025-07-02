@@ -7,6 +7,7 @@ interface LazyImageProps {
   placeholder?: string;
   onLoad?: () => void;
   onError?: () => void;
+  fallbackText?: string;
 }
 
 export const LazyImage: React.FC<LazyImageProps> = ({
@@ -15,7 +16,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   className = '',
   placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+',
   onLoad,
-  onError
+  onError,
+  fallbackText
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -78,8 +80,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       
       {hasError && (
         <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700">
-          <span className="text-gray-500 dark:text-gray-400 text-sm">
-            Failed to load image
+          <span className="text-gray-500 dark:text-gray-400 text-sm text-center p-4">
+            {fallbackText || alt || 'Image failed to load'}
           </span>
         </div>
       )}

@@ -62,7 +62,10 @@ function setupErrorTracking() {
       page_url: window.location.href
     });
 
-    toast.error('An error occurred. Our team has been notified.');
+    // Only show toast in development
+    if (process.env.NODE_ENV === 'development') {
+      toast.error('An error occurred. Check console for details.');
+    }
   });
 
   window.addEventListener('unhandledrejection', (event) => {

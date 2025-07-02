@@ -5,6 +5,34 @@ import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
 
 const PartnersPage: React.FC = () => {
+  const partners = [
+    {
+      name: "Microsoft",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/512px-Microsoft_logo.svg.png",
+      link: "https://www.microsoft.com"
+    },
+    {
+      name: "NVIDIA",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/512px-Nvidia_logo.svg.png",
+      link: "https://www.nvidia.com"
+    },
+    {
+      name: "OpenAI",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png",
+      link: "https://openai.com"
+    },
+    {
+      name: "Nielsen",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Nielsen_logo.svg/512px-Nielsen_logo.svg.png",
+      link: "https://www.nielsen.com"
+    },
+    {
+      name: "PWC",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PwC_Logo.svg/512px-PwC_Logo.svg.png",
+      link: "https://www.pwc.com"
+    }
+  ];
+
   return (
     <>
       <SEO 
@@ -115,23 +143,29 @@ const PartnersPage: React.FC = () => {
               Our Partners
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center max-w-6xl mx-auto">
-              {[
-                { name: "Microsoft", logo: "/images/partners/microsoft.png" },
-                { name: "NVIDIA", logo: "/images/partners/nvidia.png" },
-                { name: "OpenAI", logo: "/images/partners/openai.png" },
-                { name: "Nielsen", logo: "/images/partners/nielsen.png" },
-                { name: "PWC", logo: "/images/partners/pwc.png" }
-              ].map((partner) => (
-                <div
+              {partners.map((partner) => (
+                <a
                   key={partner.name}
+                  href={partner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
                 >
                   <img
                     src={partner.logo}
                     alt={partner.name}
                     className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium';
+                      fallback.textContent = partner.name;
+                      target.parentNode?.appendChild(fallback);
+                    }}
                   />
-                </div>
+                </a>
               ))}
             </div>
           </div>

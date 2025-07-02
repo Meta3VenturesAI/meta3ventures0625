@@ -10,12 +10,12 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "Nielsen",
-      logo: "https://logos-world.net/wp-content/uploads/2020/06/Nielsen-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Nielsen_logo.svg/512px-Nielsen_logo.svg.png",
       link: "https://www.nielsen.com"
     },
     {
       name: "PWC",
-      logo: "https://logos-world.net/wp-content/uploads/2020/06/PwC-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PwC_Logo.svg/512px-PwC_Logo.svg.png",
       link: "https://www.pwc.com"
     },
     {
@@ -25,12 +25,12 @@ export const Partners: React.FC = () => {
     },
     {
       name: "NVIDIA",
-      logo: "https://logos-world.net/wp-content/uploads/2020/11/Nvidia-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/512px-Nvidia_logo.svg.png",
       link: "https://www.nvidia.com"
     },
     {
       name: "Microsoft",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/512px-Microsoft_logo.svg.png",
       link: "https://www.microsoft.com"
     }
   ];

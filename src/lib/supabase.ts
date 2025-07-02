@@ -18,7 +18,12 @@ const createSupabaseClient = () => {
         insert: () => Promise.resolve({ data: null, error: null }),
         update: () => Promise.resolve({ data: null, error: null }),
         delete: () => Promise.resolve({ data: null, error: null }),
-        single: () => Promise.resolve({ data: null, error: null })
+        single: () => Promise.resolve({ data: null, error: null }),
+        eq: function() { return this; },
+        gte: function() { return this; },
+        lte: function() { return this; },
+        order: function() { return this; },
+        limit: function() { return this; }
       }),
       auth: {
         getUser: () => Promise.resolve({ data: { user: null }, error: null }),
@@ -74,7 +79,7 @@ export async function checkSupabaseConnection(): Promise<boolean> {
   }
 
   try {
-    const { data, error } = await supabase.from('page_views').select('count').limit(1);
+    const { error } = await supabase.from('page_views').select('count').limit(1);
     return !error;
   } catch {
     return false;
