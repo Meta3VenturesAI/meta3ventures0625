@@ -165,17 +165,8 @@ const BlogPage: React.FC = () => {
 
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full overflow-hidden">
-                          <img
-                            src={post.author.avatar}
-                            alt={post.author.name}
-                            className="w-full h-full object-cover"
-                            loading="lazy"
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.src = "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg";
-                            }}
-                          />
+                        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                          <User size={20} className="text-gray-500 dark:text-gray-400" />
                         </div>
                         <div>
                           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">

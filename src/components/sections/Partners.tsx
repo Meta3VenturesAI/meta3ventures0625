@@ -98,29 +98,15 @@ export const Partners: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center">
-          {partners.map((partner) => (
-            <a
-              key={partner.name}
-              href={partner.link}
-              target="_blank"
-              rel="noopener noreferrer"
+          {partners.map((partner, index) => (
+            <div
+              key={index}
               className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = document.createElement('div');
-                  fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium text-center';
-                  fallback.textContent = partner.name;
-                  target.parentNode?.appendChild(fallback);
-                }}
-              />
-            </a>
+              <div className="text-center">
+                <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">{partner.name}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
