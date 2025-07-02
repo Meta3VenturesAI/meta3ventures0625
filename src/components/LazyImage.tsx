@@ -26,42 +26,24 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   srcSet
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(loading === 'eager');
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(src);
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Fallback images for different types
-  const fallbackImages = {
-    team: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400',
-    blog: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    general: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800'
-  };
+  // Reliable fallback images
+  const fallbackImages = [
+    'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800'
+  ];
 
-  // Generate optimized placeholder
-  const generatePlaceholder = useCallback(() => {
-    if (placeholder) return placeholder;
-    
-    // Generate a simple SVG placeholder
-    const svg = `
-      <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100%" height="100%" fill="#f3f4f6"/>
-        <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="system-ui, sans-serif" font-size="14">
-          Loading...
-        </text>
-      </svg>
-    `;
-    return `data:image/svg+xml;base64,${btoa(svg)}`;
-  }, [placeholder]);
-
-  // Set up intersection observer
+  // Set up intersection observer for lazy loading
   useEffect(() => {
-    if (!imgRef.current || loading === 'eager') {
-      setIsInView(true);
-      return;
-    }
+    if (loading === 'eager' || isInView) return;
+
+    if (!imgRef.current) return;
 
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
@@ -81,77 +63,38 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     return () => {
       observerRef.current?.disconnect();
     };
-  }, [loading]);
+  }, [loading, isInView]);
 
-  // Handle image load
+  // Handle image load success
   const handleLoad = useCallback(() => {
     setIsLoaded(true);
-    setIsLoading(false);
     onLoad?.();
   }, [onLoad]);
 
-  // Handle image error with fallback
+  // Handle image load error with simple fallback
   const handleError = useCallback(() => {
     console.warn(`Failed to load image: ${currentSrc}`);
     
-    // Try fallback images
-    if (currentSrc === src) {
-      // First fallback: try a different Pexels image
-      const fallbackSrc = alt.toLowerCase().includes('team') || alt.toLowerCase().includes('author') 
-        ? fallbackImages.team
-        : alt.toLowerCase().includes('blog') || alt.toLowerCase().includes('article')
-        ? fallbackImages.blog
-        : fallbackImages.general;
-      
-      setCurrentSrc(fallbackSrc);
-      setIsLoading(true);
+    // Try first fallback if we haven't already
+    if (currentSrc === src && fallbackImages.length > 0) {
+      setCurrentSrc(fallbackImages[0]);
       return;
     }
     
     // If fallback also fails, show error state
     setHasError(true);
-    setIsLoading(false);
     onError?.();
-  }, [currentSrc, src, alt, onError]);
+  }, [currentSrc, src, onError]);
 
-  // Start loading when in view
-  useEffect(() => {
-    if (isInView && !isLoaded && !hasError && !isLoading) {
-      setIsLoading(true);
-    }
-  }, [isInView, isLoaded, hasError, isLoading]);
-
-  // Reset when src changes
+  // Reset state when src changes
   useEffect(() => {
     setCurrentSrc(src);
     setIsLoaded(false);
     setHasError(false);
-    setIsLoading(false);
   }, [src]);
-
-  const placeholderSrc = generatePlaceholder();
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {/* Placeholder/Loading state */}
-      {(!isLoaded || isLoading) && !hasError && (
-        <img
-          src={placeholderSrc}
-          alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
-            isLoaded ? 'opacity-0' : 'opacity-100'
-          }`}
-          aria-hidden="true"
-        />
-      )}
-      
-      {/* Loading spinner */}
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
-        </div>
-      )}
-      
       {/* Main image */}
       {isInView && !hasError && (
         <img
@@ -171,6 +114,13 @@ export const LazyImage: React.FC<LazyImageProps> = ({
         />
       )}
       
+      {/* Loading placeholder */}
+      {!isLoaded && !hasError && (
+        <div className="absolute inset-0 bg-gray-200 dark:bg-gray-700 animate-pulse flex items-center justify-center">
+          <div className="text-gray-400 dark:text-gray-500 text-sm">Loading...</div>
+        </div>
+      )}
+      
       {/* Error state */}
       {hasError && (
         <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700 min-h-[200px]">
@@ -181,7 +131,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
               </svg>
             </div>
             <span className="text-gray-500 dark:text-gray-400 text-sm">
-              {fallbackText || alt || 'Image failed to load'}
+              {fallbackText || alt || 'Image unavailable'}
             </span>
           </div>
         </div>

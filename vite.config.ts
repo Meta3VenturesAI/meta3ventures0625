@@ -56,38 +56,38 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/images\.pexels\.com\/.*/i,
-            handler: 'NetworkFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'pexels-images-cache',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 7
               },
-              networkTimeoutSeconds: 10
+              networkTimeoutSeconds: 5
             }
           },
           {
             urlPattern: /^https:\/\/res\.cloudinary\.com\/.*/i,
-            handler: 'NetworkFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'cloudinary-images-cache',
               expiration: {
                 maxEntries: 50,
                 maxAgeSeconds: 60 * 60 * 24 * 7
               },
-              networkTimeoutSeconds: 10
+              networkTimeoutSeconds: 5
             }
           },
           {
             urlPattern: /^https:\/\/upload\.wikimedia\.org\/.*/i,
-            handler: 'NetworkFirst',
+            handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'wikipedia-images-cache',
               expiration: {
                 maxEntries: 30,
                 maxAgeSeconds: 60 * 60 * 24 * 30
               },
-              networkTimeoutSeconds: 10
+              networkTimeoutSeconds: 5
             }
           }
         ]
