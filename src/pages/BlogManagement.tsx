@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SEO } from '../components/SEO';
-import { Plus, Save, Trash2, Edit2, LogOut, BarChart } from 'lucide-react';
+import { Plus, Save, Trash2, Edit2, LogOut, BarChart, Search, Filter, Eye, Calendar, User, Tag } from 'lucide-react';
 import { BlogPost } from '../types/blog';
 import { useAuth } from '../contexts/AuthContext';
 import LoginForm from '../components/LoginForm';
@@ -9,6 +9,8 @@ import { Analytics } from '../components/Analytics';
 import { getBlogPosts, deleteBlogPost } from '../lib/blog';
 import { ErrorFallback } from '../components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
+import { blogPosts } from '../utils/blog';
+import toast from 'react-hot-toast';
 
 const BlogManagement: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -17,6 +19,9 @@ const BlogManagement: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterStatus, setFilterStatus] = useState<'all' | 'published' | 'draft'>('all');
+  const [filterCategory, setFilterCategory] = useState('all');
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -26,26 +31,74 @@ const BlogManagement: React.FC = () => {
 
   const loadPosts = async () => {
     try {
-      const posts = await getBlogPosts();
-      setPosts(posts || []);
+      // For now, use the static blog posts data
+      // In a real implementation, this would fetch from Supabase
+      setPosts(blogPosts || []);
     } catch (error) {
       console.error('Error loading posts:', error);
       setPosts([]);
+      toast.error('Failed to load posts');
     } finally {
       setLoading(false);
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this post?')) return;
+    if (!window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) return;
     
     try {
       await deleteBlogPost(id);
       setPosts(posts.filter(post => post.id !== id));
+      toast.success('Post deleted successfully');
     } catch (error) {
       console.error('Error deleting post:', error);
-      alert('Failed to delete post');
+      toast.error('Failed to delete post');
     }
+  };
+
+  const handleDuplicate = (post: BlogPost) => {
+    const duplicatedPost = {
+      ...post,
+      id: undefined,
+      title: `${post.title} (Copy)`,
+      published: false
+    };
+    setSelectedPost(duplicatedPost);
+    setIsEditing(true);
+  };
+
+  const filteredPosts = posts.filter(post => {
+    const matchesSearch = 
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesStatus = 
+      filterStatus === 'all' || 
+      (filterStatus === 'published' && post.published) ||
+      (filterStatus === 'draft' && !post.published);
+    
+    const matchesCategory = 
+      filterCategory === 'all' || post.category === filterCategory;
+    
+    return matchesSearch && matchesStatus && matchesCategory;
+  });
+
+  const getStatusColor = (published: boolean) => {
+    return published 
+      ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200'
+      : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200';
+  };
+
+  const getCategoryName = (categoryId: string): string => {
+    const categoryMap: Record<string, string> = {
+      'ai': 'AI & Machine Learning',
+      'blockchain': 'Blockchain',
+      'innovation': 'Innovation',
+      'venture-capital': 'Venture Capital',
+      'technology': 'Technology'
+    };
+    return categoryMap[categoryId] || categoryId;
   };
 
   if (!isAuthenticated) {
@@ -55,7 +108,10 @@ const BlogManagement: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading blog posts...</p>
+        </div>
       </div>
     );
   }
@@ -102,12 +158,17 @@ const BlogManagement: React.FC = () => {
       />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
-              <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text">
-                  Blog Management
-                </h1>
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                <div>
+                  <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text">
+                    Blog Management
+                  </h1>
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">
+                    Create, edit, and manage your blog content
+                  </p>
+                </div>
                 <div className="flex items-center space-x-4">
                   <button
                     onClick={() => setShowAnalytics(true)}
@@ -141,47 +202,177 @@ const BlogManagement: React.FC = () => {
                 />
               ) : (
                 <>
-                  <button
-                    onClick={() => setIsEditing(true)}
-                    className="mb-8 inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
-                  >
-                    <Plus className="w-5 h-5 mr-2" />
-                    New Post
-                  </button>
+                  {/* Action Bar */}
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <button
+                      onClick={() => setIsEditing(true)}
+                      className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+                    >
+                      <Plus className="w-5 h-5 mr-2" />
+                      New Post
+                    </button>
 
+                    {/* Search and Filters */}
+                    <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                        <input
+                          type="text"
+                          placeholder="Search posts..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500 w-full md:w-64"
+                        />
+                      </div>
+                      
+                      <select
+                        value={filterStatus}
+                        onChange={(e) => setFilterStatus(e.target.value as 'all' | 'published' | 'draft')}
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
+                      >
+                        <option value="all">All Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                      </select>
+                      
+                      <select
+                        value={filterCategory}
+                        onChange={(e) => setFilterCategory(e.target.value)}
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
+                      >
+                        <option value="all">All Categories</option>
+                        <option value="ai">AI & Machine Learning</option>
+                        <option value="blockchain">Blockchain</option>
+                        <option value="innovation">Innovation</option>
+                        <option value="venture-capital">Venture Capital</option>
+                        <option value="technology">Technology</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                        {posts.length}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Total Posts</div>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                        {posts.filter(p => p.published).length}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Published</div>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
+                        {posts.filter(p => !p.published).length}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Drafts</div>
+                    </div>
+                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                        {filteredPosts.length}
+                      </div>
+                      <div className="text-sm text-gray-600 dark:text-gray-300">Filtered</div>
+                    </div>
+                  </div>
+
+                  {/* Posts List */}
                   <div className="space-y-6">
-                    {posts.length > 0 ? (
-                      posts.map(post => (
+                    {filteredPosts.length > 0 ? (
+                      filteredPosts.map(post => (
                         <div
                           key={post.id}
-                          className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6"
+                          className="bg-gray-50 dark:bg-gray-700 rounded-lg p-6 hover:shadow-md transition-shadow"
                         >
-                          <div className="flex justify-between items-start">
-                            <div>
+                          <div className="flex flex-col lg:flex-row gap-6">
+                            {/* Post Image */}
+                            <div className="lg:w-48 h-32 flex-shrink-0">
+                              <img
+                                src={post.image}
+                                alt={post.title}
+                                className="w-full h-full object-cover rounded-lg"
+                                loading="lazy"
+                              />
+                            </div>
+                            
+                            {/* Post Content */}
+                            <div className="flex-grow">
+                              <div className="flex flex-wrap items-center gap-2 mb-3">
+                                <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(post.published)}`}>
+                                  {post.published ? 'Published' : 'Draft'}
+                                </span>
+                                <span className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-medium rounded">
+                                  {getCategoryName(post.category)}
+                                </span>
+                                <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                                  <Calendar className="w-3 h-3 mr-1" />
+                                  {post.date}
+                                </div>
+                                <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
+                                  <User className="w-3 h-3 mr-1" />
+                                  {post.author.name}
+                                </div>
+                              </div>
+                              
                               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                                 {post.title}
                               </h3>
-                              <p className="text-gray-600 dark:text-gray-300">
+                              <p className="text-gray-600 dark:text-gray-300 mb-3 line-clamp-2">
                                 {post.excerpt}
                               </p>
-                              <div className="mt-2 flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                                <span>Status: {post.published ? 'Published' : 'Draft'}</span>
-                                <span>Created: {new Date(post.created_at).toLocaleDateString()}</span>
+                              
+                              <div className="flex flex-wrap gap-1 mb-4">
+                                {post.tags.slice(0, 3).map((tag, index) => (
+                                  <span
+                                    key={index}
+                                    className="inline-flex items-center px-2 py-1 text-xs bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded"
+                                  >
+                                    <Tag className="w-3 h-3 mr-1" />
+                                    {tag}
+                                  </span>
+                                ))}
+                                {post.tags.length > 3 && (
+                                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                                    +{post.tags.length - 3} more
+                                  </span>
+                                )}
                               </div>
                             </div>
-                            <div className="flex space-x-2">
+                            
+                            {/* Actions */}
+                            <div className="flex lg:flex-col gap-2 lg:w-auto">
+                              <a
+                                href={`/blog/${post.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                title="View Post"
+                              >
+                                <Eye className="w-5 h-5" />
+                              </a>
                               <button
                                 onClick={() => {
                                   setSelectedPost(post);
                                   setIsEditing(true);
                                 }}
-                                className="p-2 text-indigo-600 hover:text-indigo-700"
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                title="Edit Post"
                               >
                                 <Edit2 className="w-5 h-5" />
                               </button>
                               <button
+                                onClick={() => handleDuplicate(post)}
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                                title="Duplicate Post"
+                              >
+                                <Plus className="w-5 h-5" />
+                              </button>
+                              <button
                                 onClick={() => handleDelete(post.id)}
-                                className="p-2 text-red-600 hover:text-red-700"
+                                className="p-2 text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                title="Delete Post"
                               >
                                 <Trash2 className="w-5 h-5" />
                               </button>
@@ -191,15 +382,38 @@ const BlogManagement: React.FC = () => {
                       ))
                     ) : (
                       <div className="text-center py-12">
-                        <p className="text-gray-600 dark:text-gray-300 mb-4">
-                          No blog posts found. Create your first post to get started.
+                        <div className="text-gray-400 mb-4">
+                          <Search className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                          {searchQuery || filterStatus !== 'all' || filterCategory !== 'all' 
+                            ? 'No posts match your filters' 
+                            : 'No blog posts found'
+                          }
+                        </h3>
+                        <p className="text-gray-500 dark:text-gray-400 mb-4">
+                          {searchQuery || filterStatus !== 'all' || filterCategory !== 'all'
+                            ? 'Try adjusting your search terms or filters.'
+                            : 'Create your first post to get started.'
+                          }
                         </p>
                         <button
-                          onClick={() => setIsEditing(true)}
+                          onClick={() => {
+                            if (searchQuery || filterStatus !== 'all' || filterCategory !== 'all') {
+                              setSearchQuery('');
+                              setFilterStatus('all');
+                              setFilterCategory('all');
+                            } else {
+                              setIsEditing(true);
+                            }
+                          }}
                           className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
                         >
                           <Plus className="w-5 h-5 mr-2" />
-                          Create First Post
+                          {searchQuery || filterStatus !== 'all' || filterCategory !== 'all' 
+                            ? 'Clear Filters' 
+                            : 'Create First Post'
+                          }
                         </button>
                       </div>
                     )}
