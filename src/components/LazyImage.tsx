@@ -29,8 +29,16 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(src);
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
+
+  // Fallback images for different types
+  const fallbackImages = {
+    team: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400',
+    blog: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    general: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800'
+  };
 
   // Generate optimized placeholder
   const generatePlaceholder = useCallback(() => {
@@ -82,12 +90,29 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     onLoad?.();
   }, [onLoad]);
 
-  // Handle image error
+  // Handle image error with fallback
   const handleError = useCallback(() => {
+    console.warn(`Failed to load image: ${currentSrc}`);
+    
+    // Try fallback images
+    if (currentSrc === src) {
+      // First fallback: try a different Pexels image
+      const fallbackSrc = alt.toLowerCase().includes('team') || alt.toLowerCase().includes('author') 
+        ? fallbackImages.team
+        : alt.toLowerCase().includes('blog') || alt.toLowerCase().includes('article')
+        ? fallbackImages.blog
+        : fallbackImages.general;
+      
+      setCurrentSrc(fallbackSrc);
+      setIsLoading(true);
+      return;
+    }
+    
+    // If fallback also fails, show error state
     setHasError(true);
     setIsLoading(false);
     onError?.();
-  }, [onError]);
+  }, [currentSrc, src, alt, onError]);
 
   // Start loading when in view
   useEffect(() => {
@@ -95,6 +120,14 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       setIsLoading(true);
     }
   }, [isInView, isLoaded, hasError, isLoading]);
+
+  // Reset when src changes
+  useEffect(() => {
+    setCurrentSrc(src);
+    setIsLoaded(false);
+    setHasError(false);
+    setIsLoading(false);
+  }, [src]);
 
   const placeholderSrc = generatePlaceholder();
 
@@ -122,7 +155,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       {/* Main image */}
       {isInView && !hasError && (
         <img
-          src={src}
+          src={currentSrc}
           srcSet={srcSet}
           sizes={sizes}
           alt={alt}
@@ -133,6 +166,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           onError={handleError}
           loading={loading}
           decoding="async"
+          crossOrigin="anonymous"
         />
       )}
       

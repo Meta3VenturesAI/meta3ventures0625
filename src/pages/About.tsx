@@ -2,6 +2,7 @@ import React from 'react';
 import { SEO } from '../components/SEO';
 import { Users, Target, Lightbulb, Rocket, Brain, Network, CheckCircle, ArrowRight, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { LazyImage } from '../components/LazyImage';
 
 const AboutPage: React.FC = () => {
   const values = [
@@ -112,11 +113,11 @@ const AboutPage: React.FC = () => {
               </div>
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-lg"></div>
-                <img 
+                <LazyImage 
                   src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
+                  loading="eager"
                 />
               </div>
             </div>
@@ -167,11 +168,12 @@ const AboutPage: React.FC = () => {
               <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
-                    <img 
+                    <LazyImage 
                       src="https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
                       alt="Liron Langer"
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      fallbackText="Liron Langer - Managing Director"
                     />
                   </div>
                   <div className="p-8">
