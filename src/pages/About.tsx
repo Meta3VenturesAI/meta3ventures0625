@@ -118,6 +118,7 @@ const AboutPage: React.FC = () => {
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
                   loading="eager"
+                  fallbackText="Team collaboration workspace"
                 />
               </div>
             </div>
@@ -170,7 +171,7 @@ const AboutPage: React.FC = () => {
                   <div className="relative h-full">
                     <LazyImage 
                       src="https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
-                      alt="Liron Langer"
+                      alt="Liron Langer - Managing Director"
                       className="w-full h-full object-cover"
                       loading="lazy"
                       fallbackText="Liron Langer - Managing Director"
@@ -202,6 +203,7 @@ const AboutPage: React.FC = () => {
                       <a 
                         href="mailto:liron@meta3ventures.com"
                         className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                        aria-label="Email Liron Langer"
                       >
                         <Mail className="w-6 h-6" />
                       </a>
@@ -210,6 +212,7 @@ const AboutPage: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                        aria-label="Liron Langer LinkedIn Profile"
                       >
                         <Linkedin className="w-6 h-6" />
                       </a>

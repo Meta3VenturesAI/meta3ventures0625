@@ -117,8 +117,12 @@ const BlogPage: React.FC = () => {
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800';
+                      }}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">
@@ -167,6 +171,10 @@ const BlogPage: React.FC = () => {
                             alt={post.author.name}
                             className="w-full h-full object-cover"
                             loading="lazy"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.src = 'https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg';
+                            }}
                           />
                         </div>
                         <div>
@@ -253,7 +261,7 @@ const BlogPage: React.FC = () => {
                   </div>
                 )}
 
-                {state.errors?.length > 0 && (
+                {state.errors && Object.keys(state.errors).length > 0 && (
                   <div className="mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-200 animate-fadeIn flex items-center justify-center">
                     <AlertCircle className="w-5 h-5 mr-2" />
                     Failed to subscribe. Please try again.

@@ -34,8 +34,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
 
   // Reliable fallback images with proper CORS headers
   const fallbackImages = [
-    'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800'
   ];
 
@@ -84,7 +84,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     // If fallback also fails, show error state
     setHasError(true);
     onError?.();
-  }, [currentSrc, src, onError]);
+  }, [currentSrc, src, onError, fallbackImages]);
 
   // Reset state when src changes
   useEffect(() => {
