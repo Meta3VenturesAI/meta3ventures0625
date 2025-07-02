@@ -3,6 +3,7 @@ import { SEO } from '../components/SEO';
 import { CheckCircle, Users, Target, Network } from 'lucide-react';
 import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
+import { getPartnerLogo } from '../utils/imageUtils';
 
 const PartnersPage: React.FC = () => {
   const [imageLoadErrors, setImageLoadErrors] = useState<Record<string, boolean>>({});
@@ -71,7 +72,7 @@ const PartnersPage: React.FC = () => {
   ];
 
   const handleImageError = (partnerName: string) => {
-    console.warn(`Image failed to load for partner: ${partnerName}`);
+    console.warn(`Failed to load image for partner: ${partnerName}`);
     setImageLoadErrors(prev => ({ ...prev, [partnerName]: true }));
   };
 
@@ -185,26 +186,40 @@ const PartnersPage: React.FC = () => {
               Our Partners
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-center justify-items-center max-w-7xl mx-auto">
-              {partners.map((partner, index) => (
-                <div
-                  key={index}
-                  className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-                >
-                  <div className="h-32 flex items-center justify-center p-4">
-                    <div className="text-lg font-semibold text-gray-900 dark:text-white text-center px-2">
-                      {partner.name}
+              {partners.map((partner, index) => {
+                const logoSrc = getPartnerLogo(partner.name);
+                
+                return (
+                  <div
+                    key={index}
+                    className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
+                  >
+                    <div className="h-32 flex items-center justify-center p-4">
+                      {!imageLoadErrors[partner.name] ? (
+                        <img
+                          src={logoSrc}
+                          alt={partner.name}
+                          className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300 rounded"
+                          loading="lazy"
+                          onError={() => handleImageError(partner.name)}
+                        />
+                      ) : (
+                        <div className="text-lg font-semibold text-gray-900 dark:text-white text-center px-2">
+                          {partner.name}
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
+                        {partner.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                        {partner.description}
+                      </p>
                     </div>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-700">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
-                      {partner.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
-                      {partner.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

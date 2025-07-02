@@ -9,23 +9,23 @@ export const imageConfig = {
     business: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   
-  // Partner logos - using fallback images for now
+  // Partner logos - using public folder paths
   partnerLogos: {
-    'HubSpot for Startups': 'https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'NVIDIA Inception': 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Google for Startups': 'https://images.pexels.com/photos/2068975/pexels-photo-2068975.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Microsoft for Startups': 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Oracle for Startups': 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'AWS Startups': 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'EY': 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'PwC': 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Start-up Nation Central': 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Nielsen': 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Atlassian': 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Slack': 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Zoom': 'https://images.pexels.com/photos/4226140/pexels-photo-4226140.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Notion': 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
-    'Figma': 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop'
+    'HubSpot for Startups': '/logos/hubspot-for-startups.png',
+    'NVIDIA Inception': '/logos/nvidia-inception.png',
+    'Google for Startups': '/logos/google-for-startups.png',
+    'Microsoft for Startups': '/logos/Microsoft-for-Startups.jpg',
+    'Oracle for Startups': '/logos/oracle-for-startups.png',
+    'AWS Startups': '/logos/amazon.jpg',
+    'EY': '/logos/EYLogo.gif',
+    'PwC': '/logos/PwC_2025_Logo.svg.png',
+    'Start-up Nation Central': '/logos/SNC.png',
+    'Nielsen': '/logos/Nielsen_New_Logo_2021.png',
+    'Atlassian': '/logos/Atlassian-Logo.png',
+    'Slack': '/logos/slack-logo.png',
+    'Zoom': '/logos/zoom-logo.png',
+    'Notion': '/logos/notion-logo.png',
+    'Figma': '/logos/figma-logo.png'
   },
   
   // Optimized image URLs for different use cases
@@ -136,9 +136,15 @@ export const isValidImageUrl = (url: string): boolean => {
   }
 };
 
-// Get partner logo by name - now uses reliable fallback images
+// Get partner logo by name
 export const getPartnerLogo = (partnerName: string): string => {
-  return imageConfig.partnerLogos[partnerName] || imageConfig.fallbackImages.business;
+  // First try to get from the partnerLogos map
+  if (imageConfig.partnerLogos[partnerName]) {
+    return imageConfig.partnerLogos[partnerName];
+  }
+  
+  // If not found, return a fallback image
+  return imageConfig.fallbackImages.business;
 };
 
 // Preload critical images
