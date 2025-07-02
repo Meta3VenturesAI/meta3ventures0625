@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 interface LazyImageProps {
   src: string;
@@ -8,55 +8,133 @@ interface LazyImageProps {
   onLoad?: () => void;
   onError?: () => void;
   fallbackText?: string;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  srcSet?: string;
+  quality?: number;
 }
 
 export const LazyImage: React.FC<LazyImageProps> = ({
   src,
   alt,
   className = '',
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+',
+  placeholder,
   onLoad,
   onError,
-  fallbackText
+  fallbackText,
+  loading = 'lazy',
+  sizes,
+  srcSet,
+  quality = 85
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
+  // Generate optimized placeholder
+  const generatePlaceholder = useCallback(() => {
+    if (placeholder) return placeholder;
+    
+    // Generate a simple SVG placeholder
+    const svg = `
+      <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#f3f4f6"/>
+        <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="system-ui, sans-serif" font-size="14">
+          Loading...
+        </text>
+      </svg>
+    `;
+    return `data:image/svg+xml;base64,${btoa(svg)}`;
+  }, [placeholder]);
+
+  // Optimize image URL with quality and format parameters
+  const optimizeImageUrl = useCallback((url: string) => {
+    try {
+      const urlObj = new URL(url);
+      
+      // Add quality parameter for supported services
+      if (urlObj.hostname.includes('pexels.com')) {
+        urlObj.searchParams.set('auto', 'compress');
+        urlObj.searchParams.set('cs', 'tinysrgb');
+        if (quality < 100) {
+          urlObj.searchParams.set('q', quality.toString());
+        }
+      } else if (urlObj.hostname.includes('cloudinary.com')) {
+        // Cloudinary optimization
+        const pathParts = urlObj.pathname.split('/');
+        const uploadIndex = pathParts.indexOf('upload');
+        if (uploadIndex !== -1) {
+          pathParts.splice(uploadIndex + 1, 0, `q_${quality}`, 'f_auto');
+          urlObj.pathname = pathParts.join('/');
+        }
+      }
+      
+      return urlObj.toString();
+    } catch {
+      return url;
+    }
+  }, [quality]);
+
+  // Set up intersection observer
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    if (!imgRef.current || loading === 'eager') {
+      setIsInView(true);
+      return;
+    }
+
+    observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.disconnect();
+          observerRef.current?.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
     );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
+    observerRef.current.observe(imgRef.current);
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [loading]);
 
-  const handleLoad = () => {
+  // Handle image load
+  const handleLoad = useCallback(() => {
     setIsLoaded(true);
+    setIsLoading(false);
     onLoad?.();
-  };
+  }, [onLoad]);
 
-  const handleError = () => {
+  // Handle image error
+  const handleError = useCallback(() => {
     setHasError(true);
+    setIsLoading(false);
     onError?.();
-  };
+  }, [onError]);
+
+  // Start loading when in view
+  useEffect(() => {
+    if (isInView && !isLoaded && !hasError && !isLoading) {
+      setIsLoading(true);
+    }
+  }, [isInView, isLoaded, hasError, isLoading]);
+
+  const optimizedSrc = optimizeImageUrl(src);
+  const placeholderSrc = generatePlaceholder();
 
   return (
     <div ref={imgRef} className={`relative overflow-hidden ${className}`}>
-      {!isLoaded && !hasError && (
+      {/* Placeholder/Loading state */}
+      {(!isLoaded || isLoading) && !hasError && (
         <img
-          src={placeholder}
+          src={placeholderSrc}
           alt=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
             isLoaded ? 'opacity-0' : 'opacity-100'
@@ -65,26 +143,47 @@ export const LazyImage: React.FC<LazyImageProps> = ({
         />
       )}
       
+      {/* Loading spinner */}
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-indigo-600 dark:border-indigo-400"></div>
+        </div>
+      )}
+      
+      {/* Main image */}
       {isInView && !hasError && (
         <img
-          src={src}
+          src={optimizedSrc}
+          srcSet={srcSet}
+          sizes={sizes}
           alt={alt}
           className={`w-full h-full object-cover transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           onLoad={handleLoad}
           onError={handleError}
-          loading="lazy"
+          loading={loading}
+          decoding="async"
         />
       )}
       
+      {/* Error state */}
       {hasError && (
-        <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700">
-          <span className="text-gray-500 dark:text-gray-400 text-sm text-center p-4">
-            {fallbackText || alt || 'Image failed to load'}
-          </span>
+        <div className="flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700 min-h-[200px]">
+          <div className="text-center p-4">
+            <div className="text-gray-400 dark:text-gray-500 mb-2">
+              <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span className="text-gray-500 dark:text-gray-400 text-sm">
+              {fallbackText || alt || 'Image failed to load'}
+            </span>
+          </div>
         </div>
       )}
     </div>
   );
 };
+
+export default LazyImage;
