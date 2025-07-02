@@ -20,13 +20,38 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
+      logo: "/logos/Logo_for_Google_for_Startups_page.png",
       link: "https://startup.google.com/"
     },
     {
       name: "Microsoft for Startups",
       logo: "/logos/Microsoft-for-Startups.jpg",
       link: "https://www.microsoft.com/en-us/startups"
+    },
+    {
+      name: "Oracle for Startups",
+      logo: "/logos/oracle-for-startups.png",
+      link: "https://www.oracle.com/startup/"
+    },
+    {
+      name: "AWS Startups",
+      logo: "/logos/amazon.jpg",
+      link: "https://aws.amazon.com/startups/"
+    },
+    {
+      name: "EY",
+      logo: "/logos/EYLogo.gif",
+      link: "https://www.ey.com/"
+    },
+    {
+      name: "PwC",
+      logo: "/logos/PwC_2025_Logo.svg.png",
+      link: "https://www.pwc.com/"
+    },
+    {
+      name: "Start-up Nation Central",
+      logo: "/logos/SNC.png",
+      link: "https://www.startupnationcentral.org/"
     },
     {
       name: "Nielsen",
@@ -59,13 +84,13 @@ export const Partners: React.FC = () => {
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
+                className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   const fallback = document.createElement('div');
-                  fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium';
+                  fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium text-center';
                   fallback.textContent = partner.name;
                   target.parentNode?.appendChild(fallback);
                 }}

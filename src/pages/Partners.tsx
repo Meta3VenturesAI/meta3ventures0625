@@ -20,7 +20,7 @@ const PartnersPage: React.FC = () => {
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
+      logo: "/logos/Logo_for_Google_for_Startups_page.png",
       link: "https://startup.google.com/",
       description: "Cloud credits and startup support from Google"
     },
@@ -29,6 +29,36 @@ const PartnersPage: React.FC = () => {
       logo: "/logos/Microsoft-for-Startups.jpg",
       link: "https://www.microsoft.com/en-us/startups",
       description: "Azure credits and enterprise tools for startups"
+    },
+    {
+      name: "Oracle for Startups",
+      logo: "/logos/oracle-for-startups.png",
+      link: "https://www.oracle.com/startup/",
+      description: "Cloud infrastructure and database solutions for startups"
+    },
+    {
+      name: "AWS Startups",
+      logo: "/logos/amazon.jpg",
+      link: "https://aws.amazon.com/startups/",
+      description: "Cloud computing platform and startup credits"
+    },
+    {
+      name: "EY",
+      logo: "/logos/EYLogo.gif",
+      link: "https://www.ey.com/",
+      description: "Professional services and startup advisory"
+    },
+    {
+      name: "PwC",
+      logo: "/logos/PwC_2025_Logo.svg.png",
+      link: "https://www.pwc.com/",
+      description: "Consulting and professional services"
+    },
+    {
+      name: "Start-up Nation Central",
+      logo: "/logos/SNC.png",
+      link: "https://www.startupnationcentral.org/",
+      description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
@@ -147,11 +177,11 @@ const PartnersPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text">
               Our Partners
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-items-center max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-center justify-items-center max-w-7xl mx-auto">
               {partners.map((partner) => (
                 <div
                   key={partner.name}
-                  className="w-full max-w-[300px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
+                  className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
                 >
                   <a
                     href={partner.link}
@@ -176,10 +206,10 @@ const PartnersPage: React.FC = () => {
                       />
                     </div>
                     <div className="p-4">
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center text-sm">
                         {partner.name}
                       </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-center line-clamp-2">
                         {partner.description}
                       </p>
                     </div>
