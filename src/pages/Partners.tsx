@@ -3,7 +3,6 @@ import { SEO } from '../components/SEO';
 import { CheckCircle, Users, Target, Network } from 'lucide-react';
 import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
-import { getPartnerLogo } from '../utils/imageUtils';
 
 const PartnersPage: React.FC = () => {
   const [imageLoadErrors, setImageLoadErrors] = useState<Record<string, boolean>>({});
@@ -11,82 +10,102 @@ const PartnersPage: React.FC = () => {
   const partners = [
     {
       name: "HubSpot for Startups",
+      imageUrl: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
+      imageUrl: "/logos/nvidia-inception.png",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
+      imageUrl: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
+      imageUrl: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
+      imageUrl: "/logos/oracle-for-startups.png",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
+      imageUrl: "/logos/amazon.jpg",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
+      imageUrl: "/logos/EYLogo.gif",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
+      imageUrl: "/logos/PwC_2025_Logo.svg.png",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
+      imageUrl: "/logos/SNC.png",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
+      imageUrl: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
+      imageUrl: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
+      imageUrl: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
+      imageUrl: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
+      imageUrl: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
+      imageUrl: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     },
     {
       name: "Databricks",
+      imageUrl: "/logos/Databricks_Logo.png",
       description: "Unified analytics platform for big data and machine learning"
     },
     {
       name: "MongoDB",
+      imageUrl: "/logos/MongoDB_forStartups_ForestGreen copy.png",
       description: "Document database for modern applications"
     },
     {
       name: "Snowflake",
+      imageUrl: "/logos/ibsi_snowflake copy.jpg",
       description: "Cloud data platform for data warehousing"
     },
     {
       name: "Stripe",
+      imageUrl: "/logos/new-stripe-logo-png copy.png",
       description: "Payment processing platform for internet businesses"
     },
     {
       name: "Salesforce",
+      imageUrl: "/logos/salesforce copy.png",
       description: "Customer relationship management platform"
     }
   ];
@@ -206,40 +225,36 @@ const PartnersPage: React.FC = () => {
               Our Partners
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-center justify-items-center max-w-7xl mx-auto">
-              {partners.map((partner, index) => {
-                const logoSrc = getPartnerLogo(partner.name);
-                
-                return (
-                  <div
-                    key={index}
-                    className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-                  >
-                    <div className="h-32 flex items-center justify-center p-4">
-                      {!imageLoadErrors[partner.name] ? (
-                        <img
-                          src={logoSrc}
-                          alt={partner.name}
-                          className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300 rounded"
-                          loading="lazy"
-                          onError={() => handleImageError(partner.name)}
-                        />
-                      ) : (
-                        <div className="text-lg font-semibold text-gray-900 dark:text-white text-center px-2">
-                          {partner.name}
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4 bg-gray-50 dark:bg-gray-700">
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
+              {partners.map((partner, index) => (
+                <div
+                  key={index}
+                  className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
+                >
+                  <div className="h-32 flex items-center justify-center p-4">
+                    {!imageLoadErrors[partner.name] ? (
+                      <img
+                        src={partner.imageUrl}
+                        alt={partner.name}
+                        className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300 rounded"
+                        loading="lazy"
+                        onError={() => handleImageError(partner.name)}
+                      />
+                    ) : (
+                      <div className="text-lg font-semibold text-gray-900 dark:text-white text-center px-2">
                         {partner.name}
-                      </h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
-                        {partner.description}
-                      </p>
-                    </div>
+                      </div>
+                    )}
                   </div>
-                );
-              })}
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
+                      {partner.name}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                      {partner.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

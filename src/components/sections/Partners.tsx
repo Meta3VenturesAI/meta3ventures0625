@@ -13,84 +13,109 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      imageUrl: "https://images.pexels.com/photos/4968391/pexels-photo-4968391.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      imageUrl: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/nvidia-inception.png",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      imageUrl: "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      imageUrl: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
-      imageUrl: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/oracle-for-startups.png",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
-      imageUrl: "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/amazon.jpg",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
-      imageUrl: "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/EYLogo.gif",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
-      imageUrl: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/PwC_2025_Logo.svg.png",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
-      imageUrl: "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/SNC.png",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
-      imageUrl: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
-      imageUrl: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
-      imageUrl: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      imageUrl: "https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      imageUrl: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      imageUrl: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=800",
+      imageUrl: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
+    },
+    {
+      name: "Databricks",
+      imageUrl: "/logos/Databricks_Logo.png",
+      description: "Unified analytics platform for big data and machine learning"
+    },
+    {
+      name: "MongoDB",
+      imageUrl: "/logos/MongoDB_forStartups_ForestGreen copy.png",
+      description: "Document database for modern applications"
+    },
+    {
+      name: "Snowflake",
+      imageUrl: "/logos/ibsi_snowflake copy.jpg",
+      description: "Cloud data platform for data warehousing"
+    },
+    {
+      name: "Stripe",
+      imageUrl: "/logos/new-stripe-logo-png copy.png",
+      description: "Payment processing platform for internet businesses"
+    },
+    {
+      name: "Salesforce",
+      imageUrl: "/logos/salesforce copy.png",
+      description: "Customer relationship management platform"
     }
   ];
 
   // Log all partner logos on component mount to verify paths
   useEffect(() => {
-    console.log("Partner logos:", partners.map(p => ({ name: p.name, logo: p.logo })));
+    console.log("Partner logos:", partners.map(p => ({ name: p.name, logo: p.imageUrl })));
   }, []);
 
   const handleImageError = (partnerName: string) => {
@@ -116,10 +141,13 @@ export const Partners: React.FC = () => {
               key={index}
               className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              {!imageLoadErrors[partner.name] ? (
-                <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">
-                  {partner.name}
-                </div>
+              {!imageLoadErrors[partner.name] && partner.imageUrl ? (
+                <img
+                  src={partner.imageUrl}
+                  alt={partner.name}
+                  className="max-h-full max-w-full object-contain"
+                  onError={() => handleImageError(partner.name)}
+                />
               ) : (
                 <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">
                   {partner.name}
