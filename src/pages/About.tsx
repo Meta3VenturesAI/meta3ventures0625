@@ -1,6 +1,6 @@
 import React from 'react';
 import { SEO } from '../components/SEO';
-import { Users, Target, Lightbulb, Rocket, Brain, Network, CheckCircle, ArrowRight, Linkedin, Mail } from 'lucide-react';
+import { CheckCircle, Users, Target, Lightbulb, Rocket, Brain, Network, ArrowRight, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
@@ -113,10 +113,14 @@ const AboutPage: React.FC = () => {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-lg"></div>
                 <img 
-                  src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/images/team-collaboration.jpg"
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
                   loading="eager"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800";
+                  }}
                 />
               </div>
             </div>
@@ -168,10 +172,14 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
                     <img 
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="/images/liron-langer.jpg"
                       alt="Liron Langer - Managing Director"
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      }}
                     />
                   </div>
                   <div className="p-8">
@@ -261,14 +269,14 @@ const AboutPage: React.FC = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Link 
-                    to="/apply" 
+                    to="/apply"
                     className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-900 font-medium rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     Apply Now
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                   <Link 
-                    to="/contact" 
+                    to="/contact"
                     className="inline-flex items-center justify-center px-8 py-4 border border-white text-white hover:bg-white/10 font-medium rounded-lg transition-colors"
                   >
                     Contact Us
