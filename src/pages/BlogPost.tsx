@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Tag, Share2, BookOpen } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { getBlogPost, getRelatedPosts } from '../utils/blog';
 import ReactMarkdown from 'react-markdown';
@@ -20,6 +20,35 @@ const BlogPost: React.FC = () => {
 
   const relatedPosts = getRelatedPosts(post, 3);
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: post.title,
+          text: post.excerpt,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log('Error sharing:', err);
+      }
+    } else {
+      // Fallback to copying URL to clipboard
+      navigator.clipboard.writeText(window.location.href);
+      // You could show a toast notification here
+    }
+  };
+
+  const getCategoryName = (categoryId: string): string => {
+    const categoryMap: Record<string, string> = {
+      'ai': 'AI & Machine Learning',
+      'blockchain': 'Blockchain',
+      'innovation': 'Innovation',
+      'venture-capital': 'Venture Capital',
+      'technology': 'Technology'
+    };
+    return categoryMap[categoryId] || categoryId;
+  };
+
   return (
     <>
       <SEO 
@@ -27,6 +56,11 @@ const BlogPost: React.FC = () => {
         description={post.excerpt}
         image={post.image}
         type="article"
+        keywords={post.tags}
+        author={post.author.name}
+        publishedTime={new Date(post.date).toISOString()}
+        section={getCategoryName(post.category)}
+        tags={post.tags}
       />
       
       <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -35,7 +69,7 @@ const BlogPost: React.FC = () => {
             {/* Back to Blog */}
             <Link 
               to="/blog"
-              className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-8"
+              className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
@@ -48,17 +82,25 @@ const BlogPost: React.FC = () => {
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-cover"
+                  loading="eager"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-6 left-6">
                   <span className="px-3 py-1 bg-indigo-600 text-white text-sm font-medium rounded-full">
-                    {post.category}
+                    {getCategoryName(post.category)}
                   </span>
                 </div>
+                <button
+                  onClick={handleShare}
+                  className="absolute top-6 right-6 p-2 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
+                  aria-label="Share article"
+                >
+                  <Share2 className="w-5 h-5" />
+                </button>
               </div>
 
               <div className="p-8">
-                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                <h1 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
                   {post.title}
                 </h1>
 
@@ -75,6 +117,10 @@ const BlogPost: React.FC = () => {
                     <User className="w-4 h-4" />
                     <span>{post.author.name}</span>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    <span>Article</span>
+                  </div>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-8">
@@ -89,8 +135,40 @@ const BlogPost: React.FC = () => {
                   ))}
                 </div>
 
+                {/* Article Content */}
                 <div className="prose prose-lg dark:prose-invert max-w-none">
-                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                  <div className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-medium leading-relaxed">
+                    {post.excerpt}
+                  </div>
+                  <ReactMarkdown 
+                    components={{
+                      h1: ({children}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{children}</h1>,
+                      h2: ({children}) => <h2 className="text-2xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">{children}</h2>,
+                      h3: ({children}) => <h3 className="text-xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{children}</h3>,
+                      p: ({children}) => <p className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">{children}</p>,
+                      ul: ({children}) => <ul className="mb-4 space-y-2">{children}</ul>,
+                      ol: ({children}) => <ol className="mb-4 space-y-2">{children}</ol>,
+                      li: ({children}) => <li className="text-gray-700 dark:text-gray-300">{children}</li>,
+                      strong: ({children}) => <strong className="font-semibold text-gray-900 dark:text-white">{children}</strong>,
+                      blockquote: ({children}) => (
+                        <blockquote className="border-l-4 border-indigo-500 pl-4 my-6 italic text-gray-600 dark:text-gray-400">
+                          {children}
+                        </blockquote>
+                      ),
+                      code: ({children}) => (
+                        <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono">
+                          {children}
+                        </code>
+                      ),
+                      pre: ({children}) => (
+                        <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-6">
+                          {children}
+                        </pre>
+                      )
+                    }}
+                  >
+                    {post.content}
+                  </ReactMarkdown>
                 </div>
 
                 {/* Author Bio */}
@@ -100,6 +178,7 @@ const BlogPost: React.FC = () => {
                       src={post.author.avatar}
                       alt={post.author.name}
                       className="w-16 h-16 rounded-full object-cover"
+                      loading="lazy"
                     />
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -108,7 +187,24 @@ const BlogPost: React.FC = () => {
                       <p className="text-gray-600 dark:text-gray-300">
                         Managing Director at Meta3Ventures
                       </p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        Expert in AI innovation, venture building, and digital transformation
+                      </p>
                     </div>
+                  </div>
+                </div>
+
+                {/* Share Section */}
+                <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-600 dark:text-gray-300">Share this article:</span>
+                    <button
+                      onClick={handleShare}
+                      className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                    >
+                      <Share2 className="w-4 h-4 mr-2" />
+                      Share
+                    </button>
                   </div>
                 </div>
               </div>
@@ -132,21 +228,44 @@ const BlogPost: React.FC = () => {
                           src={relatedPost.image}
                           alt={relatedPost.title}
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
                         />
                       </div>
                       <div className="p-6">
-                        <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-medium rounded">
+                            {getCategoryName(relatedPost.category)}
+                          </span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            {relatedPost.readTime}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-white line-clamp-2">
                           {relatedPost.title}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          {relatedPost.excerpt.substring(0, 100)}...
+                        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3">
+                          {relatedPost.excerpt}
                         </p>
+                        <div className="mt-4 text-indigo-600 dark:text-indigo-400 text-sm font-medium">
+                          Read more →
+                        </div>
                       </div>
                     </Link>
                   ))}
                 </div>
               </div>
             )}
+
+            {/* Back to Blog CTA */}
+            <div className="mt-16 text-center">
+              <Link
+                to="/blog"
+                className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                View All Articles
+              </Link>
+            </div>
           </div>
         </div>
       </div>

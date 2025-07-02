@@ -188,6 +188,10 @@ export const getBlogPost = (slug: string): BlogPost | undefined => {
   return blogPosts.find(post => post.slug === slug);
 };
 
+export const getBlogPostById = (id: string): BlogPost | undefined => {
+  return blogPosts.find(post => post.id === id);
+};
+
 export const getRelatedPosts = (currentPost: BlogPost, limit: number = 3): BlogPost[] => {
   return blogPosts
     .filter(post => post.id !== currentPost.id)
@@ -215,4 +219,14 @@ export const filterPosts = (query: string, category: string = 'all'): BlogPost[]
     
     return matchesQuery && matchesCategory;
   });
+};
+
+export const getAllCategories = (): string[] => {
+  const categories = new Set(blogPosts.map(post => post.category));
+  return Array.from(categories);
+};
+
+export const getAllTags = (): string[] => {
+  const tags = new Set(blogPosts.flatMap(post => post.tags));
+  return Array.from(tags);
 };

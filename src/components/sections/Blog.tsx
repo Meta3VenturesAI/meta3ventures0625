@@ -1,51 +1,21 @@
 import React from 'react';
 import { ArrowRight, Clock, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-interface BlogPost {
-  title: string;
-  excerpt: string;
-  image: string;
-  date: string;
-  author: string;
-  category: string;
-  readTime: string;
-  slug: string;
-}
+import { getLatestPosts } from '../../utils/blog';
 
 export const Blog: React.FC = () => {
-  const blogPosts: BlogPost[] = [
-    {
-      title: "The Future of AI: Trends Shaping 2025 and Beyond",
-      excerpt: "Explore the transformative AI trends that are revolutionizing industries and creating new opportunities for innovation and growth.",
-      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
-      date: "April 15, 2025",
-      author: "Liron Langer",
-      category: "AI",
-      readTime: "8 min read",
-      slug: "future-of-ai-trends-2025"
-    },
-    {
-      title: "Building Resilient Web3 Infrastructure",
-      excerpt: "A deep dive into the essential components of robust Web3 infrastructure and best practices for scalable blockchain applications.",
-      image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
-      date: "April 2, 2025",
-      author: "Liron Langer",
-      category: "Blockchain",
-      readTime: "12 min read",
-      slug: "building-resilient-web3-infrastructure"
-    },
-    {
-      title: "The Rise of Agentic AI Systems",
-      excerpt: "Understanding how autonomous AI agents are transforming business operations and creating new possibilities for intelligent automation.",
-      image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
-      date: "March 27, 2025",
-      author: "Liron Langer",
-      category: "Innovation",
-      readTime: "10 min read",
-      slug: "rise-of-agentic-ai-systems"
-    }
-  ];
+  const blogPosts = getLatestPosts(3);
+
+  const getCategoryName = (categoryId: string): string => {
+    const categoryMap: Record<string, string> = {
+      'ai': 'AI & Machine Learning',
+      'blockchain': 'Blockchain',
+      'innovation': 'Innovation',
+      'venture-capital': 'Venture Capital',
+      'technology': 'Technology'
+    };
+    return categoryMap[categoryId] || categoryId;
+  };
 
   return (
     <section id="blog" className="py-20 bg-gray-50 dark:bg-gray-900">
@@ -63,7 +33,7 @@ export const Blog: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post, index) => (
             <div 
-              key={index} 
+              key={post.id} 
               className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group"
             >
               <div className="relative overflow-hidden h-48">
@@ -71,22 +41,24 @@ export const Blog: React.FC = () => {
                   src={post.image} 
                   alt={post.title} 
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">
-                    {post.category}
+                    {getCategoryName(post.category)}
                   </span>
                 </div>
               </div>
+              
               <div className="p-6">
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-3">
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 mr-1" />
-                    <span>{post.readTime}</span>
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Clock size={16} className="text-gray-400" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
                   </div>
-                  <div className="flex items-center">
-                    <User className="w-4 h-4 mr-1" />
-                    <span>{post.author}</span>
+                  <div className="flex items-center gap-2">
+                    <User size={16} className="text-gray-400" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400">{post.author.name}</span>
                   </div>
                 </div>
 

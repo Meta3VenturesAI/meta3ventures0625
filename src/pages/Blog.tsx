@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
 import { Search, Calendar, Clock, User, Tag, ArrowRight, Mail, CheckCircle, AlertCircle } from 'lucide-react';
 import { useForm } from '@formspree/react';
-import { filterPosts } from '../utils/blog';
+import { filterPosts, getAllCategories } from '../utils/blog';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const BlogPage: React.FC = () => {
 
   const categories = [
     { id: 'all', name: 'All Posts' },
-    { id: 'ai', name: 'Artificial Intelligence' },
+    { id: 'ai', name: 'AI & Machine Learning' },
     { id: 'blockchain', name: 'Blockchain' },
     { id: 'innovation', name: 'Innovation' },
     { id: 'venture-capital', name: 'Venture Capital' },
@@ -24,6 +24,11 @@ const BlogPage: React.FC = () => {
   ];
 
   const filteredPosts = filterPosts(searchQuery, selectedCategory);
+
+  const getCategoryName = (categoryId: string): string => {
+    const category = categories.find(c => c.id === categoryId);
+    return category?.name || categoryId;
+  };
 
   const onNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,7 +122,7 @@ const BlogPage: React.FC = () => {
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">
-                        {categories.find(c => c.id === post.category)?.name}
+                        {getCategoryName(post.category)}
                       </span>
                     </div>
                   </div>
@@ -125,17 +130,17 @@ const BlogPage: React.FC = () => {
                   <div className="p-6">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="flex items-center gap-2">
-                        <Calendar size={16} className="text-gray-400" />
-                        <span className="text-sm text-gray-500 dark:text-gray-400">{post.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
                         <Clock size={16} className="text-gray-400" />
                         <span className="text-sm text-gray-500 dark:text-gray-400">{post.readTime}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <User size={16} className="text-gray-400" />
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{post.author.name}</span>
                       </div>
                     </div>
 
                     <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                      <Link to={`/blog/${post.id}`}>{post.title}</Link>
+                      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                     </h2>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -143,7 +148,7 @@ const BlogPage: React.FC = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {post.tags.map((tag, index) => (
+                      {post.tags.slice(0, 3).map((tag, index) => (
                         <span
                           key={index}
                           className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
@@ -164,12 +169,17 @@ const BlogPage: React.FC = () => {
                             loading="lazy"
                           />
                         </div>
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          {post.author.name}
-                        </span>
+                        <div>
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                            {post.author.name}
+                          </span>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                            {post.date}
+                          </div>
+                        </div>
                       </div>
                       <Link
-                        to={`/blog/${post.id}`}
+                        to={`/blog/${post.slug}`}
                         className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline transform hover:translate-x-1 transition-transform"
                       >
                         Read More
@@ -183,9 +193,24 @@ const BlogPage: React.FC = () => {
 
             {filteredPosts.length === 0 && (
               <div className="text-center py-12">
-                <p className="text-gray-600 dark:text-gray-300">
-                  No articles found matching your criteria.
+                <div className="text-gray-400 mb-4">
+                  <Search className="w-16 h-16 mx-auto mb-4 opacity-50" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-2">
+                  No articles found
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400">
+                  Try adjusting your search terms or browse all categories.
                 </p>
+                <button
+                  onClick={() => {
+                    setSearchQuery('');
+                    setSelectedCategory('all');
+                  }}
+                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                >
+                  Clear Filters
+                </button>
               </div>
             )}
 
