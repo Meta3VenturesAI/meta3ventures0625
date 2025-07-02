@@ -175,7 +175,8 @@ class ProductionAuditor {
   private auditSEO(): void {
     // Check meta description
     const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription && metaDescription.getAttribute('content')?.length > 0) {
+    const content = metaDescription?.getAttribute('content');
+    if (metaDescription && content && content.length > 0) {
       this.results.push({
         category: 'SEO',
         status: 'pass',
