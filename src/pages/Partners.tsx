@@ -65,6 +65,66 @@ const PartnersPage: React.FC = () => {
       logo: "/logos/Nielsen_New_Logo_2021.png",
       link: "https://www.nielsen.com",
       description: "Global measurement and data analytics company"
+    },
+    {
+      name: "Stripe",
+      logo: "/logos/stripe-logo.png",
+      link: "https://stripe.com/",
+      description: "Payment processing and financial infrastructure"
+    },
+    {
+      name: "Salesforce",
+      logo: "/logos/salesforce-logo.png",
+      link: "https://www.salesforce.com/",
+      description: "Customer relationship management platform"
+    },
+    {
+      name: "Snowflake",
+      logo: "/logos/snowflake-logo.png",
+      link: "https://www.snowflake.com/",
+      description: "Cloud data platform and analytics"
+    },
+    {
+      name: "Databricks",
+      logo: "/logos/databricks-logo.png",
+      link: "https://databricks.com/",
+      description: "Unified analytics platform for big data and machine learning"
+    },
+    {
+      name: "MongoDB",
+      logo: "/logos/mongodb-logo.png",
+      link: "https://www.mongodb.com/",
+      description: "Modern database platform for developers"
+    },
+    {
+      name: "Atlassian",
+      logo: "/logos/atlassian-logo.png",
+      link: "https://www.atlassian.com/",
+      description: "Team collaboration and productivity tools"
+    },
+    {
+      name: "Slack",
+      logo: "/logos/slack-logo.png",
+      link: "https://slack.com/",
+      description: "Business communication and collaboration platform"
+    },
+    {
+      name: "Zoom",
+      logo: "/logos/zoom-logo.png",
+      link: "https://zoom.us/",
+      description: "Video communications and virtual meetings"
+    },
+    {
+      name: "Notion",
+      logo: "/logos/notion-logo.png",
+      link: "https://www.notion.so/",
+      description: "All-in-one workspace for notes, docs, and collaboration"
+    },
+    {
+      name: "Figma",
+      logo: "/logos/figma-logo.png",
+      link: "https://www.figma.com/",
+      description: "Collaborative design and prototyping platform"
     }
   ];
 
