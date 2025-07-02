@@ -10,7 +10,7 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-logo.png",
+      logo: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
@@ -25,50 +25,62 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Microsoft for Startups",
+      logo: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
+      logo: "/logos/oracle-for-startups.png",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
+      logo: "/logos/amazon.jpg",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
+      logo: "/logos/EYLogo.gif",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
+      logo: "/logos/PwC_2025_Logo.svg.png",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
+      logo: "/logos/SNC.png",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
+      logo: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
+      logo: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
+      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
+      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
+      logo: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
+      logo: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
@@ -119,5 +131,3 @@ export const Partners: React.FC = () => {
     </section>
   );
 };
-
-export default Partners;

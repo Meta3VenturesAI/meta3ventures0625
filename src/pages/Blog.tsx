@@ -171,7 +171,7 @@ const BlogPage: React.FC = () => {
 
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                           <User size={20} className="text-gray-500 dark:text-gray-400" />
                         </div>
                         <div>
