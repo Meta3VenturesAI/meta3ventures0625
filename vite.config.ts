@@ -5,14 +5,13 @@ import { VitePWA } from 'vite-plugin-pwa';
 export default defineConfig({
   plugins: [
     react({
-      // Remove Emotion configuration that's causing the error
       jsxImportSource: 'react',
       babel: {
         plugins: []
       }
     }),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'Meta3Ventures',
@@ -41,6 +40,8 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         maximumFileSizeToCacheInBytes: 5000000,
+        skipWaiting: true,
+        clientsClaim: true,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -50,43 +51,43 @@ export default defineConfig({
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365
-              },
-              cacheKeyWillBeUsed: async ({ request }) => {
-                return `${request.url}?v=1`;
               }
             }
           },
           {
             urlPattern: /^https:\/\/images\.pexels\.com\/.*/i,
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'pexels-images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30
-              }
+                maxAgeSeconds: 60 * 60 * 24 * 7
+              },
+              networkTimeoutSeconds: 10
             }
           },
           {
             urlPattern: /^https:\/\/res\.cloudinary\.com\/.*/i,
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'cloudinary-images-cache',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 30
-              }
+                maxAgeSeconds: 60 * 60 * 24 * 7
+              },
+              networkTimeoutSeconds: 10
             }
           },
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-            handler: 'CacheFirst',
+            urlPattern: /^https:\/\/upload\.wikimedia\.org\/.*/i,
+            handler: 'NetworkFirst',
             options: {
-              cacheName: 'images-cache',
+              cacheName: 'wikipedia-images-cache',
               expiration: {
-                maxEntries: 100,
+                maxEntries: 30,
                 maxAgeSeconds: 60 * 60 * 24 * 30
-              }
+              },
+              networkTimeoutSeconds: 10
             }
           }
         ]

@@ -167,6 +167,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           loading={loading}
           decoding="async"
           crossOrigin="anonymous"
+          referrerPolicy="no-referrer-when-downgrade"
         />
       )}
       
