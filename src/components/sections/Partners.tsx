@@ -9,29 +9,29 @@ interface Partner {
 export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
+      name: "HubSpot for Startups",
+      logo: "/logos/hubspot-for-startups.png",
+      link: "https://www.hubspot.com/startups"
+    },
+    {
+      name: "NVIDIA Inception",
+      logo: "/logos/nvidia-inception.png",
+      link: "https://www.nvidia.com/en-us/startups/"
+    },
+    {
+      name: "Google for Startups",
+      logo: "/logos/google-for-startups.png",
+      link: "https://startup.google.com/"
+    },
+    {
+      name: "Microsoft for Startups",
+      logo: "/logos/Microsoft-for-Startups.jpg",
+      link: "https://www.microsoft.com/en-us/startups"
+    },
+    {
       name: "Nielsen",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Nielsen_logo.svg/512px-Nielsen_logo.svg.png",
+      logo: "/logos/Nielsen_New_Logo_2021.png",
       link: "https://www.nielsen.com"
-    },
-    {
-      name: "PWC",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PwC_Logo.svg/512px-PwC_Logo.svg.png",
-      link: "https://www.pwc.com"
-    },
-    {
-      name: "OpenAI",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png",
-      link: "https://openai.com"
-    },
-    {
-      name: "NVIDIA",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/512px-Nvidia_logo.svg.png",
-      link: "https://www.nvidia.com"
-    },
-    {
-      name: "Microsoft",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/512px-Microsoft_logo.svg.png",
-      link: "https://www.microsoft.com"
     }
   ];
 
@@ -61,6 +61,14 @@ export const Partners: React.FC = () => {
                 alt={partner.name}
                 className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = document.createElement('div');
+                  fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium';
+                  fallback.textContent = partner.name;
+                  target.parentNode?.appendChild(fallback);
+                }}
               />
             </a>
           ))}

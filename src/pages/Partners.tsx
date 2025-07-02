@@ -7,29 +7,34 @@ import { Link } from 'react-router-dom';
 const PartnersPage: React.FC = () => {
   const partners = [
     {
-      name: "Microsoft",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/512px-Microsoft_logo.svg.png",
-      link: "https://www.microsoft.com"
+      name: "HubSpot for Startups",
+      logo: "/logos/hubspot-for-startups.png",
+      link: "https://www.hubspot.com/startups",
+      description: "CRM and marketing platform for growing startups"
     },
     {
-      name: "NVIDIA",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/512px-Nvidia_logo.svg.png",
-      link: "https://www.nvidia.com"
+      name: "NVIDIA Inception",
+      logo: "/logos/nvidia-inception.png", 
+      link: "https://www.nvidia.com/en-us/startups/",
+      description: "AI computing platform and startup acceleration program"
     },
     {
-      name: "OpenAI",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png",
-      link: "https://openai.com"
+      name: "Google for Startups",
+      logo: "/logos/google-for-startups.png",
+      link: "https://startup.google.com/",
+      description: "Cloud credits and startup support from Google"
+    },
+    {
+      name: "Microsoft for Startups",
+      logo: "/logos/Microsoft-for-Startups.jpg",
+      link: "https://www.microsoft.com/en-us/startups",
+      description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Nielsen",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Nielsen_logo.svg/512px-Nielsen_logo.svg.png",
-      link: "https://www.nielsen.com"
-    },
-    {
-      name: "PWC",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PwC_Logo.svg/512px-PwC_Logo.svg.png",
-      link: "https://www.pwc.com"
+      logo: "/logos/Nielsen_New_Logo_2021.png",
+      link: "https://www.nielsen.com",
+      description: "Global measurement and data analytics company"
     }
   ];
 
@@ -142,30 +147,44 @@ const PartnersPage: React.FC = () => {
             <h2 className="text-3xl font-bold text-center mb-12 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text">
               Our Partners
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-items-center max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-items-center max-w-6xl mx-auto">
               {partners.map((partner) => (
-                <a
+                <div
                   key={partner.name}
-                  href={partner.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
+                  className="w-full max-w-[300px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
                 >
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="max-h-12 w-auto object-contain filter dark:brightness-0 dark:invert group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      const fallback = document.createElement('div');
-                      fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium';
-                      fallback.textContent = partner.name;
-                      target.parentNode?.appendChild(fallback);
-                    }}
-                  />
-                </a>
+                  <a
+                    href={partner.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <div className="h-32 flex items-center justify-center p-6 bg-gray-50 dark:bg-gray-700">
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="max-h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium text-center';
+                          fallback.textContent = partner.name;
+                          target.parentNode?.appendChild(fallback);
+                        }}
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
+                        {partner.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                        {partner.description}
+                      </p>
+                    </div>
+                  </a>
+                </div>
               ))}
             </div>
           </div>
