@@ -92,7 +92,7 @@ const PartnersPage: React.FC = () => {
   ];
 
   const handleImageError = (partnerName: string) => {
-    console.warn(`Failed to load image for partner: ${partnerName}`);
+    console.warn(`Using fallback for partner: ${partnerName}`);
     setImageLoadErrors(prev => ({ ...prev, [partnerName]: true }));
   };
 
