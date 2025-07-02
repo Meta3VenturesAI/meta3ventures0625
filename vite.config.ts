@@ -77,18 +77,6 @@ export default defineConfig({
               },
               networkTimeoutSeconds: 5
             }
-          },
-          {
-            urlPattern: /^https:\/\/upload\.wikimedia\.org\/.*/i,
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'wikipedia-images-cache',
-              expiration: {
-                maxEntries: 30,
-                maxAgeSeconds: 60 * 60 * 24 * 30
-              },
-              networkTimeoutSeconds: 5
-            }
           }
         ]
       }

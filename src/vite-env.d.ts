@@ -1,7 +1,11 @@
 /// <reference types="vite/client" />
 
 declare module 'react-dom/client' {
-  export * from 'react-dom/client';
+  import { Container } from 'react-dom';
+  export function createRoot(container: Container): {
+    render(children: React.ReactNode): void;
+    unmount(): void;
+  };
 }
 
 interface ImportMetaEnv {
@@ -18,4 +22,10 @@ interface ImportMetaEnv {
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
+}
+
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
 }
