@@ -121,7 +121,13 @@ const BlogPage: React.FC = () => {
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                        if (post.category === 'ai') {
+                          target.src = "/images/innovation.jpg";
+                        } else if (post.category === 'blockchain') {
+                          target.src = "/images/blockchain-tech.jpg";
+                        } else {
+                          target.src = "/images/venture-capital.jpg";
+                        }
                       }}
                     />
                     <div className="absolute top-4 left-4">

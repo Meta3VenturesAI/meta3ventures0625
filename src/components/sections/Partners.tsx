@@ -1,22 +1,76 @@
 import React from 'react';
 
-const Partners: React.FC = () => {
-  const partners = [
-    { name: "HubSpot for Startups" },
-    { name: "NVIDIA Inception" },
-    { name: "Google for Startups" },
-    { name: "Microsoft for Startups" },
-    { name: "Oracle for Startups" },
-    { name: "AWS Startups" },
-    { name: "EY" },
-    { name: "PwC" },
-    { name: "Start-up Nation Central" },
-    { name: "Nielsen" },
-    { name: "Atlassian" },
-    { name: "Slack" },
-    { name: "Zoom" },
-    { name: "Notion" },
-    { name: "Figma" }
+interface Partner {
+  name: string;
+  logo?: string;
+  description: string;
+}
+
+export const Partners: React.FC = () => {
+  const partners: Partner[] = [
+    {
+      name: "HubSpot for Startups",
+      logo: "/logos/hubspot-logo.png",
+      description: "CRM and marketing platform for growing startups"
+    },
+    {
+      name: "NVIDIA Inception",
+      logo: "/logos/nvidia-inception.png",
+      description: "AI computing platform and startup acceleration program"
+    },
+    {
+      name: "Google for Startups",
+      logo: "/logos/google-for-startups.png",
+      description: "Cloud credits and startup support from Google"
+    },
+    {
+      name: "Microsoft for Startups",
+      description: "Azure credits and enterprise tools for startups"
+    },
+    {
+      name: "Oracle for Startups",
+      description: "Cloud infrastructure and database solutions for startups"
+    },
+    {
+      name: "AWS Startups",
+      description: "Cloud computing platform and startup credits"
+    },
+    {
+      name: "EY",
+      description: "Professional services and startup advisory"
+    },
+    {
+      name: "PwC",
+      description: "Consulting and professional services"
+    },
+    {
+      name: "Start-up Nation Central",
+      description: "Israeli innovation ecosystem connector"
+    },
+    {
+      name: "Nielsen",
+      description: "Global measurement and data analytics company"
+    },
+    {
+      name: "Atlassian",
+      description: "Team collaboration and productivity tools"
+    },
+    {
+      name: "Slack",
+      description: "Business communication and collaboration platform"
+    },
+    {
+      name: "Zoom",
+      description: "Video communications and virtual meetings"
+    },
+    {
+      name: "Notion",
+      description: "All-in-one workspace for notes, docs, and collaboration"
+    },
+    {
+      name: "Figma",
+      description: "Collaborative design and prototyping platform"
+    }
   ];
 
   return (
@@ -37,9 +91,27 @@ const Partners: React.FC = () => {
               key={index}
               className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              <div className="text-center">
-                <p className="text-gray-600 dark:text-gray-300 text-sm font-medium">{partner.name}</p>
-              </div>
+              {partner.logo ? (
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentNode as HTMLElement;
+                    const fallback = document.createElement('div');
+                    fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium text-center';
+                    fallback.textContent = partner.name;
+                    parent.appendChild(fallback);
+                  }}
+                />
+              ) : (
+                <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">
+                  {partner.name}
+                </div>
+              )}
             </div>
           ))}
         </div>
