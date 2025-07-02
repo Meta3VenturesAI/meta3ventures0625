@@ -13,7 +13,7 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      imageUrl: "/logos/New Customer Offer Thumbnails (11).webp",
+      imageUrl: "/logos/png-clipart-hubspot-logo-hubspot-logo-icons-logos-emojis-tech-companies.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
