@@ -10,78 +10,103 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-for-startups.png",
+      logo: "https://www.hubspot.com/hubfs/assets/hubspot.com/style-guide/brand-guidelines/guidelines_the-logo.svg",
       link: "https://www.hubspot.com/startups"
     },
     {
       name: "NVIDIA Inception",
-      logo: "/logos/nvidia-inception.png",
+      logo: "https://developer-blogs.nvidia.com/wp-content/uploads/2021/02/nvidia-inception-program-logo-for-screen.png",
       link: "https://www.nvidia.com/en-us/startups/"
     },
     {
       name: "Google for Startups",
-      logo: "/logos/Logo_for_Google_for_Startups_page.png",
+      logo: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Logo_for_Google_for_Startups_page.max-1000x1000.png",
       link: "https://startup.google.com/"
     },
     {
       name: "Microsoft for Startups",
-      logo: "/logos/Microsoft-for-Startups.jpg",
+      logo: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4Bw1o",
       link: "https://www.microsoft.com/en-us/startups"
     },
     {
       name: "Oracle for Startups",
-      logo: "/logos/oracle-for-startups.png",
+      logo: "https://www.oracle.com/a/ocom/img/rc24-oracle-for-startups-logo.png",
       link: "https://www.oracle.com/startup/"
     },
     {
       name: "AWS Startups",
-      logo: "/logos/amazon.jpg",
+      logo: "https://d0.awsstatic.com/logos/powered-by-aws.png",
       link: "https://aws.amazon.com/startups/"
     },
     {
       name: "EY",
-      logo: "/logos/EYLogo.gif",
+      logo: "https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/generic-content/ey-logo-horizontal.svg",
       link: "https://www.ey.com/"
     },
     {
       name: "PwC",
-      logo: "/logos/PwC_2025_Logo.svg.png",
+      logo: "https://www.pwc.com/content/dam/pwc/us/en/assets/pwc-logo-lockup-white-300x300.png",
       link: "https://www.pwc.com/"
     },
     {
       name: "Start-up Nation Central",
-      logo: "/logos/SNC.png",
+      logo: "https://startupnationcentral.org/wp-content/uploads/2022/06/SNC-Logo-1.svg",
       link: "https://www.startupnationcentral.org/"
     },
     {
       name: "Nielsen",
-      logo: "/logos/Nielsen_New_Logo_2021.png",
+      logo: "https://www.nielsen.com/wp-content/uploads/sites/3/2021/02/Nielsen-Logo-Large-scaled.jpg",
       link: "https://www.nielsen.com"
     },
     {
       name: "Atlassian",
-      logo: "/logos/atlassian-logo.png",
+      logo: "https://wac-cdn.atlassian.com/dam/jcr:616e6748-ad8c-48d9-ae93-28a8f1c4fe03/Atlassian-horizontal-blue-rgb.svg",
       link: "https://www.atlassian.com/"
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
+      logo: "https://a.slack-edge.com/bv1-10/slack_logo-ebd02d1.svg",
       link: "https://slack.com/"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
+      logo: "https://st1.zoom.us/static/6.3.10815/image/new/home/logo.svg",
       link: "https://zoom.us/"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
+      logo: "https://www.notion.so/cdn-cgi/image/format=auto,width=256,quality=100/front-static/shared/logos/notion-logo.png",
       link: "https://www.notion.so/"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
+      logo: "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=670&h=670&q=75&fit=max&auto=format",
       link: "https://www.figma.com/"
+    },
+    {
+      name: "MongoDB",
+      logo: "https://webimages.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png?auto=format%2Ccompress",
+      link: "https://www.mongodb.com/startups"
+    },
+    {
+      name: "Snowflake",
+      logo: "https://www.snowflake.com/wp-content/themes/snowflake/assets/img/logo-blue.svg",
+      link: "https://www.snowflake.com/startups/"
+    },
+    {
+      name: "Stripe",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg",
+      link: "https://stripe.com/startups"
+    },
+    {
+      name: "Salesforce",
+      logo: "https://www.salesforce.com/content/dam/web/en_us/www/images/home/logo.png",
+      link: "https://www.salesforce.com/startups/"
+    },
+    {
+      name: "Databricks",
+      logo: "https://www.databricks.com/wp-content/uploads/2022/05/db-nav-logo.svg",
+      link: "https://www.databricks.com/company/startups"
     }
   ];
 
