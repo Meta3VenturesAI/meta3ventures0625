@@ -10,7 +10,7 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-for-startups.png",
+      logo: "/logos/hubspot-logo.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
@@ -65,22 +65,22 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
+      logo: "/logos/slack-logo.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
+      logo: "/logos/zoom-logo.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-symbol.png",
+      logo: "/logos/notion-logo.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma.png",
+      logo: "/logos/figma-logo.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
