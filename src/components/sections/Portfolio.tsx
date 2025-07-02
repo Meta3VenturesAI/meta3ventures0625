@@ -208,10 +208,11 @@ export const Portfolio: React.FC = () => {
       }, 4000);
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [isPaused]);
 
-  const getCategoryColor = (category: string) => {
-    const colors = {
+  const getCategoryColor = (category: string): string => {
+    const colors: Record<string, string> = {
       'AI & Machine Learning': 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200',
       'Media & Entertainment': 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-200',
       'FinTech': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200',
@@ -220,7 +221,12 @@ export const Portfolio: React.FC = () => {
       'AdTech': 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200',
       'Blockchain': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-200',
       'E-commerce': 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-200',
-      'Gaming': 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-200'
+      'Gaming': 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900/30 dark:text-cyan-200',
+      'Privacy Tech': 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-200',
+      'Logistics': 'bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-200',
+      'Marketing Tech': 'bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-200',
+      'HR Tech': 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-200',
+      'Research Tech': 'bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-200'
     };
     return colors[category] || 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-200';
   };

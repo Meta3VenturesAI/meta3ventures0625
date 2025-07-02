@@ -38,8 +38,8 @@ function trackInitialPageView() {
 function setupNavigationTracking() {
   // Track history changes
   const originalPushState = history.pushState;
-  history.pushState = function() {
-    originalPushState.apply(this, arguments);
+  history.pushState = function(...args: [data: any, unused: string, url?: string | URL | null | undefined]) {
+    originalPushState.apply(this, args);
     handleNavigation();
   };
 
@@ -63,7 +63,7 @@ function setupErrorTracking() {
     });
 
     // Only show toast in development
-    if (process.env.NODE_ENV === 'development') {
+    if (import.meta.env.MODE === 'development') {
       toast.error('An error occurred. Check console for details.');
     }
   });

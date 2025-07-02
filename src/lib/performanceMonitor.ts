@@ -23,6 +23,12 @@ interface ResourceTiming {
   type: string;
 }
 
+interface MemoryInfo {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
 class PerformanceMonitor {
   private sessionId: string;
   private metrics: Partial<PerformanceMetrics> = {};
@@ -87,9 +93,9 @@ class PerformanceMonitor {
     const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
     
     if (navigation) {
-      this.metrics.pageLoadTime = navigation.loadEventEnd - navigation.navigationStart;
-      this.metrics.domContentLoaded = navigation.domContentLoadedEventEnd - navigation.navigationStart;
-      this.metrics.timeToInteractive = navigation.domInteractive - navigation.navigationStart;
+      this.metrics.pageLoadTime = navigation.loadEventEnd - navigation.fetchStart;
+      this.metrics.domContentLoaded = navigation.domContentLoadedEventEnd - navigation.fetchStart;
+      this.metrics.timeToInteractive = navigation.domInteractive - navigation.fetchStart;
     }
 
     // Collect resource timings

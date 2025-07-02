@@ -14,13 +14,13 @@ export const performanceMonitor = {
           response: perfData.responseEnd - perfData.responseStart,
           dom: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
           load: perfData.loadEventEnd - perfData.loadEventStart,
-          total: perfData.loadEventEnd - perfData.navigationStart
+          total: perfData.loadEventEnd - perfData.fetchStart
         };
 
         console.log('Performance Metrics:', metrics);
         
         // Send to analytics in production
-        if (process.env.NODE_ENV === 'production') {
+        if (import.meta.env.PROD) {
           // You can send these metrics to your analytics service
         }
       });
@@ -69,30 +69,48 @@ export const performanceMonitor = {
 export const measureWebVitals = () => {
   if (typeof window !== 'undefined') {
     // Measure Largest Contentful Paint (LCP)
-    new PerformanceObserver((entryList) => {
-      const entries = entryList.getEntries();
-      const lastEntry = entries[entries.length - 1];
-      console.log('LCP:', lastEntry.startTime);
-    }).observe({ entryTypes: ['largest-contentful-paint'] });
+    if ('PerformanceObserver' in window) {
+      try {
+        new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          console.log('LCP:', lastEntry.startTime);
+        }).observe({ entryTypes: ['largest-contentful-paint'] });
 
-    // Measure First Input Delay (FID)
-    new PerformanceObserver((entryList) => {
-      const entries = entryList.getEntries();
-      entries.forEach(entry => {
-        console.log('FID:', entry.processingStart - entry.startTime);
-      });
-    }).observe({ entryTypes: ['first-input'] });
+        // Measure First Input Delay (FID)
+        new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          entries.forEach(entry => {
+            const fidEntry = entry as PerformanceEventTiming;
+            console.log('FID:', fidEntry.processingStart - fidEntry.startTime);
+          });
+        }).observe({ entryTypes: ['first-input'] });
 
-    // Measure Cumulative Layout Shift (CLS)
-    let clsValue = 0;
-    new PerformanceObserver((entryList) => {
-      const entries = entryList.getEntries();
-      entries.forEach(entry => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
-        }
-      });
-      console.log('CLS:', clsValue);
-    }).observe({ entryTypes: ['layout-shift'] });
+        // Measure Cumulative Layout Shift (CLS)
+        let clsValue = 0;
+        new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          entries.forEach(entry => {
+            const layoutShiftEntry = entry as LayoutShift;
+            if (!layoutShiftEntry.hadRecentInput) {
+              clsValue += layoutShiftEntry.value;
+            }
+          });
+          console.log('CLS:', clsValue);
+        }).observe({ entryTypes: ['layout-shift'] });
+      } catch (error) {
+        console.warn('Performance observer not supported:', error);
+      }
+    }
   }
 };
+
+// Type definitions for performance entries
+interface PerformanceEventTiming extends PerformanceEntry {
+  processingStart: number;
+}
+
+interface LayoutShift extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}

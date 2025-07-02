@@ -252,7 +252,7 @@ const ApplyPage: React.FC = () => {
                 </div>
               )}
 
-              {state.errors?.length > 0 && (
+              {Array.isArray(state.errors) && state.errors.length > 0 && (
                 <div className="mt-4 p-4 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-200 rounded-lg text-center animate-fadeIn flex items-center justify-center">
                   <AlertCircle className="w-5 h-5 mr-2" />
                   There was an error submitting your application. Please try again.

@@ -112,7 +112,7 @@ export const Footer: React.FC = () => {
               </div>
             )}
 
-            {state.errors?.length > 0 && (
+            {Array.isArray(state.errors) && state.errors.length > 0 && (
               <div className="mt-3 p-2 bg-red-600/20 border border-red-500/30 rounded text-red-200 text-sm animate-fadeIn flex items-center">
                 <AlertCircle className="w-4 h-4 mr-2" />
                 Failed to subscribe. Try again.
