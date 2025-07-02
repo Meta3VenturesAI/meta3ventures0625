@@ -13,22 +13,22 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      imageUrl: "/logos/hubspot-for-startups.png",
+      imageUrl: "/New Customer Offer Thumbnails (11).webp",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      imageUrl: "/logos/nvidia-inception.png",
+      imageUrl: "/20181218-Nvidia-Inception.webp",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      imageUrl: "/logos/Logo_for_Google_for_Startups_page.png",
+      imageUrl: "/Logo_for_Google_for_Startups_page copy.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      imageUrl: "/logos/Microsoft-for-Startups.jpg",
+      imageUrl: "/Microsoft-for-Startups copy.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
@@ -58,7 +58,7 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Nielsen",
-      imageUrl: "/logos/Nielsen_New_Logo_2021.png",
+      imageUrl: "/Nielsen_New_Logo_2021 copy.png",
       description: "Global measurement and data analytics company"
     },
     {
@@ -93,22 +93,22 @@ export const Partners: React.FC = () => {
     },
     {
       name: "MongoDB",
-      imageUrl: "/logos/MongoDB_forStartups_ForestGreen copy.png",
+      imageUrl: "/logos/MongoDB_forStartups_ForestGreen.png",
       description: "Document database for modern applications"
     },
     {
       name: "Snowflake",
-      imageUrl: "/logos/ibsi_snowflake copy.jpg",
+      imageUrl: "/logos/ibsi_snowflake.jpg",
       description: "Cloud data platform for data warehousing"
     },
     {
       name: "Stripe",
-      imageUrl: "/logos/new-stripe-logo-png copy.png",
+      imageUrl: "/logos/new-stripe-logo-png.png",
       description: "Payment processing platform for internet businesses"
     },
     {
       name: "Salesforce",
-      imageUrl: "/logos/salesforce copy.png",
+      imageUrl: "/logos/salesforce.png",
       description: "Customer relationship management platform"
     }
   ];

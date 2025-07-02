@@ -11,26 +11,26 @@ export const imageConfig = {
   
   // Partner logos - using reliable external URLs
   partnerLogos: {
-    'HubSpot for Startups': 'https://images.pexels.com/photos/4968391/pexels-photo-4968391.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'NVIDIA Inception': 'https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Google for Startups': 'https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Microsoft for Startups': 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Oracle for Startups': 'https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'AWS Startups': 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'EY': 'https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'PwC': 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Start-up Nation Central': 'https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Nielsen': 'https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Atlassian': 'https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Slack': 'https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Zoom': 'https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Notion': 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Figma': 'https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Databricks': 'https://images.pexels.com/photos/3184471/pexels-photo-3184471.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'MongoDB': 'https://images.pexels.com/photos/3184481/pexels-photo-3184481.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Snowflake': 'https://images.pexels.com/photos/3184487/pexels-photo-3184487.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Stripe': 'https://images.pexels.com/photos/3184490/pexels-photo-3184490.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'Salesforce': 'https://images.pexels.com/photos/3184496/pexels-photo-3184496.jpeg?auto=compress&cs=tinysrgb&w=800'
+    'HubSpot for Startups': '/New Customer Offer Thumbnails (11).webp',
+    'NVIDIA Inception': '/20181218-Nvidia-Inception.webp',
+    'Google for Startups': '/Logo_for_Google_for_Startups_page copy.png',
+    'Microsoft for Startups': '/Microsoft-for-Startups copy.jpg',
+    'Oracle for Startups': '/logos/oracle-for-startups.png',
+    'AWS Startups': '/logos/amazon.jpg',
+    'EY': '/logos/EYLogo.gif',
+    'PwC': '/logos/PwC_2025_Logo.svg.png',
+    'Start-up Nation Central': '/logos/SNC.png',
+    'Nielsen': '/Nielsen_New_Logo_2021 copy.png',
+    'Atlassian': '/logos/Atlassian-Logo.png',
+    'Slack': '/logos/slack-logo-PNG-large-size-900x230.png',
+    'Zoom': '/logos/zoom-logo-png-video-meeting-call-software.png',
+    'Notion': '/logos/notion-symbol.png',
+    'Figma': '/logos/figma.png',
+    'Databricks': '/logos/Databricks_Logo.png',
+    'MongoDB': '/logos/MongoDB_forStartups_ForestGreen.png',
+    'Snowflake': '/logos/ibsi_snowflake.jpg',
+    'Stripe': '/logos/new-stripe-logo-png.png',
+    'Salesforce': '/logos/salesforce.png'
   },
   
   // Optimized image URLs for different use cases
@@ -180,35 +180,34 @@ export const loadImageWithRetry = (
 export const debugCheckAllImages = async () => {
   const imagesToCheck = [
     // Partner logos
-    '/logos/hubspot-for-startups.png',
-    '/logos/nvidia-inception.png',
-    '/logos/google-for-startups.png',
-    '/logos/Microsoft-for-Startups.jpg',
+    '/New Customer Offer Thumbnails (11).webp',
+    '/20181218-Nvidia-Inception.webp',
+    '/Logo_for_Google_for_Startups_page copy.png',
+    '/Microsoft-for-Startups copy.jpg',
+    '/Nielsen_New_Logo_2021 copy.png',
     '/logos/oracle-for-startups.png',
     '/logos/amazon.jpg',
     '/logos/EYLogo.gif',
     '/logos/PwC_2025_Logo.svg.png',
     '/logos/SNC.png',
-    '/logos/Nielsen_New_Logo_2021.png',
-    '/logos/atlassian-logo.png',
-    '/logos/slack-logo.png',
-    '/logos/zoom-logo.png',
-    '/logos/notion-logo.png',
-    '/logos/figma-logo.png',
-    '/logos/databricks-logo.png',
-    '/logos/mongodb-logo.png',
-    '/logos/snowflake-logo.png',
-    '/logos/stripe-logo.png',
-    '/logos/salesforce-logo.png',
+    '/logos/Atlassian-Logo.png',
+    '/logos/slack-logo-PNG-large-size-900x230.png',
+    '/logos/zoom-logo-png-video-meeting-call-software.png',
+    '/logos/notion-symbol.png',
+    '/logos/figma.png',
+    '/logos/Databricks_Logo.png',
+    '/logos/MongoDB_forStartups_ForestGreen.png',
+    '/logos/ibsi_snowflake.jpg',
+    '/logos/new-stripe-logo-png.png',
+    '/logos/salesforce.png',
     
     // Team images
-    '/images/liron-langer.jpg',
-    '/images/team-collaboration.jpg',
+    '/images/Liron1.jpg',
     
     // Blog images
-    '/images/innovation.jpg',
-    '/images/blockchain-tech.jpg',
-    '/images/venture-capital.jpg'
+    'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
+    'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg',
+    'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg'
   ];
   
   const results = await Promise.all(
