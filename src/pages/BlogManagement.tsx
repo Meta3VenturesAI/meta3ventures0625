@@ -294,6 +294,10 @@ const BlogManagement: React.FC = () => {
                                 alt={post.title}
                                 className="w-full h-full object-cover rounded-lg"
                                 loading="lazy"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement;
+                                  target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                                }}
                               />
                             </div>
                             

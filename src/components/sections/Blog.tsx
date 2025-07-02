@@ -42,6 +42,10 @@ export const Blog: React.FC = () => {
                   alt={post.title} 
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                  }}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">

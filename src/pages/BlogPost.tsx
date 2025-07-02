@@ -83,6 +83,10 @@ const BlogPost: React.FC = () => {
                   alt={post.title}
                   className="w-full h-full object-cover"
                   loading="eager"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-6 left-6">
@@ -179,6 +183,10 @@ const BlogPost: React.FC = () => {
                       alt={post.author.name}
                       className="w-16 h-16 rounded-full object-cover"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg";
+                      }}
                     />
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -229,6 +237,10 @@ const BlogPost: React.FC = () => {
                           alt={relatedPost.title}
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                           loading="lazy"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                          }}
                         />
                       </div>
                       <div className="p-6">

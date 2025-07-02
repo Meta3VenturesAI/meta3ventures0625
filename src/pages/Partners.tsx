@@ -8,91 +8,91 @@ const PartnersPage: React.FC = () => {
   const partners = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-for-startups.png",
+      logo: "https://www.hubspot.com/hubfs/assets/hubspot.com/style-guide/brand-guidelines/guidelines_the-logo.svg",
       link: "https://www.hubspot.com/startups",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      logo: "/logos/nvidia-inception.png", 
+      logo: "https://developer-blogs.nvidia.com/wp-content/uploads/2021/02/nvidia-inception-program-logo-for-screen.png", 
       link: "https://www.nvidia.com/en-us/startups/",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      logo: "/logos/Logo_for_Google_for_Startups_page.png",
+      logo: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Logo_for_Google_for_Startups_page.max-1000x1000.png",
       link: "https://startup.google.com/",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      logo: "/logos/Microsoft-for-Startups.jpg",
+      logo: "https://img-prod-cms-rt-microsoft-com.akamaized.net/cms/api/am/imageFileData/RE4Bw1o",
       link: "https://www.microsoft.com/en-us/startups",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
-      logo: "/logos/oracle-for-startups.png",
+      logo: "https://www.oracle.com/a/ocom/img/rc24-oracle-for-startups-logo.png",
       link: "https://www.oracle.com/startup/",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
-      logo: "/logos/amazon.jpg",
+      logo: "https://d0.awsstatic.com/logos/powered-by-aws.png",
       link: "https://aws.amazon.com/startups/",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
-      logo: "/logos/EYLogo.gif",
+      logo: "https://assets.ey.com/content/dam/ey-sites/ey-com/en_gl/generic-content/ey-logo-horizontal.svg",
       link: "https://www.ey.com/",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
-      logo: "/logos/PwC_2025_Logo.svg.png",
+      logo: "https://www.pwc.com/content/dam/pwc/us/en/assets/pwc-logo-lockup-white-300x300.png",
       link: "https://www.pwc.com/",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
-      logo: "/logos/SNC.png",
+      logo: "https://startupnationcentral.org/wp-content/uploads/2022/06/SNC-Logo-1.svg",
       link: "https://www.startupnationcentral.org/",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
-      logo: "/logos/Nielsen_New_Logo_2021.png",
+      logo: "https://www.nielsen.com/wp-content/uploads/sites/3/2021/02/Nielsen-Logo-Large-scaled.jpg",
       link: "https://www.nielsen.com",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
-      logo: "/logos/atlassian-logo.png",
+      logo: "https://wac-cdn.atlassian.com/dam/jcr:616e6748-ad8c-48d9-ae93-28a8f1c4fe03/Atlassian-horizontal-blue-rgb.svg",
       link: "https://www.atlassian.com/",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
+      logo: "https://a.slack-edge.com/bv1-10/slack_logo-ebd02d1.svg",
       link: "https://slack.com/",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
+      logo: "https://st1.zoom.us/static/6.3.10815/image/new/home/logo.svg",
       link: "https://zoom.us/",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
+      logo: "https://www.notion.so/cdn-cgi/image/format=auto,width=256,quality=100/front-static/shared/logos/notion-logo.png",
       link: "https://www.notion.so/",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
+      logo: "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=670&h=670&q=75&fit=max&auto=format",
       link: "https://www.figma.com/",
       description: "Collaborative design and prototyping platform"
     }

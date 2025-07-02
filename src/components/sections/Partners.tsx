@@ -82,31 +82,6 @@ export const Partners: React.FC = () => {
       name: "Figma",
       logo: "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=670&h=670&q=75&fit=max&auto=format",
       link: "https://www.figma.com/"
-    },
-    {
-      name: "MongoDB",
-      logo: "https://webimages.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png?auto=format%2Ccompress",
-      link: "https://www.mongodb.com/startups"
-    },
-    {
-      name: "Snowflake",
-      logo: "https://www.snowflake.com/wp-content/themes/snowflake/assets/img/logo-blue.svg",
-      link: "https://www.snowflake.com/startups/"
-    },
-    {
-      name: "Stripe",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg",
-      link: "https://stripe.com/startups"
-    },
-    {
-      name: "Salesforce",
-      logo: "https://www.salesforce.com/content/dam/web/en_us/www/images/home/logo.png",
-      link: "https://www.salesforce.com/startups/"
-    },
-    {
-      name: "Databricks",
-      logo: "https://www.databricks.com/wp-content/uploads/2022/05/db-nav-logo.svg",
-      link: "https://www.databricks.com/company/startups"
     }
   ];
 
