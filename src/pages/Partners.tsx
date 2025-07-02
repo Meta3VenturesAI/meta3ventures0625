@@ -3,6 +3,7 @@ import { SEO } from '../components/SEO';
 import { CheckCircle, Users, Target, Network } from 'lucide-react';
 import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
+import { getPartnerLogo } from '../utils/imageUtils';
 
 const PartnersPage: React.FC = () => {
   const [imageLoadErrors, setImageLoadErrors] = useState<Record<string, boolean>>({});
@@ -10,83 +11,68 @@ const PartnersPage: React.FC = () => {
   const partners = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      logo: "/logos/nvidia-inception.png",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      logo: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
-      logo: "/logos/oracle-for-startups.png",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
-      logo: "/logos/amazon.jpg",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
-      logo: "/logos/EYLogo.gif",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
-      logo: "/logos/PwC_2025_Logo.svg.png",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
-      logo: "/logos/SNC.png",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
-      logo: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
-      logo: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
 
   const handleImageError = (partnerName: string) => {
-    console.error(`Failed to load image for partner: ${partnerName}`);
+    console.warn(`Image failed to load for partner: ${partnerName}`);
     setImageLoadErrors(prev => ({ ...prev, [partnerName]: true }));
   };
 
@@ -200,36 +186,40 @@ const PartnersPage: React.FC = () => {
               Our Partners
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-center justify-items-center max-w-7xl mx-auto">
-              {partners.map((partner, index) => (
-                <div
-                  key={index}
-                  className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
-                >
-                  <div className="h-32 flex items-center justify-center p-4">
-                    {partner.logo && !imageLoadErrors[partner.name] ? (
-                      <img
-                        src={partner.logo}
-                        alt={partner.name}
-                        className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        onError={() => handleImageError(partner.name)}
-                      />
-                    ) : (
-                      <div className="text-xl font-semibold text-gray-900 dark:text-white text-center">
+              {partners.map((partner, index) => {
+                const logoSrc = getPartnerLogo(partner.name);
+                
+                return (
+                  <div
+                    key={index}
+                    className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
+                  >
+                    <div className="h-32 flex items-center justify-center p-4">
+                      {!imageLoadErrors[partner.name] ? (
+                        <img
+                          src={logoSrc}
+                          alt={partner.name}
+                          className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300 rounded"
+                          loading="lazy"
+                          onError={() => handleImageError(partner.name)}
+                        />
+                      ) : (
+                        <div className="text-lg font-semibold text-gray-900 dark:text-white text-center px-2">
+                          {partner.name}
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4 bg-gray-50 dark:bg-gray-700">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
                         {partner.name}
-                      </div>
-                    )}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+                        {partner.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-700">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
-                      {partner.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
-                      {partner.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

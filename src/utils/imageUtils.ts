@@ -9,6 +9,25 @@ export const imageConfig = {
     business: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800'
   },
   
+  // Partner logos - using fallback images for now
+  partnerLogos: {
+    'HubSpot for Startups': 'https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'NVIDIA Inception': 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Google for Startups': 'https://images.pexels.com/photos/2068975/pexels-photo-2068975.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Microsoft for Startups': 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Oracle for Startups': 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'AWS Startups': 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'EY': 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'PwC': 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Start-up Nation Central': 'https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Nielsen': 'https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Atlassian': 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Slack': 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Zoom': 'https://images.pexels.com/photos/4226140/pexels-photo-4226140.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Notion': 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop',
+    'Figma': 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=200&h=100&fit=crop'
+  },
+  
   // Optimized image URLs for different use cases
   optimizedUrls: {
     // Team/About images
@@ -20,7 +39,7 @@ export const imageConfig = {
     blockchain: '/images/blockchain-tech.jpg',
     ventureCapital: '/images/venture-capital.jpg',
     
-    // Partner logos
+    // Partner logos (fallback paths)
     hubspot: '/logos/hubspot-for-startups.png',
     nvidia: '/logos/nvidia-inception.png',
     google: '/logos/google-for-startups.png',
@@ -117,31 +136,9 @@ export const isValidImageUrl = (url: string): boolean => {
   }
 };
 
-// Get partner logo by name
+// Get partner logo by name - now uses reliable fallback images
 export const getPartnerLogo = (partnerName: string): string => {
-  const normalizedName = partnerName.toLowerCase().replace(/\s+/g, '');
-  
-  // Map of partner names to their logo keys in imageConfig
-  const partnerLogoMap: Record<string, keyof typeof imageConfig.optimizedUrls> = {
-    'hubspotforstartups': 'hubspot',
-    'nvidiaception': 'nvidia',
-    'googleforstartups': 'google',
-    'microsoftforstartups': 'microsoft',
-    'oracleforstartups': 'oracle',
-    'awsstartups': 'aws',
-    'ey': 'ey',
-    'pwc': 'pwc',
-    'startupnationcentral': 'snc',
-    'nielsen': 'nielsen',
-    'atlassian': 'atlassian',
-    'slack': 'slack',
-    'zoom': 'zoom',
-    'notion': 'notion',
-    'figma': 'figma'
-  };
-  
-  const logoKey = partnerLogoMap[normalizedName];
-  return logoKey ? imageConfig.optimizedUrls[logoKey] : '';
+  return imageConfig.partnerLogos[partnerName] || imageConfig.fallbackImages.business;
 };
 
 // Preload critical images
@@ -230,6 +227,7 @@ export const debugCheckAllImages = async () => {
 export const preloadAllImages = () => {
   const allImagePaths = [
     ...Object.values(imageConfig.fallbackImages),
+    ...Object.values(imageConfig.partnerLogos),
     ...Object.values(imageConfig.optimizedUrls)
   ];
   
