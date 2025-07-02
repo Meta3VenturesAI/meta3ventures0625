@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Clock, User } from 'lucide-react';
+import { ArrowRight, Clock, User, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getLatestPosts } from '../../utils/blog';
 
