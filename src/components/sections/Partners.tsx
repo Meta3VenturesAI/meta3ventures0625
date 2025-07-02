@@ -13,22 +13,22 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      imageUrl: "/New Customer Offer Thumbnails (11).webp",
+      imageUrl: "/logos/New Customer Offer Thumbnails (11).webp",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      imageUrl: "/20181218-Nvidia-Inception.webp",
+      imageUrl: "/logos/20181218-Nvidia-Inception.webp",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      imageUrl: "/Logo_for_Google_for_Startups_page copy.png",
+      imageUrl: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      imageUrl: "/Microsoft-for-Startups copy.jpg",
+      imageUrl: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
@@ -58,7 +58,7 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Nielsen",
-      imageUrl: "/Nielsen_New_Logo_2021 copy.png",
+      imageUrl: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {

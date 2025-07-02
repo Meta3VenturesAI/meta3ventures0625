@@ -11,16 +11,16 @@ export const imageConfig = {
   
   // Partner logos - using reliable external URLs
   partnerLogos: {
-    'HubSpot for Startups': '/New Customer Offer Thumbnails (11).webp',
-    'NVIDIA Inception': '/20181218-Nvidia-Inception.webp',
-    'Google for Startups': '/Logo_for_Google_for_Startups_page copy.png',
-    'Microsoft for Startups': '/Microsoft-for-Startups copy.jpg',
+    'HubSpot for Startups': '/logos/New Customer Offer Thumbnails (11).webp',
+    'NVIDIA Inception': '/logos/20181218-Nvidia-Inception.webp',
+    'Google for Startups': '/logos/Logo_for_Google_for_Startups_page.png',
+    'Microsoft for Startups': '/logos/Microsoft-for-Startups.jpg',
     'Oracle for Startups': '/logos/oracle-for-startups.png',
     'AWS Startups': '/logos/amazon.jpg',
     'EY': '/logos/EYLogo.gif',
     'PwC': '/logos/PwC_2025_Logo.svg.png',
     'Start-up Nation Central': '/logos/SNC.png',
-    'Nielsen': '/Nielsen_New_Logo_2021 copy.png',
+    'Nielsen': '/logos/Nielsen_New_Logo_2021.png',
     'Atlassian': '/logos/Atlassian-Logo.png',
     'Slack': '/logos/slack-logo-PNG-large-size-900x230.png',
     'Zoom': '/logos/zoom-logo-png-video-meeting-call-software.png',
@@ -180,16 +180,16 @@ export const loadImageWithRetry = (
 export const debugCheckAllImages = async () => {
   const imagesToCheck = [
     // Partner logos
-    '/New Customer Offer Thumbnails (11).webp',
-    '/20181218-Nvidia-Inception.webp',
-    '/Logo_for_Google_for_Startups_page copy.png',
-    '/Microsoft-for-Startups copy.jpg',
-    '/Nielsen_New_Logo_2021 copy.png',
+    '/logos/New Customer Offer Thumbnails (11).webp',
+    '/logos/20181218-Nvidia-Inception.webp',
+    '/logos/Logo_for_Google_for_Startups_page.png',
+    '/logos/Microsoft-for-Startups.jpg',
     '/logos/oracle-for-startups.png',
     '/logos/amazon.jpg',
     '/logos/EYLogo.gif',
     '/logos/PwC_2025_Logo.svg.png',
     '/logos/SNC.png',
+    '/logos/Nielsen_New_Logo_2021.png',
     '/logos/Atlassian-Logo.png',
     '/logos/slack-logo-PNG-large-size-900x230.png',
     '/logos/zoom-logo-png-video-meeting-call-software.png',
