@@ -14,7 +14,8 @@
     "test": "echo \"No tests specified\" && exit 0",
     "deploy:netlify": "npm run build && netlify deploy --prod",
     "deploy:vercel": "npm run build && vercel --prod",
-    "postinstall": "npm run type-check"
+    "clean": "rm -rf dist node_modules/.vite",
+    "build:clean": "npm run clean && npm run build"
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",

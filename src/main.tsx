@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { runQuickAudit } from './lib/productionAudit';
 
 // Initialize error tracking
 if (typeof window !== 'undefined') {
@@ -38,6 +39,13 @@ if (typeof window !== 'undefined') {
   // Optimize images loading
   if ('loading' in HTMLImageElement.prototype) {
     document.documentElement.classList.add('native-lazy-loading');
+  }
+
+  // Run production audit in development
+  if (import.meta.env.DEV) {
+    setTimeout(() => {
+      runQuickAudit();
+    }, 2000);
   }
 }
 

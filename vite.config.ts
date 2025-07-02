@@ -56,7 +56,7 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/images\.pexels\.com\/.*/i,
-            handler: 'StaleWhileRevalidate',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'pexels-images-cache',
               expiration: {
@@ -68,7 +68,7 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/res\.cloudinary\.com\/.*/i,
-            handler: 'StaleWhileRevalidate',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'cloudinary-images-cache',
               expiration: {
@@ -80,7 +80,7 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/upload\.wikimedia\.org\/.*/i,
-            handler: 'StaleWhileRevalidate',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'wikipedia-images-cache',
               expiration: {
