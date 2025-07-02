@@ -19,6 +19,8 @@ checkSupabaseConnection().then(connected => {
   } else {
     console.warn('⚠️ Supabase connection failed - using fallback mode');
   }
+}).catch(() => {
+  console.warn('⚠️ Supabase connection check failed - using fallback mode');
 });
 
 // Initialize performance monitoring
