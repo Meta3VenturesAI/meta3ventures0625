@@ -18,6 +18,7 @@ const PortfolioPage = React.lazy(() => import('./pages/Portfolio'));
 const PartnersPage = React.lazy(() => import('./pages/Partners'));
 const ResourcesPage = React.lazy(() => import('./pages/Resources'));
 const BlogPage = React.lazy(() => import('./pages/Blog'));
+const BlogPost = React.lazy(() => import('./pages/BlogPost'));
 const BlogManagementPage = React.lazy(() => import('./pages/BlogManagement'));
 const ApplyPage = React.lazy(() => import('./pages/Apply'));
 const ContactPage = React.lazy(() => import('./pages/Contact'));
@@ -51,7 +52,7 @@ function App() {
                       <Route path="/partners" element={<PartnersPage />} />
                       <Route path="/resources" element={<ResourcesPage />} />
                       <Route path="/blog" element={<BlogPage />} />
-                      <Route path="/blog/:slug" element={<BlogPage />} />
+                      <Route path="/blog/:slug" element={<BlogPost />} />
                       <Route path="/blog/manage" element={<BlogManagementPage />} />
                       <Route path="/apply" element={<ApplyPage />} />
                       <Route path="/contact" element={<ContactPage />} />

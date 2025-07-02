@@ -4,6 +4,7 @@ import { BlogPost } from '../types/blog';
 export const blogPosts: BlogPost[] = [
   {
     id: '1',
+    slug: 'future-of-ai-trends-2025',
     title: "The Future of AI: Trends Shaping 2025 and Beyond",
     excerpt: "Explore the transformative AI trends that are revolutionizing industries and creating new opportunities for innovation and growth.",
     content: `
@@ -54,6 +55,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: '2',
+    slug: 'building-resilient-web3-infrastructure',
     title: "Building Resilient Web3 Infrastructure",
     excerpt: "A deep dive into the essential components of robust Web3 infrastructure and best practices for scalable blockchain applications.",
     content: `
@@ -115,6 +117,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: '3',
+    slug: 'rise-of-agentic-ai-systems',
     title: "The Rise of Agentic AI Systems",
     excerpt: "Understanding how autonomous AI agents are transforming business operations and creating new possibilities for intelligent automation.",
     content: `
@@ -181,8 +184,8 @@ export const blogPosts: BlogPost[] = [
 ];
 
 // Helper functions for blog management
-export const getBlogPost = (id: string): BlogPost | undefined => {
-  return blogPosts.find(post => post.id === id);
+export const getBlogPost = (slug: string): BlogPost | undefined => {
+  return blogPosts.find(post => post.slug === slug);
 };
 
 export const getRelatedPosts = (currentPost: BlogPost, limit: number = 3): BlogPost[] => {

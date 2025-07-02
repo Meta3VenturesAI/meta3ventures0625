@@ -19,22 +19,28 @@ export interface BlogCategory {
 
 export interface BlogPost {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
   content: string;
   image: string;
-  author_id: string;
-  author?: BlogAuthor;
-  category_id: string;
-  category?: BlogCategory;
+  author_id?: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  category_id?: string;
+  category: string;
   tags: string[];
-  read_time: string;
-  published: boolean;
-  featured: boolean;
+  read_time?: string;
+  readTime: string;
+  published?: boolean;
+  featured?: boolean;
   meta_description?: string;
   meta_keywords?: string[];
-  created_at: string;
-  updated_at: string;
+  date: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface BlogPostFormData {
