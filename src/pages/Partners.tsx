@@ -8,62 +8,77 @@ const PartnersPage: React.FC = () => {
   const partners = [
     {
       name: "HubSpot for Startups",
+      logo: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
+      logo: "/logos/nvidia-inception.png",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
+      logo: "/logos/google-for-startups.png",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
+      logo: "/logos/Microsoft-for-Startups.jpg",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
+      logo: "/logos/oracle-for-startups.png",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
+      logo: "/logos/amazon.jpg",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
+      logo: "/logos/EYLogo.gif",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
+      logo: "/logos/PwC_2025_Logo.svg.png",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
+      logo: "/logos/SNC.png",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
+      logo: "/logos/Nielsen_New_Logo_2021.png",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
+      logo: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
+      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
+      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
+      logo: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
+      logo: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
@@ -183,8 +198,25 @@ const PartnersPage: React.FC = () => {
                   key={index}
                   className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
                 >
-                  <div className="p-4">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center text-lg">
+                  <div className="h-32 flex items-center justify-center p-4">
+                    <img
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentNode as HTMLElement;
+                        const fallback = document.createElement('div');
+                        fallback.className = 'text-xl font-semibold text-gray-900 dark:text-white text-center';
+                        fallback.textContent = partner.name;
+                        parent.appendChild(fallback);
+                      }}
+                    />
+                  </div>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">
                       {partner.name}
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
