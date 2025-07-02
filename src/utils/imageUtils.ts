@@ -21,11 +21,16 @@ export const imageConfig = {
     'PwC': '/logos/PwC_2025_Logo.svg.png',
     'Start-up Nation Central': '/logos/SNC.png',
     'Nielsen': '/logos/Nielsen_New_Logo_2021.png',
-    'Atlassian': '/logos/Atlassian-Logo.png',
+    'Atlassian': '/logos/atlassian-logo.png',
     'Slack': '/logos/slack-logo.png',
     'Zoom': '/logos/zoom-logo.png',
     'Notion': '/logos/notion-logo.png',
-    'Figma': '/logos/figma-logo.png'
+    'Figma': '/logos/figma-logo.png',
+    'Databricks': '/logos/databricks-logo.png',
+    'MongoDB': '/logos/mongodb-logo.png',
+    'Snowflake': '/logos/snowflake-logo.png',
+    'Stripe': '/logos/stripe-logo.png',
+    'Salesforce': '/logos/salesforce-logo.png'
   },
   
   // Optimized image URLs for different use cases
@@ -50,11 +55,16 @@ export const imageConfig = {
     pwc: '/logos/PwC_2025_Logo.svg.png',
     snc: '/logos/SNC.png',
     nielsen: '/logos/Nielsen_New_Logo_2021.png',
-    atlassian: '/logos/Atlassian-Logo.png',
+    atlassian: '/logos/atlassian-logo.png',
     slack: '/logos/slack-logo.png',
     zoom: '/logos/zoom-logo.png',
     notion: '/logos/notion-logo.png',
-    figma: '/logos/figma-logo.png'
+    figma: '/logos/figma-logo.png',
+    databricks: '/logos/databricks-logo.png',
+    mongodb: '/logos/mongodb-logo.png',
+    snowflake: '/logos/snowflake-logo.png',
+    stripe: '/logos/stripe-logo.png',
+    salesforce: '/logos/salesforce-logo.png'
   }
 };
 
@@ -202,11 +212,16 @@ export const debugCheckAllImages = async () => {
     '/logos/PwC_2025_Logo.svg.png',
     '/logos/SNC.png',
     '/logos/Nielsen_New_Logo_2021.png',
-    '/logos/Atlassian-Logo.png',
+    '/logos/atlassian-logo.png',
     '/logos/slack-logo.png',
     '/logos/zoom-logo.png',
     '/logos/notion-logo.png',
     '/logos/figma-logo.png',
+    '/logos/databricks-logo.png',
+    '/logos/mongodb-logo.png',
+    '/logos/snowflake-logo.png',
+    '/logos/stripe-logo.png',
+    '/logos/salesforce-logo.png',
     
     // Team images
     '/images/liron-langer.jpg',

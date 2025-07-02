@@ -68,6 +68,26 @@ const PartnersPage: React.FC = () => {
     {
       name: "Figma",
       description: "Collaborative design and prototyping platform"
+    },
+    {
+      name: "Databricks",
+      description: "Unified analytics platform for big data and machine learning"
+    },
+    {
+      name: "MongoDB",
+      description: "Document database for modern applications"
+    },
+    {
+      name: "Snowflake",
+      description: "Cloud data platform for data warehousing"
+    },
+    {
+      name: "Stripe",
+      description: "Payment processing platform for internet businesses"
+    },
+    {
+      name: "Salesforce",
+      description: "Customer relationship management platform"
     }
   ];
 

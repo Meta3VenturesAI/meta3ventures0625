@@ -168,10 +168,14 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
                     <img 
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="/images/liron-langer.jpg"
                       alt="Liron Langer - Managing Director"
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      }}
                     />
                   </div>
                   <div className="p-8">
