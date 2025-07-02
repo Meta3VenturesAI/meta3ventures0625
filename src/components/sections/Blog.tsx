@@ -44,12 +44,13 @@ export const Blog: React.FC = () => {
                   loading="lazy"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
+                    console.error(`Failed to load blog image: ${post.image}`);
                     if (index === 0) {
-                      target.src = "/images/innovation.jpg";
+                      target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
                     } else if (index === 1) {
-                      target.src = "/images/blockchain-tech.jpg";
+                      target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
                     } else {
-                      target.src = "/images/venture-capital.jpg";
+                      target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
                     }
                   }}
                 />

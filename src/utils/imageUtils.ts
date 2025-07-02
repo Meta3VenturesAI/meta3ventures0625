@@ -225,3 +225,16 @@ export const debugCheckAllImages = async () => {
   console.log('Image check results:', results);
   return results;
 };
+
+// Create image elements for all images to force browser to load and cache them
+export const preloadAllImages = () => {
+  const allImagePaths = [
+    ...Object.values(imageConfig.fallbackImages),
+    ...Object.values(imageConfig.optimizedUrls)
+  ];
+  
+  allImagePaths.forEach(path => {
+    const img = new Image();
+    img.src = path;
+  });
+};
