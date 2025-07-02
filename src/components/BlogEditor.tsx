@@ -237,11 +237,11 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
   };
 
   const suggestedImages = [
-    'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
-    'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800'
+    '/images/ai-future.jpg',
+    '/images/blockchain-tech.jpg',
+    '/images/innovation.jpg',
+    '/images/team-collaboration.jpg',
+    '/images/venture-capital.jpg'
   ];
 
   if (isPreview) {
@@ -264,7 +264,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
               alt={formData.title}
               className="w-full h-full object-cover"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800';
+                (e.target as HTMLImageElement).src = '/images/ai-future.jpg';
               }}
             />
             <div className="absolute bottom-4 left-4">

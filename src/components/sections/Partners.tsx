@@ -57,6 +57,31 @@ export const Partners: React.FC = () => {
       name: "Nielsen",
       logo: "/logos/Nielsen_New_Logo_2021.png",
       link: "https://www.nielsen.com"
+    },
+    {
+      name: "Atlassian",
+      logo: "/logos/atlassian-logo.png",
+      link: "https://www.atlassian.com/"
+    },
+    {
+      name: "Slack",
+      logo: "/logos/slack-logo.png",
+      link: "https://slack.com/"
+    },
+    {
+      name: "Zoom",
+      logo: "/logos/zoom-logo.png",
+      link: "https://zoom.us/"
+    },
+    {
+      name: "Notion",
+      logo: "/logos/notion-logo.png",
+      link: "https://www.notion.so/"
+    },
+    {
+      name: "Figma",
+      logo: "/logos/figma-logo.png",
+      link: "https://www.figma.com/"
     }
   ];
 

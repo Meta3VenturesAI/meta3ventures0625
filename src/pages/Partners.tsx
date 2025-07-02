@@ -67,36 +67,6 @@ const PartnersPage: React.FC = () => {
       description: "Global measurement and data analytics company"
     },
     {
-      name: "Stripe",
-      logo: "/logos/stripe-logo.png",
-      link: "https://stripe.com/",
-      description: "Payment processing and financial infrastructure"
-    },
-    {
-      name: "Salesforce",
-      logo: "/logos/salesforce-logo.png",
-      link: "https://www.salesforce.com/",
-      description: "Customer relationship management platform"
-    },
-    {
-      name: "Snowflake",
-      logo: "/logos/snowflake-logo.png",
-      link: "https://www.snowflake.com/",
-      description: "Cloud data platform and analytics"
-    },
-    {
-      name: "Databricks",
-      logo: "/logos/databricks-logo.png",
-      link: "https://databricks.com/",
-      description: "Unified analytics platform for big data and machine learning"
-    },
-    {
-      name: "MongoDB",
-      logo: "/logos/mongodb-logo.png",
-      link: "https://www.mongodb.com/",
-      description: "Modern database platform for developers"
-    },
-    {
       name: "Atlassian",
       logo: "/logos/atlassian-logo.png",
       link: "https://www.atlassian.com/",

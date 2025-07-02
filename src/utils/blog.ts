@@ -43,11 +43,11 @@ export const blogPosts: BlogPost[] = [
 
       The next few years will be crucial in determining how AI technologies evolve and integrate into our society. Organizations that embrace these trends while maintaining a focus on ethical implementation will be best positioned for success in the AI-driven future.
     `,
-    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/images/ai-future.jpg",
     date: "April 15, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
+      avatar: "/images/liron-langer.jpg"
     },
     category: "ai",
     tags: ["Artificial Intelligence", "Machine Learning", "Innovation"],
@@ -105,11 +105,11 @@ export const blogPosts: BlogPost[] = [
       - Flexible scaling strategies
       - Continuous learning and improvement
     `,
-    image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/images/blockchain-tech.jpg",
     date: "April 10, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
+      avatar: "/images/liron-langer.jpg"
     },
     category: "blockchain",
     tags: ["Web3", "Blockchain", "Infrastructure"],
@@ -171,11 +171,11 @@ export const blogPosts: BlogPost[] = [
 
       The key to successful implementation lies in thoughtful design, gradual deployment, and continuous monitoring to ensure these powerful systems serve human interests effectively.
     `,
-    image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "/images/innovation.jpg",
     date: "April 5, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "https://res.cloudinary.com/dmoricfgw/image/upload/v1747140463/Liron1_pvqoev.jpg"
+      avatar: "/images/liron-langer.jpg"
     },
     category: "ai",
     tags: ["Agentic AI", "Automation", "Business Intelligence"],
