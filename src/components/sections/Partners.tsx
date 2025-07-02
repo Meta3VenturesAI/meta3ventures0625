@@ -22,7 +22,7 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Google for Startups",
-      logo: "/logos/Logo_for_Google_for_Startups_page.png",
+      logo: "/logos/google-for-startups.png",
       description: "Cloud credits and startup support from Google"
     },
     {
@@ -67,22 +67,22 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
+      logo: "/logos/slack-logo.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
+      logo: "/logos/zoom-logo.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-symbol.png",
+      logo: "/logos/notion-logo.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma.png",
+      logo: "/logos/figma-logo.png",
       description: "Collaborative design and prototyping platform"
     }
   ];

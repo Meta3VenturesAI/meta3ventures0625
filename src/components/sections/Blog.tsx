@@ -43,14 +43,14 @@ export const Blog: React.FC = () => {
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                   onError={(e) => {
-                    const target = e.target as HTMLImageElement;
                     console.error(`Failed to load blog image: ${post.image}`);
+                    const target = e.target as HTMLImageElement;
                     if (index === 0) {
-                      target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/innovation.jpg";
                     } else if (index === 1) {
-                      target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/blockchain-tech.jpg";
                     } else {
-                      target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/venture-capital.jpg";
                     }
                   }}
                 />

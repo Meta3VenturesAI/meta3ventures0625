@@ -23,7 +23,7 @@ export const imageConfig = {
     // Partner logos
     hubspot: '/logos/hubspot-for-startups.png',
     nvidia: '/logos/nvidia-inception.png',
-    google: '/logos/Logo_for_Google_for_Startups_page.png',
+    google: '/logos/google-for-startups.png',
     microsoft: '/logos/Microsoft-for-Startups.jpg',
     oracle: '/logos/oracle-for-startups.png',
     aws: '/logos/amazon.jpg',
@@ -32,10 +32,10 @@ export const imageConfig = {
     snc: '/logos/SNC.png',
     nielsen: '/logos/Nielsen_New_Logo_2021.png',
     atlassian: '/logos/Atlassian-Logo.png',
-    slack: '/logos/slack-logo-PNG-large-size-900x230.png',
-    zoom: '/logos/zoom-logo-png-video-meeting-call-software.png',
-    notion: '/logos/notion-symbol.png',
-    figma: '/logos/figma.png'
+    slack: '/logos/slack-logo.png',
+    zoom: '/logos/zoom-logo.png',
+    notion: '/logos/notion-logo.png',
+    figma: '/logos/figma-logo.png'
   }
 };
 
@@ -191,7 +191,7 @@ export const debugCheckAllImages = async () => {
     // Partner logos
     '/logos/hubspot-for-startups.png',
     '/logos/nvidia-inception.png',
-    '/logos/Logo_for_Google_for_Startups_page.png',
+    '/logos/google-for-startups.png',
     '/logos/Microsoft-for-Startups.jpg',
     '/logos/oracle-for-startups.png',
     '/logos/amazon.jpg',
@@ -200,10 +200,10 @@ export const debugCheckAllImages = async () => {
     '/logos/SNC.png',
     '/logos/Nielsen_New_Logo_2021.png',
     '/logos/Atlassian-Logo.png',
-    '/logos/slack-logo-PNG-large-size-900x230.png',
-    '/logos/zoom-logo-png-video-meeting-call-software.png',
-    '/logos/notion-symbol.png',
-    '/logos/figma.png',
+    '/logos/slack-logo.png',
+    '/logos/zoom-logo.png',
+    '/logos/notion-logo.png',
+    '/logos/figma-logo.png',
     
     // Team images
     '/images/liron-langer.jpg',

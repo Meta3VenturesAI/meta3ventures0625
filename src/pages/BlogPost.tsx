@@ -87,11 +87,11 @@ const BlogPost: React.FC = () => {
                     console.error(`Failed to load blog post image: ${post.image}`);
                     const target = e.target as HTMLImageElement;
                     if (post.category === 'ai') {
-                      target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/innovation.jpg";
                     } else if (post.category === 'blockchain') {
-                      target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/blockchain-tech.jpg";
                     } else {
-                      target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      target.src = "/images/venture-capital.jpg";
                     }
                   }}
                 />
@@ -186,7 +186,7 @@ const BlogPost: React.FC = () => {
                 <div className="mt-12 p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
                   <div className="flex items-center gap-4">
                     <img
-                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      src="/images/liron-langer.jpg"
                       alt={post.author.name}
                       className="w-16 h-16 rounded-full object-cover"
                       loading="lazy"
@@ -249,11 +249,11 @@ const BlogPost: React.FC = () => {
                             console.error(`Failed to load related post image: ${relatedPost.image}`);
                             const target = e.target as HTMLImageElement;
                             if (relatedPost.category === 'ai') {
-                              target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                              target.src = "/images/innovation.jpg";
                             } else if (relatedPost.category === 'blockchain') {
-                              target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+                              target.src = "/images/blockchain-tech.jpg";
                             } else {
-                              target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+                              target.src = "/images/venture-capital.jpg";
                             }
                           }}
                         />
