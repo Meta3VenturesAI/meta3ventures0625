@@ -32,7 +32,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   const imgRef = useRef<HTMLImageElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  // Reliable fallback images
+  // Reliable fallback images with proper CORS headers
   const fallbackImages = [
     'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -71,7 +71,7 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     onLoad?.();
   }, [onLoad]);
 
-  // Handle image load error with simple fallback
+  // Handle image load error with fallback
   const handleError = useCallback(() => {
     console.warn(`Failed to load image: ${currentSrc}`);
     
@@ -111,6 +111,11 @@ export const LazyImage: React.FC<LazyImageProps> = ({
           decoding="async"
           crossOrigin="anonymous"
           referrerPolicy="no-referrer-when-downgrade"
+          style={{ 
+            maxWidth: '100%', 
+            height: 'auto',
+            display: hasError ? 'none' : 'block'
+          }}
         />
       )}
       
