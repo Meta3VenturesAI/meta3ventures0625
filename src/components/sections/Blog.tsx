@@ -38,21 +38,12 @@ export const Blog: React.FC = () => {
             >
               <div className="relative overflow-hidden h-48">
                 <img 
-                  src={post.image} 
+                  src={index === 0 ? "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800" : 
+                       index === 1 ? "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                       "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800"}
                   alt={post.title} 
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
-                  onError={(e) => {
-                    console.error(`Failed to load blog image: ${post.image}`);
-                    const target = e.target as HTMLImageElement;
-                    if (index === 0) {
-                      target.src = "/images/innovation.jpg";
-                    } else if (index === 1) {
-                      target.src = "/images/blockchain-tech.jpg";
-                    } else {
-                      target.src = "/images/venture-capital.jpg";
-                    }
-                  }}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">

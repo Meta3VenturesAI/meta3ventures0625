@@ -49,12 +49,23 @@ const BlogPost: React.FC = () => {
     return categoryMap[categoryId] || categoryId;
   };
 
+  // Get appropriate image based on category
+  const getImageForPost = (post: any) => {
+    if (post.category === 'ai') {
+      return "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+    } else if (post.category === 'blockchain') {
+      return "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+    } else {
+      return "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+    }
+  };
+
   return (
     <>
       <SEO 
         title={`${post.title} - Meta3Ventures Blog`}
         description={post.excerpt}
-        image={post.image}
+        image={getImageForPost(post)}
         type="article"
         keywords={post.tags}
         author={post.author.name}
@@ -79,21 +90,10 @@ const BlogPost: React.FC = () => {
             <article className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
               <div className="relative h-64 md:h-96">
                 <img
-                  src={post.image}
+                  src={getImageForPost(post)}
                   alt={post.title}
                   className="w-full h-full object-cover"
                   loading="eager"
-                  onError={(e) => {
-                    console.error(`Failed to load blog post image: ${post.image}`);
-                    const target = e.target as HTMLImageElement;
-                    if (post.category === 'ai') {
-                      target.src = "/images/innovation.jpg";
-                    } else if (post.category === 'blockchain') {
-                      target.src = "/images/blockchain-tech.jpg";
-                    } else {
-                      target.src = "/images/venture-capital.jpg";
-                    }
-                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-6 left-6">
@@ -186,15 +186,10 @@ const BlogPost: React.FC = () => {
                 <div className="mt-12 p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
                   <div className="flex items-center gap-4">
                     <img
-                      src="/images/liron-langer.jpg"
+                      src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
                       alt={post.author.name}
                       className="w-16 h-16 rounded-full object-cover"
                       loading="lazy"
-                      onError={(e) => {
-                        console.error("Failed to load author image");
-                        const target = e.target as HTMLImageElement;
-                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800";
-                      }}
                     />
                     <div>
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -233,7 +228,7 @@ const BlogPost: React.FC = () => {
                   Related Articles
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {relatedPosts.map(relatedPost => (
+                  {relatedPosts.map((relatedPost, index) => (
                     <Link
                       key={relatedPost.id}
                       to={`/blog/${relatedPost.slug}`}
@@ -241,21 +236,10 @@ const BlogPost: React.FC = () => {
                     >
                       <div className="h-48 overflow-hidden">
                         <img
-                          src={relatedPost.image}
+                          src={getImageForPost(relatedPost)}
                           alt={relatedPost.title}
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                           loading="lazy"
-                          onError={(e) => {
-                            console.error(`Failed to load related post image: ${relatedPost.image}`);
-                            const target = e.target as HTMLImageElement;
-                            if (relatedPost.category === 'ai') {
-                              target.src = "/images/innovation.jpg";
-                            } else if (relatedPost.category === 'blockchain') {
-                              target.src = "/images/blockchain-tech.jpg";
-                            } else {
-                              target.src = "/images/venture-capital.jpg";
-                            }
-                          }}
                         />
                       </div>
                       <div className="p-6">

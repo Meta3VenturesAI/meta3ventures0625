@@ -43,11 +43,11 @@ export const blogPosts: BlogPost[] = [
 
       The next few years will be crucial in determining how AI technologies evolve and integrate into our society. Organizations that embrace these trends while maintaining a focus on ethical implementation will be best positioned for success in the AI-driven future.
     `,
-    image: "/images/innovation.jpg",
+    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 15, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "/images/liron-langer.jpg"
+      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     category: "ai",
     tags: ["Artificial Intelligence", "Machine Learning", "Innovation"],
@@ -105,11 +105,11 @@ export const blogPosts: BlogPost[] = [
       - Flexible scaling strategies
       - Continuous learning and improvement
     `,
-    image: "/images/blockchain-tech.jpg",
+    image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 10, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "/images/liron-langer.jpg"
+      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     category: "blockchain",
     tags: ["Web3", "Blockchain", "Infrastructure"],
@@ -171,11 +171,11 @@ export const blogPosts: BlogPost[] = [
 
       The key to successful implementation lies in thoughtful design, gradual deployment, and continuous monitoring to ensure these powerful systems serve human interests effectively.
     `,
-    image: "/images/venture-capital.jpg",
+    image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 5, 2025",
     author: {
       name: "Liron Langer",
-      avatar: "/images/liron-langer.jpg"
+      avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     category: "ai",
     tags: ["Agentic AI", "Automation", "Business Intelligence"],

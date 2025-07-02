@@ -30,6 +30,17 @@ const BlogPage: React.FC = () => {
     return category?.name || categoryId;
   };
 
+  // Get appropriate image based on category
+  const getImageForPost = (post: any) => {
+    if (post.category === 'ai') {
+      return "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+    } else if (post.category === 'blockchain') {
+      return "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+    } else {
+      return "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+    }
+  };
+
   const onNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -108,27 +119,17 @@ const BlogPage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map(post => (
+              {filteredPosts.map((post, index) => (
                 <article
                   key={post.id}
                   className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <img
-                      src={post.image}
+                      src={getImageForPost(post)}
                       alt={post.title}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        if (post.category === 'ai') {
-                          target.src = "/images/innovation.jpg";
-                        } else if (post.category === 'blockchain') {
-                          target.src = "/images/blockchain-tech.jpg";
-                        } else {
-                          target.src = "/images/venture-capital.jpg";
-                        }
-                      }}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">

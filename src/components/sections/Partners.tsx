@@ -4,6 +4,7 @@ interface Partner {
   name: string;
   logo?: string;
   description: string;
+  imageUrl?: string;
 }
 
 export const Partners: React.FC = () => {
@@ -12,77 +13,77 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-for-startups.png",
+      imageUrl: "https://images.pexels.com/photos/4968391/pexels-photo-4968391.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      logo: "/logos/nvidia-inception.png",
+      imageUrl: "https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
+      imageUrl: "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Cloud credits and startup support from Google"
     },
     {
       name: "Microsoft for Startups",
-      logo: "/logos/Microsoft-for-Startups.jpg",
+      imageUrl: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Azure credits and enterprise tools for startups"
     },
     {
       name: "Oracle for Startups",
-      logo: "/logos/oracle-for-startups.png",
+      imageUrl: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Cloud infrastructure and database solutions for startups"
     },
     {
       name: "AWS Startups",
-      logo: "/logos/amazon.jpg",
+      imageUrl: "https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Cloud computing platform and startup credits"
     },
     {
       name: "EY",
-      logo: "/logos/EYLogo.gif",
+      imageUrl: "https://images.pexels.com/photos/936137/pexels-photo-936137.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Professional services and startup advisory"
     },
     {
       name: "PwC",
-      logo: "/logos/PwC_2025_Logo.svg.png",
+      imageUrl: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Consulting and professional services"
     },
     {
       name: "Start-up Nation Central",
-      logo: "/logos/SNC.png",
+      imageUrl: "https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Israeli innovation ecosystem connector"
     },
     {
       name: "Nielsen",
-      logo: "/logos/Nielsen_New_Logo_2021.png",
+      imageUrl: "https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Global measurement and data analytics company"
     },
     {
       name: "Atlassian",
-      logo: "/logos/Atlassian-Logo.png",
+      imageUrl: "https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
+      imageUrl: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
+      imageUrl: "https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
+      imageUrl: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
+      imageUrl: "https://images.pexels.com/photos/3184454/pexels-photo-3184454.jpeg?auto=compress&cs=tinysrgb&w=800",
       description: "Collaborative design and prototyping platform"
     }
   ];
@@ -115,14 +116,10 @@ export const Partners: React.FC = () => {
               key={index}
               className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              {partner.logo && !imageLoadErrors[partner.name] ? (
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
-                  onError={() => handleImageError(partner.name)}
-                />
+              {!imageLoadErrors[partner.name] ? (
+                <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">
+                  {partner.name}
+                </div>
               ) : (
                 <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">
                   {partner.name}
