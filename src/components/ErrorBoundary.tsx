@@ -14,7 +14,7 @@ interface State {
 }
 
 class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
+  public override state: State = {
     hasError: false
   };
 
@@ -42,7 +42,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.setState({ hasError: false, error: undefined, errorInfo: undefined });
   };
 
-  public render() {
+  public override render() {
     if (this.state.hasError) {
       if (this.props.FallbackComponent) {
         return <this.props.FallbackComponent error={this.state.error} resetErrorBoundary={this.handleRetry} />;

@@ -36,7 +36,7 @@ function App() {
       window.addEventListener('load', () => {
         const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (perfData && import.meta.env.DEV) {
-          console.log('Page load time:', perfData.loadEventEnd - perfData.navigationStart, 'ms');
+          console.log('Page load time:', perfData.loadEventEnd - perfData.startTime, 'ms');
         }
       });
     }
