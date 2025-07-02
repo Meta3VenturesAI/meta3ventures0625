@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SEO } from '../components/SEO';
 import { CheckCircle, Users, Target, Network } from 'lucide-react';
 import { CTAButtons } from '../components/CTAButtons';
 import { Link } from 'react-router-dom';
 
 const PartnersPage: React.FC = () => {
+  const [imageLoadErrors, setImageLoadErrors] = useState<Record<string, boolean>>({});
+
   const partners = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-logo.png",
+      logo: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
@@ -18,7 +20,7 @@ const PartnersPage: React.FC = () => {
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
+      logo: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
@@ -63,25 +65,30 @@ const PartnersPage: React.FC = () => {
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
+      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
+      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
+      logo: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
+      logo: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
+
+  const handleImageError = (partnerName: string) => {
+    console.error(`Failed to load image for partner: ${partnerName}`);
+    setImageLoadErrors(prev => ({ ...prev, [partnerName]: true }));
+  };
 
   return (
     <>
@@ -199,21 +206,19 @@ const PartnersPage: React.FC = () => {
                   className="w-full max-w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden"
                 >
                   <div className="h-32 flex items-center justify-center p-4">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentNode as HTMLElement;
-                        const fallback = document.createElement('div');
-                        fallback.className = 'text-xl font-semibold text-gray-900 dark:text-white text-center';
-                        fallback.textContent = partner.name;
-                        parent.appendChild(fallback);
-                      }}
-                    />
+                    {partner.logo && !imageLoadErrors[partner.name] ? (
+                      <img
+                        src={partner.logo}
+                        alt={partner.name}
+                        className="max-h-24 max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        onError={() => handleImageError(partner.name)}
+                      />
+                    ) : (
+                      <div className="text-xl font-semibold text-gray-900 dark:text-white text-center">
+                        {partner.name}
+                      </div>
+                    )}
                   </div>
                   <div className="p-4 bg-gray-50 dark:bg-gray-700">
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-2 text-center">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Partner {
   name: string;
@@ -7,10 +7,12 @@ interface Partner {
 }
 
 export const Partners: React.FC = () => {
+  const [imageLoadErrors, setImageLoadErrors] = useState<Record<string, boolean>>({});
+
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      logo: "/logos/hubspot-logo.png",
+      logo: "/logos/hubspot-for-startups.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
@@ -20,7 +22,7 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Google for Startups",
-      logo: "/logos/google-for-startups.png",
+      logo: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
@@ -65,25 +67,35 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Slack",
-      logo: "/logos/slack-logo.png",
+      logo: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      logo: "/logos/zoom-logo.png",
+      logo: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      logo: "/logos/notion-logo.png",
+      logo: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      logo: "/logos/figma-logo.png",
+      logo: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     }
   ];
+
+  // Log all partner logos on component mount to verify paths
+  useEffect(() => {
+    console.log("Partner logos:", partners.map(p => ({ name: p.name, logo: p.logo })));
+  }, []);
+
+  const handleImageError = (partnerName: string) => {
+    console.error(`Failed to load image for partner: ${partnerName}`);
+    setImageLoadErrors(prev => ({ ...prev, [partnerName]: true }));
+  };
 
   return (
     <section className="py-20 bg-white dark:bg-gray-800">
@@ -103,21 +115,13 @@ export const Partners: React.FC = () => {
               key={index}
               className="w-full max-w-[200px] h-20 flex items-center justify-center p-4 bg-white dark:bg-gray-700 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              {partner.logo ? (
+              {partner.logo && !imageLoadErrors[partner.name] ? (
                 <img
                   src={partner.logo}
                   alt={partner.name}
                   className="max-h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentNode as HTMLElement;
-                    const fallback = document.createElement('div');
-                    fallback.className = 'text-gray-600 dark:text-gray-300 text-sm font-medium text-center';
-                    fallback.textContent = partner.name;
-                    parent.appendChild(fallback);
-                  }}
+                  onError={() => handleImageError(partner.name)}
                 />
               ) : (
                 <div className="text-gray-600 dark:text-gray-300 text-sm font-medium text-center">

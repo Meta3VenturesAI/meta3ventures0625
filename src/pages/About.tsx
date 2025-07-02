@@ -179,6 +179,7 @@ const AboutPage: React.FC = () => {
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800";
+                        console.error("Failed to load Liron's image");
                       }}
                     />
                   </div>

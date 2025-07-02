@@ -9,6 +9,8 @@ import LoadingSpinner from './components/LoadingSpinner';
 import { AuthProvider } from './contexts/AuthContext';
 import { ErrorFallback } from './components/ErrorFallback';
 import { Toast } from './components/Toast';
+import { debugCheckAllImages } from './utils/imageUtils';
+import ImageDebugger from './components/ImageDebugger';
 
 // Lazy load pages for better performance
 const ServicesPage = React.lazy(() => import('./pages/Services'));
@@ -37,6 +39,18 @@ function App() {
         const perfData = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
         if (perfData && import.meta.env.DEV) {
           console.log('Page load time:', perfData.loadEventEnd - perfData.startTime, 'ms');
+        }
+      });
+    }
+
+    // Debug check all images in development mode
+    if (import.meta.env.DEV) {
+      debugCheckAllImages().then(results => {
+        const missingImages = results.filter(r => !r.exists);
+        if (missingImages.length > 0) {
+          console.warn('Missing images detected:', missingImages);
+        } else {
+          console.log('All images loaded successfully');
         }
       });
     }
@@ -72,6 +86,7 @@ function App() {
               </main>
               <Footer />
               <Toast />
+              {import.meta.env.DEV && <ImageDebugger />}
             </div>
           </Router>
         </ErrorBoundary>

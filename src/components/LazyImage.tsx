@@ -11,6 +11,7 @@ interface LazyImageProps {
   loading?: 'lazy' | 'eager';
   sizes?: string;
   srcSet?: string;
+  fallbackSrc?: string;
 }
 
 export const LazyImage: React.FC<LazyImageProps> = ({
@@ -23,7 +24,8 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   fallbackText,
   loading = 'lazy',
   sizes,
-  srcSet
+  srcSet,
+  fallbackSrc
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(loading === 'eager');
@@ -75,6 +77,12 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   const handleError = useCallback(() => {
     console.warn(`Failed to load image: ${currentSrc}`);
     
+    // Try provided fallback if available
+    if (fallbackSrc && currentSrc !== fallbackSrc) {
+      setCurrentSrc(fallbackSrc);
+      return;
+    }
+    
     // Try first fallback if we haven't already
     if (currentSrc === src && fallbackImages.length > 0) {
       setCurrentSrc(fallbackImages[0]);
@@ -84,13 +92,18 @@ export const LazyImage: React.FC<LazyImageProps> = ({
     // If fallback also fails, show error state
     setHasError(true);
     onError?.();
-  }, [currentSrc, src, onError, fallbackImages]);
+  }, [currentSrc, src, onError, fallbackImages, fallbackSrc]);
 
   // Reset state when src changes
   useEffect(() => {
     setCurrentSrc(src);
     setIsLoaded(false);
     setHasError(false);
+  }, [src]);
+
+  // Log image loading for debugging
+  useEffect(() => {
+    console.log(`Loading image: ${src}`);
   }, [src]);
 
   return (

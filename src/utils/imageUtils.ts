@@ -12,22 +12,44 @@ export const imageConfig = {
   // Optimized image URLs for different use cases
   optimizedUrls: {
     // Team/About images
-    lironLanger: 'https://res.cloudinary.com/dmoricfgw/image/upload/c_fill,w_400,h_400,q_auto,f_auto/v1747140463/Liron1_pvqoev.jpg',
-    teamCollaboration: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop',
+    lironLanger: '/images/liron-langer.jpg',
+    teamCollaboration: '/images/team-collaboration.jpg',
     
     // Blog images
-    aiFuture: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
-    blockchain: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
-    innovation: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop',
+    aiFuture: '/images/innovation.jpg',
+    blockchain: '/images/blockchain-tech.jpg',
+    ventureCapital: '/images/venture-capital.jpg',
     
-    // Partner logos (using reliable sources)
-    microsoft: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/200px-Microsoft_logo.svg.png',
-    nvidia: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Nvidia_logo.svg/200px-Nvidia_logo.svg.png',
-    openai: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/200px-OpenAI_Logo.svg.png'
+    // Partner logos
+    hubspot: '/logos/hubspot-for-startups.png',
+    nvidia: '/logos/nvidia-inception.png',
+    google: '/logos/Logo_for_Google_for_Startups_page.png',
+    microsoft: '/logos/Microsoft-for-Startups.jpg',
+    oracle: '/logos/oracle-for-startups.png',
+    aws: '/logos/amazon.jpg',
+    ey: '/logos/EYLogo.gif',
+    pwc: '/logos/PwC_2025_Logo.svg.png',
+    snc: '/logos/SNC.png',
+    nielsen: '/logos/Nielsen_New_Logo_2021.png',
+    atlassian: '/logos/Atlassian-Logo.png',
+    slack: '/logos/slack-logo-PNG-large-size-900x230.png',
+    zoom: '/logos/zoom-logo-png-video-meeting-call-software.png',
+    notion: '/logos/notion-symbol.png',
+    figma: '/logos/figma.png'
   }
 };
 
-// Generate optimized image URL with fallback
+// Check if an image exists
+export const checkImageExists = (url: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+};
+
+// Get optimized image URL with fallback
 export const getOptimizedImageUrl = (
   originalUrl: string, 
   width: number = 800, 
@@ -71,7 +93,7 @@ export const getFallbackImage = (type: 'hero' | 'team' | 'blog' | 'technology' |
 export const isValidImageUrl = (url: string): boolean => {
   try {
     const urlObj = new URL(url);
-    const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.svg'];
+    const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.svg', '.gif'];
     const hasValidExtension = validExtensions.some(ext => 
       urlObj.pathname.toLowerCase().includes(ext)
     );
@@ -93,6 +115,33 @@ export const isValidImageUrl = (url: string): boolean => {
   } catch {
     return false;
   }
+};
+
+// Get partner logo by name
+export const getPartnerLogo = (partnerName: string): string => {
+  const normalizedName = partnerName.toLowerCase().replace(/\s+/g, '');
+  
+  // Map of partner names to their logo keys in imageConfig
+  const partnerLogoMap: Record<string, keyof typeof imageConfig.optimizedUrls> = {
+    'hubspotforstartups': 'hubspot',
+    'nvidiaception': 'nvidia',
+    'googleforstartups': 'google',
+    'microsoftforstartups': 'microsoft',
+    'oracleforstartups': 'oracle',
+    'awsstartups': 'aws',
+    'ey': 'ey',
+    'pwc': 'pwc',
+    'startupnationcentral': 'snc',
+    'nielsen': 'nielsen',
+    'atlassian': 'atlassian',
+    'slack': 'slack',
+    'zoom': 'zoom',
+    'notion': 'notion',
+    'figma': 'figma'
+  };
+  
+  const logoKey = partnerLogoMap[normalizedName];
+  return logoKey ? imageConfig.optimizedUrls[logoKey] : '';
 };
 
 // Preload critical images
@@ -134,4 +183,45 @@ export const loadImageWithRetry = (
     
     attemptLoad(retries);
   });
+};
+
+// Debug function to check all images in the public folder
+export const debugCheckAllImages = async () => {
+  const imagesToCheck = [
+    // Partner logos
+    '/logos/hubspot-for-startups.png',
+    '/logos/nvidia-inception.png',
+    '/logos/Logo_for_Google_for_Startups_page.png',
+    '/logos/Microsoft-for-Startups.jpg',
+    '/logos/oracle-for-startups.png',
+    '/logos/amazon.jpg',
+    '/logos/EYLogo.gif',
+    '/logos/PwC_2025_Logo.svg.png',
+    '/logos/SNC.png',
+    '/logos/Nielsen_New_Logo_2021.png',
+    '/logos/Atlassian-Logo.png',
+    '/logos/slack-logo-PNG-large-size-900x230.png',
+    '/logos/zoom-logo-png-video-meeting-call-software.png',
+    '/logos/notion-symbol.png',
+    '/logos/figma.png',
+    
+    // Team images
+    '/images/liron-langer.jpg',
+    '/images/team-collaboration.jpg',
+    
+    // Blog images
+    '/images/innovation.jpg',
+    '/images/blockchain-tech.jpg',
+    '/images/venture-capital.jpg'
+  ];
+  
+  const results = await Promise.all(
+    imagesToCheck.map(async (path) => {
+      const exists = await checkImageExists(path);
+      return { path, exists };
+    })
+  );
+  
+  console.log('Image check results:', results);
+  return results;
 };
