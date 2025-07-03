@@ -81,6 +81,7 @@ const BlogPost: React.FC = () => {
             <Link 
               to="/blog"
               className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline mb-8 transition-colors"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
@@ -237,6 +238,7 @@ const BlogPost: React.FC = () => {
                       key={relatedPost.id}
                       to={`/blog/${relatedPost.slug}`}
                       className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                     >
                       <div className="h-48 overflow-hidden">
                         <img
@@ -276,6 +278,7 @@ const BlogPost: React.FC = () => {
               <Link
                 to="/blog"
                 className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 View All Articles

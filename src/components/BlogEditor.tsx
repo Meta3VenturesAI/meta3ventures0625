@@ -3,6 +3,7 @@ import { BlogPostFormData } from '../types/blog';
 import { createBlogPost, updateBlogPost } from '../lib/blog';
 import { Save, X, Eye, Upload, Image, Link as LinkIcon, Bold, Italic, List, Quote } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ReactMarkdown from 'react-markdown';
 
 interface BlogEditorProps {
   initialData?: Partial<BlogPostFormData & { id: string }>;
@@ -289,9 +290,9 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
                 {formData.excerpt}
               </p>
-              <div className="whitespace-pre-wrap">
+              <ReactMarkdown>
                 {formData.content}
-              </div>
+              </ReactMarkdown>
             </div>
             
             <div className="flex flex-wrap gap-2 mt-6">
