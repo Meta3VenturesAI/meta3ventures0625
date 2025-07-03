@@ -6,12 +6,14 @@ import { useAuth } from '../contexts/AuthContext';
 import LoginForm from '../components/LoginForm';
 import { BlogEditor } from '../components/BlogEditor';
 import { Analytics } from '../components/Analytics';
+import { getBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost } from '../lib/blog';
 import { ErrorFallback } from '../components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
 import { blogPosts } from '../utils/blog';
 import { BlogQuickActions } from '../components/BlogQuickActions';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { imageConfig } from '../utils/imageUtils';
 
 const BlogManagement: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -93,6 +95,7 @@ const BlogManagement: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) return;
     
     try {
+      await deleteBlogPost(id);
       const updatedPosts = posts.filter(post => post.id !== id);
       savePosts(updatedPosts);
       toast.success('Post deleted successfully');
@@ -116,47 +119,29 @@ const BlogManagement: React.FC = () => {
     setIsEditing(true);
   };
 
-  const handleSavePost = (postData: BlogPostFormData) => {
+  const handleSavePost = async (postData: BlogPostFormData) => {
     try {
       if (selectedPost) {
         const isNew = selectedPost.id.startsWith('new-');
         
         if (isNew) {
           // Create new post
-          const newPost: BlogPost = {
-            ...selectedPost,
-            ...postData,
-            id: 'post-' + Date.now(),
-            slug: postData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''),
-            author: {
-              name: 'Liron Langer',
-              avatar: '/images/Liron1.jpg'
-            },
-            category: postData.category_id,
-            readTime: postData.read_time,
-            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString()
-          };
-          
-          const updatedPosts = [newPost, ...posts];
-          savePosts(updatedPosts);
-          toast.success('Post created successfully!');
+          const newPost = await createBlogPost(postData);
+          if (newPost) {
+            const updatedPosts = [newPost, ...posts];
+            savePosts(updatedPosts);
+            toast.success('Post created successfully!');
+          }
         } else {
           // Update existing post
-          const updatedPost: BlogPost = {
-            ...selectedPost,
-            ...postData,
-            category: postData.category_id,
-            readTime: postData.read_time,
-            updated_at: new Date().toISOString()
-          };
-          
-          const updatedPosts = posts.map(post => 
-            post.id === selectedPost.id ? updatedPost : post
-          );
-          savePosts(updatedPosts);
-          toast.success('Post updated successfully!');
+          const updatedPost = await updateBlogPost(selectedPost.id, postData);
+          if (updatedPost) {
+            const updatedPosts = posts.map(post => 
+              post.id === selectedPost.id ? updatedPost : post
+            );
+            savePosts(updatedPosts);
+            toast.success('Post updated successfully!');
+          }
         }
       }
       
@@ -379,11 +364,11 @@ const BlogManagement: React.FC = () => {
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   if (post.category === 'ai') {
-                                    target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+                                    target.src = imageConfig.optimizedUrls.aiFuture;
                                   } else if (post.category === 'blockchain') {
-                                    target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+                                    target.src = imageConfig.optimizedUrls.blockchain;
                                   } else {
-                                    target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+                                    target.src = imageConfig.optimizedUrls.ventureCapital;
                                   }
                                 }}
                               />

@@ -19,7 +19,8 @@ const BlogPost: React.FC = () => {
       const savedPosts = localStorage.getItem('blog-posts');
       if (savedPosts) {
         const posts = JSON.parse(savedPosts);
-        return posts.find((post: any) => post.slug === slug);
+        const post = posts.find((post: any) => post.slug === slug);
+        if (post) return post;
       }
     } catch (error) {
       console.error('Error loading posts from storage:', error);

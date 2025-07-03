@@ -34,6 +34,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
       if (formData.title || formData.content) {
         const draftKey = `blog-draft-${initialData?.id || 'new'}`;
         localStorage.setItem(draftKey, JSON.stringify(formData));
+        console.log('Auto-saved draft');
       }
     }, 30000); // Auto-save every 30 seconds
 
@@ -143,6 +144,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
     setIsSaving(true);
     
     try {
+      // Pass the form data to the parent component
       onSave(formData);
       
       // Clear draft after successful save
