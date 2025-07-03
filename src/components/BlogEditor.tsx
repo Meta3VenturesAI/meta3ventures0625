@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BlogPostFormData } from '../types/blog';
-import { createBlogPost, updateBlogPost } from '../lib/blog';
 import { Save, X, Eye, Upload, Image, Link as LinkIcon, Bold, Italic, List, Quote } from 'lucide-react';
 import toast from 'react-hot-toast';
 import ReactMarkdown from 'react-markdown';
 
 interface BlogEditorProps {
   initialData?: Partial<BlogPostFormData & { id: string }>;
-  onSave: () => void;
+  onSave: (data: BlogPostFormData) => void;
   onCancel: () => void;
 }
 
@@ -144,19 +143,11 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
     setIsSaving(true);
     
     try {
-      if (initialData?.id) {
-        await updateBlogPost(initialData.id, formData);
-        toast.success('Post updated successfully!');
-      } else {
-        await createBlogPost(formData);
-        toast.success('Post created successfully!');
-      }
+      onSave(formData);
       
       // Clear draft after successful save
       const draftKey = `blog-draft-${initialData?.id || 'new'}`;
       localStorage.removeItem(draftKey);
-      
-      onSave();
     } catch (error) {
       console.error('Error saving post:', error);
       toast.error('Failed to save post. Please try again.');

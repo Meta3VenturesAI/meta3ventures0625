@@ -12,7 +12,21 @@ const BlogPost: React.FC = () => {
     return <Navigate to="/blog" replace />;
   }
 
-  const post = getBlogPost(slug);
+  // Try to get post from localStorage first, then fallback to static data
+  const getPostFromStorage = (slug: string) => {
+    try {
+      const savedPosts = localStorage.getItem('blog-posts');
+      if (savedPosts) {
+        const posts = JSON.parse(savedPosts);
+        return posts.find((post: any) => post.slug === slug);
+      }
+    } catch (error) {
+      console.error('Error loading posts from storage:', error);
+    }
+    return getBlogPost(slug);
+  };
+
+  const post = getPostFromStorage(slug);
   
   if (!post) {
     return <Navigate to="/404" replace />;
@@ -51,6 +65,8 @@ const BlogPost: React.FC = () => {
 
   // Get appropriate image based on category
   const getImageForPost = (post: any) => {
+    if (post.image) return post.image;
+    
     if (post.category === 'ai') {
       return "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
     } else if (post.category === 'blockchain') {

@@ -7,42 +7,40 @@ export const blogPosts: BlogPost[] = [
     slug: 'future-of-ai-trends-2025',
     title: "The Future of AI: Trends Shaping 2025 and Beyond",
     excerpt: "Explore the transformative AI trends that are revolutionizing industries and creating new opportunities for innovation and growth.",
-    content: `
-      # The Future of AI: Trends Shaping 2025 and Beyond
+    content: `# The Future of AI: Trends Shaping 2025 and Beyond
 
-      Artificial Intelligence continues to evolve at an unprecedented pace, reshaping industries and creating new possibilities for innovation. As we look ahead to 2025 and beyond, several key trends are emerging that will define the next era of AI development and implementation.
+Artificial Intelligence continues to evolve at an unprecedented pace, reshaping industries and creating new possibilities for innovation. As we look ahead to 2025 and beyond, several key trends are emerging that will define the next era of AI development and implementation.
 
-      ## 1. Autonomous AI Agents
+## 1. Autonomous AI Agents
 
-      The rise of autonomous AI agents represents a significant shift in how we approach artificial intelligence. These systems can:
+The rise of autonomous AI agents represents a significant shift in how we approach artificial intelligence. These systems can:
 
-      - Operate independently
-      - Make complex decisions
-      - Learn and adapt from experience
-      - Collaborate with other AI agents
+- Operate independently
+- Make complex decisions
+- Learn and adapt from experience
+- Collaborate with other AI agents
 
-      ## 2. AI-Human Collaboration
+## 2. AI-Human Collaboration
 
-      The future of AI isn't about replacement, but enhancement. We're seeing:
+The future of AI isn't about replacement, but enhancement. We're seeing:
 
-      - More intuitive human-AI interfaces
-      - Better natural language understanding
-      - Contextual awareness in AI systems
-      - Seamless integration into daily workflows
+- More intuitive human-AI interfaces
+- Better natural language understanding
+- Contextual awareness in AI systems
+- Seamless integration into daily workflows
 
-      ## 3. Ethical AI and Governance
+## 3. Ethical AI and Governance
 
-      As AI becomes more prevalent, ethical considerations are taking center stage:
+As AI becomes more prevalent, ethical considerations are taking center stage:
 
-      - Transparent decision-making processes
-      - Built-in bias detection and mitigation
-      - Privacy-preserving AI techniques
-      - Regulatory compliance frameworks
+- Transparent decision-making processes
+- Built-in bias detection and mitigation
+- Privacy-preserving AI techniques
+- Regulatory compliance frameworks
 
-      ## Looking Ahead
+## Looking Ahead
 
-      The next few years will be crucial in determining how AI technologies evolve and integrate into our society. Organizations that embrace these trends while maintaining a focus on ethical implementation will be best positioned for success in the AI-driven future.
-    `,
+The next few years will be crucial in determining how AI technologies evolve and integrate into our society. Organizations that embrace these trends while maintaining a focus on ethical implementation will be best positioned for success in the AI-driven future.`,
     image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 15, 2025",
     author: {
@@ -51,60 +49,59 @@ export const blogPosts: BlogPost[] = [
     },
     category: "ai",
     tags: ["Artificial Intelligence", "Machine Learning", "Innovation"],
-    readTime: "8 min read"
+    readTime: "8 min read",
+    published: true
   },
   {
     id: '2',
     slug: 'building-resilient-web3-infrastructure',
     title: "Building Resilient Web3 Infrastructure",
     excerpt: "A deep dive into the essential components of robust Web3 infrastructure and best practices for scalable blockchain applications.",
-    content: `
-      # Building Resilient Web3 Infrastructure
+    content: `# Building Resilient Web3 Infrastructure
 
-      As Web3 technologies mature, the need for robust and scalable infrastructure becomes increasingly critical. This article explores key considerations and best practices for building resilient Web3 systems.
+As Web3 technologies mature, the need for robust and scalable infrastructure becomes increasingly critical. This article explores key considerations and best practices for building resilient Web3 systems.
 
-      ## Foundation Components
+## Foundation Components
 
-      ### 1. Distributed Systems
-      - Node architecture
-      - Consensus mechanisms
-      - Data replication strategies
+### 1. Distributed Systems
+- Node architecture
+- Consensus mechanisms
+- Data replication strategies
 
-      ### 2. Security Measures
-      - Multi-signature protocols
-      - Zero-knowledge proofs
-      - Audit trails
+### 2. Security Measures
+- Multi-signature protocols
+- Zero-knowledge proofs
+- Audit trails
 
-      ### 3. Scalability Solutions
-      - Layer 2 implementations
-      - Sharding approaches
-      - State channels
+### 3. Scalability Solutions
+- Layer 2 implementations
+- Sharding approaches
+- State channels
 
-      ## Best Practices
+## Best Practices
 
-      1. **Redundancy**
-         - Multiple node deployment
-         - Backup systems
-         - Failover mechanisms
+1. **Redundancy**
+   - Multiple node deployment
+   - Backup systems
+   - Failover mechanisms
 
-      2. **Monitoring**
-         - Real-time analytics
-         - Performance metrics
-         - Alert systems
+2. **Monitoring**
+   - Real-time analytics
+   - Performance metrics
+   - Alert systems
 
-      3. **Updates and Maintenance**
-         - Continuous integration
-         - Automated testing
-         - Version control
+3. **Updates and Maintenance**
+   - Continuous integration
+   - Automated testing
+   - Version control
 
-      ## Future Considerations
+## Future Considerations
 
-      The evolution of Web3 infrastructure will continue to present new challenges and opportunities. Staying ahead requires:
+The evolution of Web3 infrastructure will continue to present new challenges and opportunities. Staying ahead requires:
 
-      - Adaptive architecture
-      - Flexible scaling strategies
-      - Continuous learning and improvement
-    `,
+- Adaptive architecture
+- Flexible scaling strategies
+- Continuous learning and improvement`,
     image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 10, 2025",
     author: {
@@ -113,64 +110,63 @@ export const blogPosts: BlogPost[] = [
     },
     category: "blockchain",
     tags: ["Web3", "Blockchain", "Infrastructure"],
-    readTime: "12 min read"
+    readTime: "12 min read",
+    published: true
   },
   {
     id: '3',
     slug: 'rise-of-agentic-ai-systems',
     title: "The Rise of Agentic AI Systems",
     excerpt: "Understanding how autonomous AI agents are transforming business operations and creating new possibilities for intelligent automation.",
-    content: `
-      # The Rise of Agentic AI Systems
+    content: `# The Rise of Agentic AI Systems
 
-      Agentic AI represents a paradigm shift in artificial intelligence, moving beyond reactive systems to proactive, goal-oriented agents that can operate autonomously in complex environments.
+Agentic AI represents a paradigm shift in artificial intelligence, moving beyond reactive systems to proactive, goal-oriented agents that can operate autonomously in complex environments.
 
-      ## What Makes AI Agentic?
+## What Makes AI Agentic?
 
-      Agentic AI systems possess several key characteristics:
+Agentic AI systems possess several key characteristics:
 
-      - **Autonomy**: Ability to operate without constant human oversight
-      - **Goal-oriented behavior**: Working towards specific objectives
-      - **Environmental awareness**: Understanding and adapting to context
-      - **Learning capabilities**: Improving performance over time
+- **Autonomy**: Ability to operate without constant human oversight
+- **Goal-oriented behavior**: Working towards specific objectives
+- **Environmental awareness**: Understanding and adapting to context
+- **Learning capabilities**: Improving performance over time
 
-      ## Applications in Business
+## Applications in Business
 
-      ### 1. Customer Service
-      - Intelligent chatbots that understand context
-      - Proactive issue resolution
-      - Personalized customer experiences
+### 1. Customer Service
+- Intelligent chatbots that understand context
+- Proactive issue resolution
+- Personalized customer experiences
 
-      ### 2. Operations Management
-      - Supply chain optimization
-      - Predictive maintenance
-      - Resource allocation
+### 2. Operations Management
+- Supply chain optimization
+- Predictive maintenance
+- Resource allocation
 
-      ### 3. Decision Support
-      - Data analysis and insights
-      - Risk assessment
-      - Strategic planning assistance
+### 3. Decision Support
+- Data analysis and insights
+- Risk assessment
+- Strategic planning assistance
 
-      ## Implementation Challenges
+## Implementation Challenges
 
-      While promising, agentic AI systems face several challenges:
+While promising, agentic AI systems face several challenges:
 
-      - **Trust and reliability**: Ensuring consistent performance
-      - **Ethical considerations**: Maintaining human oversight
-      - **Integration complexity**: Working with existing systems
-      - **Scalability**: Managing multiple agents effectively
+- **Trust and reliability**: Ensuring consistent performance
+- **Ethical considerations**: Maintaining human oversight
+- **Integration complexity**: Working with existing systems
+- **Scalability**: Managing multiple agents effectively
 
-      ## The Future of Agentic AI
+## The Future of Agentic AI
 
-      As these systems mature, we can expect to see:
+As these systems mature, we can expect to see:
 
-      - More sophisticated multi-agent collaborations
-      - Better human-AI interaction models
-      - Industry-specific specialized agents
-      - Enhanced safety and control mechanisms
+- More sophisticated multi-agent collaborations
+- Better human-AI interaction models
+- Industry-specific specialized agents
+- Enhanced safety and control mechanisms
 
-      The key to successful implementation lies in thoughtful design, gradual deployment, and continuous monitoring to ensure these powerful systems serve human interests effectively.
-    `,
+The key to successful implementation lies in thoughtful design, gradual deployment, and continuous monitoring to ensure these powerful systems serve human interests effectively.`,
     image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
     date: "April 5, 2025",
     author: {
@@ -179,7 +175,8 @@ export const blogPosts: BlogPost[] = [
     },
     category: "ai",
     tags: ["Agentic AI", "Automation", "Business Intelligence"],
-    readTime: "10 min read"
+    readTime: "10 min read",
+    published: true
   }
 ];
 

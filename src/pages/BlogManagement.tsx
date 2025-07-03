@@ -6,7 +6,6 @@ import { useAuth } from '../contexts/AuthContext';
 import LoginForm from '../components/LoginForm';
 import { BlogEditor } from '../components/BlogEditor';
 import { Analytics } from '../components/Analytics';
-import { getBlogPosts, deleteBlogPost } from '../lib/blog';
 import { ErrorFallback } from '../components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
 import { blogPosts } from '../utils/blog';
@@ -33,42 +32,60 @@ const BlogManagement: React.FC = () => {
 
   const loadPosts = async () => {
     try {
-      // For now, use the static blog posts data
-      setPosts(blogPosts || []);
+      // Load from localStorage first, then fallback to static data
+      const savedPosts = localStorage.getItem('blog-posts');
+      if (savedPosts) {
+        const parsedPosts = JSON.parse(savedPosts);
+        setPosts(parsedPosts);
+      } else {
+        setPosts([...blogPosts]);
+        // Save initial posts to localStorage
+        localStorage.setItem('blog-posts', JSON.stringify(blogPosts));
+      }
     } catch (error) {
       console.error('Error loading posts:', error);
-      setPosts([]);
+      setPosts([...blogPosts]);
       toast.error('Failed to load posts');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleCreatePost = (template?: Partial<BlogPostFormData>) => {
-    if (template) {
-      setSelectedPost({
-        id: 'new-' + Date.now(),
-        slug: '',
-        title: template.title || '',
-        excerpt: template.excerpt || '',
-        content: template.content || '',
-        image: template.image || 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-        author_id: template.author_id || 'default-author',
-        author: {
-          name: 'Liron Langer',
-          avatar: '/images/Liron1.jpg'
-        },
-        category_id: template.category_id || 'ai',
-        category: template.category_id || 'ai',
-        tags: template.tags || [],
-        read_time: template.read_time || '5 min read',
-        readTime: template.read_time || '5 min read',
-        published: template.published || false,
-        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-      } as BlogPost);
-    } else {
-      setSelectedPost(null);
+  const savePosts = (updatedPosts: BlogPost[]) => {
+    try {
+      localStorage.setItem('blog-posts', JSON.stringify(updatedPosts));
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.error('Error saving posts:', error);
+      toast.error('Failed to save posts');
     }
+  };
+
+  const handleCreatePost = (template?: Partial<BlogPostFormData>) => {
+    const newPost: BlogPost = {
+      id: 'new-' + Date.now(),
+      slug: '',
+      title: template?.title || '',
+      excerpt: template?.excerpt || '',
+      content: template?.content || '',
+      image: template?.image || 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+      author_id: template?.author_id || 'default-author',
+      author: {
+        name: 'Liron Langer',
+        avatar: '/images/Liron1.jpg'
+      },
+      category_id: template?.category_id || 'ai',
+      category: template?.category_id || 'ai',
+      tags: template?.tags || [],
+      read_time: template?.read_time || '5 min read',
+      readTime: template?.read_time || '5 min read',
+      published: template?.published || false,
+      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    setSelectedPost(newPost);
     setIsEditing(true);
   };
 
@@ -76,9 +93,8 @@ const BlogManagement: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) return;
     
     try {
-      // In a real implementation, this would call the API
-      // await deleteBlogPost(id);
-      setPosts(posts.filter(post => post.id !== id));
+      const updatedPosts = posts.filter(post => post.id !== id);
+      savePosts(updatedPosts);
       toast.success('Post deleted successfully');
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -87,41 +103,73 @@ const BlogManagement: React.FC = () => {
   };
 
   const handleDuplicate = (post: BlogPost) => {
-    const duplicatedPost: Partial<BlogPost> = {
+    const duplicatedPost: BlogPost = {
       ...post,
       id: 'new-' + Date.now(),
       title: `${post.title} (Copy)`,
-      published: false
+      slug: '',
+      published: false,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     };
-    setSelectedPost(duplicatedPost as BlogPost);
+    setSelectedPost(duplicatedPost);
     setIsEditing(true);
   };
 
-  const handleSavePost = () => {
-    // In a real implementation, this would save to the database
-    // For now, we'll simulate adding/updating the post in our local state
-    if (selectedPost) {
-      const isNew = selectedPost.id.startsWith('new-');
-      
-      if (isNew) {
-        // Create new post
-        const newPost = {
-          ...selectedPost,
-          id: 'post-' + Date.now(),
-          slug: selectedPost.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''),
-          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-        };
-        setPosts([newPost, ...posts]);
-        toast.success('Post created successfully!');
-      } else {
-        // Update existing post
-        setPosts(posts.map(post => post.id === selectedPost.id ? selectedPost : post));
-        toast.success('Post updated successfully!');
+  const handleSavePost = (postData: BlogPostFormData) => {
+    try {
+      if (selectedPost) {
+        const isNew = selectedPost.id.startsWith('new-');
+        
+        if (isNew) {
+          // Create new post
+          const newPost: BlogPost = {
+            ...selectedPost,
+            ...postData,
+            id: 'post-' + Date.now(),
+            slug: postData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''),
+            author: {
+              name: 'Liron Langer',
+              avatar: '/images/Liron1.jpg'
+            },
+            category: postData.category_id,
+            readTime: postData.read_time,
+            date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          };
+          
+          const updatedPosts = [newPost, ...posts];
+          savePosts(updatedPosts);
+          toast.success('Post created successfully!');
+        } else {
+          // Update existing post
+          const updatedPost: BlogPost = {
+            ...selectedPost,
+            ...postData,
+            category: postData.category_id,
+            readTime: postData.read_time,
+            updated_at: new Date().toISOString()
+          };
+          
+          const updatedPosts = posts.map(post => 
+            post.id === selectedPost.id ? updatedPost : post
+          );
+          savePosts(updatedPosts);
+          toast.success('Post updated successfully!');
+        }
       }
+      
+      setIsEditing(false);
+      setSelectedPost(null);
+      
+      // Clear any drafts
+      const draftKey = `blog-draft-${selectedPost?.id || 'new'}`;
+      localStorage.removeItem(draftKey);
+    } catch (error) {
+      console.error('Error saving post:', error);
+      toast.error('Failed to save post');
     }
-    
-    setIsEditing(false);
-    setSelectedPost(null);
   };
 
   const filteredPosts = posts.filter(post => {
