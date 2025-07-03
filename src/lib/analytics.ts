@@ -122,7 +122,7 @@ export async function getAnalyticsSummary(startDate: string, endDate: string): P
 
     // Process real data if available
     const totalPageViews = pageViews?.length || 0;
-    const uniqueVisitors = new Set(pageViews?.map(pv => pv.session_id)).size || 0;
+    const uniqueVisitors = new Set(pageViews?.map((pv: any) => pv.session_id)).size || 0;
     const totalLeads = leads?.length || 0;
 
     return {
@@ -189,49 +189,49 @@ export async function getLeads(startDate: string, endDate: string): Promise<Lead
   }
 }
 
-// Helper functions for processing data
+// Helper functions for processing data with proper typing
 function processTopPages(pageViews: any[]): { page: string; views: number }[] {
-  const pageCount = pageViews.reduce((acc, pv) => {
+  const pageCount = pageViews.reduce((acc: Record<string, number>, pv: any) => {
     acc[pv.page] = (acc[pv.page] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
   return Object.entries(pageCount)
-    .map(([page, views]) => ({ page, views }))
-    .sort((a, b) => b.views - a.views)
+    .map(([page, views]) => ({ page, views: views as number }))
+    .sort((a, b) => (b.views as number) - (a.views as number))
     .slice(0, 5);
 }
 
 function processLeadsBySource(leads: any[]): { source: string; count: number }[] {
-  const sourceCount = leads.reduce((acc, lead) => {
+  const sourceCount = leads.reduce((acc: Record<string, number>, lead: any) => {
     acc[lead.source] = (acc[lead.source] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
   return Object.entries(sourceCount)
-    .map(([source, count]) => ({ source, count }));
+    .map(([source, count]) => ({ source, count: count as number }));
 }
 
 function processDeviceBreakdown(pageViews: any[]): { device: string; count: number }[] {
-  const deviceCount = pageViews.reduce((acc, pv) => {
+  const deviceCount = pageViews.reduce((acc: Record<string, number>, pv: any) => {
     const device = pv.device_type || 'unknown';
     acc[device] = (acc[device] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
   return Object.entries(deviceCount)
-    .map(([device, count]) => ({ device, count }));
+    .map(([device, count]) => ({ device, count: count as number }));
 }
 
 function processCountryBreakdown(pageViews: any[]): { country: string; count: number }[] {
-  const countryCount = pageViews.reduce((acc, pv) => {
+  const countryCount = pageViews.reduce((acc: Record<string, number>, pv: any) => {
     const country = pv.country_code || 'unknown';
     acc[country] = (acc[country] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
 
   return Object.entries(countryCount)
-    .map(([country, count]) => ({ country, count }));
+    .map(([country, count]) => ({ country, count: count as number }));
 }
 
 function getDeviceType(userAgent: string): string {
