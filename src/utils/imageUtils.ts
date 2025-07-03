@@ -3,7 +3,7 @@ export const imageConfig = {
   // Reliable image sources with proper URLs
   fallbackImages: {
     hero: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    team: '/images/team-collaboration.jpg',
+    team: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200',
     blog: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     technology: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800',
     business: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800'
@@ -35,14 +35,14 @@ export const imageConfig = {
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
-    // Team/About images - using local files now
+    // Team/About images - using reliable Pexels images
     lironLanger: '/images/Liron1.jpg',
-    teamCollaboration: '/images/team-collaboration.jpg',
+    teamCollaboration: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
     
-    // Blog images - using local files with fallbacks
-    aiFuture: '/images/ai-innovation.jpg',
-    blockchain: '/images/blockchain-tech.jpg',
-    ventureCapital: '/images/venture-capital.jpg'
+    // Blog images - using reliable Pexels images
+    aiFuture: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+    blockchain: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800',
+    ventureCapital: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800'
   }
 };
 
@@ -179,15 +179,7 @@ export const loadImageWithRetry = (
 // Debug function to check only the images that should exist
 export const debugCheckAllImages = async () => {
   const imagesToCheck = [
-    // Local images that should exist
-    '/images/Liron1.jpg',
-    '/images/team-collaboration.jpg',
-    '/images/ai-innovation.jpg',
-    '/images/blockchain-tech.jpg',
-    '/images/venture-capital.jpg',
-    '/images/innovation.jpg',
-    
-    // Partner logos
+    // Only check the actual uploaded partner logos
     '/logos/png-clipart-hubspot-logo-hubspot-logo-icons-logos-emojis-tech-companies.png',
     '/logos/20181218-Nvidia-Inception.webp',
     '/logos/Logo_for_Google_for_Startups_page.png',
@@ -208,6 +200,9 @@ export const debugCheckAllImages = async () => {
     '/logos/ibsi_snowflake.jpg',
     '/logos/new-stripe-logo-png.png',
     '/logos/salesforce.png',
+    
+    // Team images - only check Liron's image which exists
+    '/images/Liron1.jpg',
     
     // External images (these should always work)
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
