@@ -11,9 +11,9 @@ export const imageConfig = {
   
   // Partner logos - using reliable external URLs
   partnerLogos: {
-    'HubSpot for Startups': '/logos/png-clipart-hubspot-logo-hubspot-logo-icons-logos-emojis-tech-companies.png',
-    'NVIDIA Inception': '/logos/20181218-Nvidia-Inception.webp',
-    'Google for Startups': '/logos/Logo_for_Google_for_Startups_page.png',
+    'HubSpot for Startups': '/logos/hubspot-logo.png',
+    'NVIDIA Inception': '/logos/nvidia-inception.png',
+    'Google for Startups': '/logos/google-for-startups.png',
     'Microsoft for Startups': '/logos/Microsoft-for-Startups.jpg',
     'Oracle for Startups': '/logos/oracle-for-startups.png',
     'AWS Startups': '/logos/amazon.jpg',
@@ -21,23 +21,23 @@ export const imageConfig = {
     'PwC': '/logos/PwC_2025_Logo.svg.png',
     'Start-up Nation Central': '/logos/SNC.png',
     'Nielsen': '/logos/Nielsen_New_Logo_2021.png',
-    'Atlassian': '/logos/Atlassian-Logo.png',
-    'Slack': '/logos/slack-logo-PNG-large-size-900x230.png',
-    'Zoom': '/logos/zoom-logo-png-video-meeting-call-software.png',
-    'Notion': '/logos/notion-symbol.png',
-    'Figma': '/logos/figma.png',
-    'Databricks': '/logos/Databricks_Logo.png',
-    'MongoDB': '/logos/MongoDB_forStartups_ForestGreen.png',
-    'Snowflake': '/logos/ibsi_snowflake.jpg',
-    'Stripe': '/logos/new-stripe-logo-png.png',
-    'Salesforce': '/logos/salesforce.png'
-  },
+    'Atlassian': '/logos/atlassian-logo.png',
+    'Slack': '/logos/slack-logo.png',
+    'Zoom': '/logos/zoom-logo.png',
+    'Notion': '/logos/notion-logo.png',
+    'Figma': '/logos/figma-logo.png',
+    'Databricks': '/logos/databricks-logo.png',
+    'MongoDB': '/logos/mongodb-logo.png',
+    'Snowflake': '/logos/snowflake-logo.png',
+    'Stripe': '/logos/stripe-logo.png',
+    'Salesforce': '/logos/salesforce-logo.png'
+  } as Record<string, string>,
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
     // Team/About images
-    lironLanger: '/images/Liron1.jpg',
-    teamCollaboration: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
+    lironLanger: '/images/liron-langer.jpg',
+    teamCollaboration: '/images/team-collaboration.jpg',
     
     // Blog images
     aiFuture: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -127,8 +127,8 @@ export const isValidImageUrl = (url: string): boolean => {
 // Get partner logo by name
 export const getPartnerLogo = (partnerName: string): string => {
   // First try to get from the partnerLogos map
-  if (imageConfig.partnerLogos[partnerName]) {
-    return imageConfig.partnerLogos[partnerName];
+  if (partnerName in imageConfig.partnerLogos) {
+    return imageConfig.partnerLogos[partnerName as keyof typeof imageConfig.partnerLogos];
   }
   
   // If not found, return a fallback image
@@ -180,9 +180,9 @@ export const loadImageWithRetry = (
 export const debugCheckAllImages = async () => {
   const imagesToCheck = [
     // Partner logos
-    '/logos/png-clipart-hubspot-logo-hubspot-logo-icons-logos-emojis-tech-companies.png',
-    '/logos/20181218-Nvidia-Inception.webp',
-    '/logos/Logo_for_Google_for_Startups_page.png',
+    '/logos/hubspot-logo.png',
+    '/logos/nvidia-inception.png',
+    '/logos/google-for-startups.png',
     '/logos/Microsoft-for-Startups.jpg',
     '/logos/oracle-for-startups.png',
     '/logos/amazon.jpg',
@@ -190,19 +190,19 @@ export const debugCheckAllImages = async () => {
     '/logos/PwC_2025_Logo.svg.png',
     '/logos/SNC.png',
     '/logos/Nielsen_New_Logo_2021.png',
-    '/logos/Atlassian-Logo.png',
-    '/logos/slack-logo-PNG-large-size-900x230.png',
-    '/logos/zoom-logo-png-video-meeting-call-software.png',
-    '/logos/notion-symbol.png',
-    '/logos/figma.png',
-    '/logos/Databricks_Logo.png',
-    '/logos/MongoDB_forStartups_ForestGreen.png',
-    '/logos/ibsi_snowflake.jpg',
-    '/logos/new-stripe-logo-png.png',
-    '/logos/salesforce.png',
+    '/logos/atlassian-logo.png',
+    '/logos/slack-logo.png',
+    '/logos/zoom-logo.png',
+    '/logos/notion-logo.png',
+    '/logos/figma-logo.png',
+    '/logos/databricks-logo.png',
+    '/logos/mongodb-logo.png',
+    '/logos/snowflake-logo.png',
+    '/logos/stripe-logo.png',
+    '/logos/salesforce-logo.png',
     
     // Team images
-    '/images/Liron1.jpg',
+    '/images/liron-langer.jpg',
     
     // Blog images
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',

@@ -53,7 +53,7 @@ const AboutPage: React.FC = () => {
           <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Our Story
                 <span className="block bg-gradient-to-r from-blue-400 to-purple-400 text-transparent bg-clip-text mt-2">
                   Building Tomorrow's Tech Leaders
@@ -113,7 +113,7 @@ const AboutPage: React.FC = () => {
               <div className="relative">
                 <div className="absolute -top-4 -left-4 w-64 h-64 bg-gradient-to-br from-indigo-100 to-purple-100 dark:from-indigo-900/30 dark:to-purple-900/30 rounded-lg"></div>
                 <img 
-                  src="/images/Liron1.jpg"
+                  src="/images/team-collaboration.jpg"
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
                   loading="eager"
@@ -168,7 +168,7 @@ const AboutPage: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative h-full">
                     <img 
-                      src="/images/Liron1.jpg"
+                      src="/images/liron-langer.jpg"
                       alt="Liron Langer - Managing Director"
                       className="w-full h-full object-cover"
                       loading="lazy"
