@@ -17,18 +17,6 @@ export const Portfolio: React.FC = () => {
 
   const companies: PortfolioCompany[] = [
     {
-      name: "GenovateAI",
-      website: "genovateai.com",
-      description: "An AI consultancy and development firm specializing in generative AI tools and solutions for enterprise applications.",
-      category: "AI & Machine Learning"
-    },
-    {
-      name: "QuickCast",
-      website: "quickcast.tv",
-      description: "Empowers content creators to build, manage, distribute, and monetize FAST channels and custom-branded TV apps across connected TV and OTT platforms.",
-      category: "Media & Entertainment"
-    },
-    {
       name: "AdVerif.ai",
       website: "adverifai.com",
       description: "Utilized AI to identify and combat misinformation online, enhancing brand safety.",
@@ -142,6 +130,18 @@ export const Portfolio: React.FC = () => {
       website: "personalics.com",
       description: "Automated 1:1 marketing.",
       category: "Marketing Tech"
+    },
+    {
+      name: "GenovateAI",
+      website: "genovateai.com",
+      description: "An AI consultancy and development firm specializing in generative AI tools and solutions for enterprise applications.",
+      category: "AI & Machine Learning"
+    },
+    {
+      name: "QuickCast",
+      website: "quickcast.tv",
+      description: "Empowers content creators to build, manage, distribute, and monetize FAST channels and custom-branded TV apps across connected TV and OTT platforms.",
+      category: "Media & Entertainment"
     },
     {
       name: "Wizer",

@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
               <a href="https://medium.com/@meta3ventures" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
                 <Medium size={20} />
               </a>
-              <a href="mailto:info@meta3ventures.com" className="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
+              <a href="mailto:liron@meta3ventures.com" className="text-gray-400 hover:text-white transition-colors transform hover:scale-110">
                 <Mail size={20} />
               </a>
             </div>
@@ -136,7 +136,7 @@ export const Footer: React.FC = () => {
             <p className="text-gray-500 text-sm">
               Derech Menachem Begin 121, Tel Aviv-Yafo, Israel | 
               <a href="tel:+972528444500" className="hover:text-white transition-colors ml-1">+972 52-844-4500</a> | 
-              <a href="mailto:info@meta3ventures.com" className="hover:text-white transition-colors ml-1">info@meta3ventures.com</a>
+              <a href="mailto:liron@meta3ventures.com" className="hover:text-white transition-colors ml-1">liron@meta3ventures.com</a>
             </p>
           </div>
         </div>

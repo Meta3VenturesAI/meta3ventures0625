@@ -3,7 +3,7 @@ export const APP_CONFIG = {
   name: 'Meta3Ventures',
   description: 'AI Innovation & Digital Transformation',
   url: 'https://meta3ventures.com',
-  email: 'info@meta3ventures.com',
+  email: 'liron@meta3ventures.com',
   phone: '+972 52-844-4500',
   address: {
     street: 'Derech Menachem Begin 121',
