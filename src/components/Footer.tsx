@@ -29,6 +29,13 @@ export const Footer: React.FC = () => {
     }
   };
 
+  const handleNavigation = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 md:px-6 py-12">
@@ -57,23 +64,23 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
-              <li><Link to="/partners" className="text-gray-400 hover:text-white transition-colors">Partners</Link></li>
-              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors">Blog</Link></li>
+              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Home</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Services</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>About Us</Link></li>
+              <li><Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Portfolio</Link></li>
+              <li><Link to="/partners" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Partners</Link></li>
+              <li><Link to="/blog" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Blog</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-lg font-semibold mb-4">Our Services</h4>
             <ul className="space-y-2">
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Venture Studio Support</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">AI Integration</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Strategic Network Access</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Intelligence Layer</Link></li>
-              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors">Growth Acceleration</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Venture Studio Support</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>AI Integration</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Strategic Network Access</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Intelligence Layer</Link></li>
+              <li><Link to="/services" className="text-gray-400 hover:text-white transition-colors" onClick={handleNavigation}>Growth Acceleration</Link></li>
             </ul>
           </div>
 
@@ -127,9 +134,9 @@ export const Footer: React.FC = () => {
               &copy; {new Date().getFullYear()} Meta3Ventures. All rights reserved.
             </p>
             <div className="mt-4 md:mt-0 flex space-x-6">
-              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors">Privacy Policy</Link>
-              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors">Terms of Service</Link>
-              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors">Cookie Policy</Link>
+              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors" onClick={handleNavigation}>Privacy Policy</Link>
+              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors" onClick={handleNavigation}>Terms of Service</Link>
+              <Link to="/contact" className="text-gray-500 hover:text-white text-sm transition-colors" onClick={handleNavigation}>Cookie Policy</Link>
             </div>
           </div>
           <div className="mt-4 text-center">

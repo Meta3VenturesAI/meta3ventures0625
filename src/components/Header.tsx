@@ -56,6 +56,15 @@ export const Header: React.FC = () => {
     }
   };
 
+  const handleNavigation = (path: string) => {
+    setIsMenuOpen(false);
+    setIsAdminMenuOpen(false);
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   const isActivePath = (path: string) => {
     return location.pathname === path;
   };
@@ -83,6 +92,7 @@ export const Header: React.FC = () => {
           <Link 
             to="/" 
             className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-transparent bg-clip-text hover:scale-105 transition-transform"
+            onClick={() => handleNavigation('/')}
           >
             Meta3Ventures
           </Link>
@@ -96,6 +106,7 @@ export const Header: React.FC = () => {
               className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium ${
                 isActivePath(item.path) ? 'text-indigo-600 dark:text-indigo-400' : ''
               }`}
+              onClick={() => handleNavigation(item.path)}
             >
               {item.label}
             </Link>
@@ -103,6 +114,7 @@ export const Header: React.FC = () => {
           <Link 
             to="/apply"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg font-medium"
+            onClick={() => handleNavigation('/apply')}
           >
             Apply Now
           </Link>
@@ -141,7 +153,7 @@ export const Header: React.FC = () => {
                 <Link
                   to="/blog/manage"
                   className="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                  onClick={() => setIsAdminMenuOpen(false)}
+                  onClick={() => handleNavigation('/blog/manage')}
                 >
                   Blog Management
                 </Link>
@@ -168,7 +180,7 @@ export const Header: React.FC = () => {
               className={`text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2 font-medium ${
                 isActivePath(item.path) ? 'text-indigo-600 dark:text-indigo-400' : ''
               }`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => handleNavigation(item.path)}
             >
               {item.label}
             </Link>
@@ -176,14 +188,14 @@ export const Header: React.FC = () => {
           <Link 
             to="/apply"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 px-6 rounded-lg transition-all transform hover:scale-105 shadow-md hover:shadow-lg text-center font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => handleNavigation('/apply')}
           >
             Apply Now
           </Link>
           <Link
             to="/blog/manage"
             className="text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors py-2 font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => handleNavigation('/blog/manage')}
           >
             Blog Management
           </Link>
@@ -195,6 +207,7 @@ export const Header: React.FC = () => {
         <Link
           to="/apply"
           className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          onClick={() => handleNavigation('/apply')}
         >
           Apply Now
         </Link>

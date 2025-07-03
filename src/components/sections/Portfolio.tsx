@@ -41,22 +41,6 @@ export const Portfolio: React.FC = () => {
       category: "AI & Machine Learning"
     },
     {
-      name: "ciValue",
-      website: "civalue.com",
-      description: "Customer-centric AI and monetization solutions for FMCG retail.",
-      status: "Exit",
-      acquirer: "NielsenIQ",
-      category: "Retail Technology"
-    },
-    {
-      name: "Crossense",
-      website: "fortune.com",
-      description: "Understanding consumer behavior through digital tracking.",
-      status: "Exit",
-      acquirer: "Toluna",
-      category: "Analytics"
-    },
-    {
       name: "First Digital Asset",
       website: "firstdigitalasset.com",
       description: "Digital asset management and trading solutions.",
@@ -148,6 +132,22 @@ export const Portfolio: React.FC = () => {
       website: "getwizer.com",
       description: "AI-powered adaptable research platform.",
       category: "Research Tech"
+    },
+    {
+      name: "ciValue",
+      website: "civalue.com",
+      description: "Customer-centric AI and monetization solutions for FMCG retail.",
+      status: "Exit",
+      acquirer: "NielsenIQ",
+      category: "Retail Technology"
+    },
+    {
+      name: "Crossense",
+      website: "fortune.com",
+      description: "Understanding consumer behavior through digital tracking.",
+      status: "Exit",
+      acquirer: "Toluna",
+      category: "Analytics"
     },
     {
       name: "Revuze",
@@ -333,6 +333,7 @@ export const Portfolio: React.FC = () => {
           <Link 
             to="/apply"
             className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-8 py-4 rounded-lg font-medium inline-flex items-center transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Apply Now
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -340,6 +341,7 @@ export const Portfolio: React.FC = () => {
           <Link 
             to="/contact"
             className="border border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 px-8 py-4 rounded-lg font-medium hover:bg-indigo-50 dark:hover:bg-indigo-900/30 inline-flex items-center transition-colors"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             Contact Us
           </Link>

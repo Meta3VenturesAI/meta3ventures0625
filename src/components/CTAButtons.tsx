@@ -10,6 +10,13 @@ interface CTAButtonsProps {
 export const CTAButtons: React.FC<CTAButtonsProps> = ({ variant = 'light', className = '' }) => {
   const isLight = variant === 'light';
 
+  const handleNavigation = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <div className={`flex flex-wrap items-center gap-4 ${className}`}>
       <Link 
@@ -19,6 +26,7 @@ export const CTAButtons: React.FC<CTAButtonsProps> = ({ variant = 'light', class
             ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white'
             : 'bg-white text-indigo-900 hover:bg-gray-100'
         }`}
+        onClick={handleNavigation}
       >
         Apply Now
         <ArrowRight className="ml-2 h-5 w-5" />
@@ -30,6 +38,7 @@ export const CTAButtons: React.FC<CTAButtonsProps> = ({ variant = 'light', class
             ? 'border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50'
             : 'border-2 border-white text-white hover:bg-white/10'
         }`}
+        onClick={handleNavigation}
       >
         Contact Us
       </Link>
