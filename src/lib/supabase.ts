@@ -49,7 +49,7 @@ const createSupabaseClient = () => {
 
 export const supabase = createSupabaseClient();
 
-// Error handling wrapper
+// Enhanced error handling wrapper
 export async function handleSupabaseError<T>(
   promise: Promise<{ data: T | null; error: any }>
 ): Promise<T> {
@@ -57,12 +57,17 @@ export async function handleSupabaseError<T>(
     const { data, error } = await promise;
     
     if (error) {
+      // Check for specific error types
+      if (error.code === '42P01') {
+        throw new Error(`Database table does not exist: ${error.message}`);
+      }
+      
       console.error('Supabase error:', error);
-      throw new Error(error.message);
+      throw new Error(error.message || 'Database operation failed');
     }
     
     if (!data) {
-      throw new Error('No data returned');
+      throw new Error('No data returned from database');
     }
     
     return data;
@@ -72,16 +77,25 @@ export async function handleSupabaseError<T>(
   }
 }
 
-// Health check function
+// Health check function with better error handling
 export async function checkSupabaseConnection(): Promise<boolean> {
   if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn('Supabase not configured');
     return false;
   }
 
   try {
+    // Try a simple query to check connection
     const { error } = await supabase.from('page_views').select('count').limit(1);
+    
+    if (error && error.code === '42P01') {
+      console.warn('Supabase connected but tables not created yet');
+      return true; // Connection works, just tables don't exist
+    }
+    
     return !error;
-  } catch {
+  } catch (error) {
+    console.warn('Supabase connection check failed:', error);
     return false;
   }
 }

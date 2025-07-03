@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { getAnalyticsSummary, getLeads, AnalyticsSummary, LeadSubmission } from '../lib/analytics';
-import { Download, Calendar, RefreshCw } from 'lucide-react';
+import { Download, Calendar, RefreshCw, AlertTriangle, Database } from 'lucide-react';
 import { format, subDays } from 'date-fns';
 
 const COLORS = ['#4F46E5', '#7C3AED', '#2563EB', '#9333EA', '#3B82F6'];
@@ -21,6 +21,7 @@ export const Analytics: React.FC = () => {
   const [leads, setLeads] = useState<LeadSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshKey, setRefreshKey] = useState(0);
+  const [isUsingMockData, setIsUsingMockData] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -38,8 +39,12 @@ export const Analytics: React.FC = () => {
         getAnalyticsSummary(dateRange.start, dateRange.end),
         getLeads(dateRange.start, dateRange.end)
       ]);
+      
       setSummary(summaryData);
       setLeads(leadsData);
+      
+      // Check if we're using mock data (when totalPageViews is exactly 1250, it's likely mock data)
+      setIsUsingMockData(summaryData.totalPageViews === 1250);
     } catch (error) {
       console.error('Error loading analytics:', error);
       // Set fallback data
@@ -54,6 +59,7 @@ export const Analytics: React.FC = () => {
         countryBreakdown: []
       });
       setLeads([]);
+      setIsUsingMockData(true);
     } finally {
       setLoading(false);
     }
@@ -99,7 +105,10 @@ export const Analytics: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600"></div>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-600 mx-auto mb-4"></div>
+          <p className="text-gray-600 dark:text-gray-300">Loading analytics data...</p>
+        </div>
       </div>
     );
   }
@@ -108,6 +117,7 @@ export const Analytics: React.FC = () => {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="text-center">
+          <AlertTriangle className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
           <p className="text-gray-600 dark:text-gray-300 mb-4">Unable to load analytics data</p>
           <button
             onClick={() => setRefreshKey(prev => prev + 1)}
@@ -122,6 +132,24 @@ export const Analytics: React.FC = () => {
 
   return (
     <div className="space-y-8">
+      {/* Database Status Warning */}
+      {isUsingMockData && (
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+          <div className="flex items-center">
+            <Database className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mr-3" />
+            <div>
+              <h3 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
+                Demo Mode - Database Tables Not Found
+              </h3>
+              <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
+                Analytics tables haven't been created yet. Showing demo data. To enable real analytics, 
+                the Supabase migration files need to be applied to create the required tables.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Date Range Controls */}
       <div className="flex flex-wrap items-center gap-4 mb-8">
         <div className="flex items-center gap-2">
@@ -150,14 +178,31 @@ export const Analytics: React.FC = () => {
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { label: 'Total Page Views', value: summary.totalPageViews.toLocaleString() },
-          { label: 'Unique Visitors', value: summary.uniqueVisitors.toLocaleString() },
-          { label: 'Total Leads', value: leads.length.toLocaleString() },
-          { label: 'Conversion Rate', value: `${summary.conversionRate.toFixed(2)}%` }
+          { 
+            label: 'Total Page Views', 
+            value: summary.totalPageViews.toLocaleString(),
+            subtext: isUsingMockData ? 'Demo data' : 'Real data'
+          },
+          { 
+            label: 'Unique Visitors', 
+            value: summary.uniqueVisitors.toLocaleString(),
+            subtext: isUsingMockData ? 'Demo data' : 'Real data'
+          },
+          { 
+            label: 'Total Leads', 
+            value: leads.length.toLocaleString(),
+            subtext: isUsingMockData ? 'Demo data' : 'Real data'
+          },
+          { 
+            label: 'Conversion Rate', 
+            value: `${summary.conversionRate.toFixed(2)}%`,
+            subtext: isUsingMockData ? 'Demo data' : 'Real data'
+          }
         ].map((stat, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
             <h3 className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</h3>
             <p className="text-3xl font-bold text-gray-900 dark:text-white mt-2">{stat.value}</p>
+            <p className="text-xs text-gray-400 mt-1">{stat.subtext}</p>
           </div>
         ))}
       </div>
@@ -210,6 +255,7 @@ export const Analytics: React.FC = () => {
           <button
             onClick={exportData}
             className="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            disabled={leads.length === 0}
           >
             <Download className="w-4 h-4 mr-2" />
             Export CSV
@@ -245,7 +291,14 @@ export const Analytics: React.FC = () => {
             </table>
           ) : (
             <div className="p-8 text-center text-gray-500 dark:text-gray-400">
-              No leads data available for the selected date range.
+              <Database className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <h3 className="text-lg font-medium mb-2">No leads data available</h3>
+              <p className="text-sm">
+                {isUsingMockData 
+                  ? 'Database tables need to be created to track real leads data.'
+                  : 'No leads found for the selected date range.'
+                }
+              </p>
             </div>
           )}
         </div>
