@@ -60,6 +60,13 @@ const BlogPage: React.FC = () => {
     }
   };
 
+  const handleNavigation = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <>
       <SEO 
@@ -151,7 +158,7 @@ const BlogPage: React.FC = () => {
                     </div>
 
                     <h2 className="text-xl font-bold mb-3 text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                      <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                      <Link to={`/blog/${post.slug}`} onClick={handleNavigation}>{post.title}</Link>
                     </h2>
 
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
@@ -195,6 +202,7 @@ const BlogPage: React.FC = () => {
                       <Link
                         to={`/blog/${post.slug}`}
                         className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline transform hover:translate-x-1 transition-transform"
+                        onClick={handleNavigation}
                       >
                         Read More
                         <ArrowRight size={16} className="ml-1" />

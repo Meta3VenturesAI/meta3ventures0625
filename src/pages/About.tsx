@@ -263,6 +263,7 @@ const AboutPage: React.FC = () => {
                   <Link 
                     to="/apply"
                     className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-900 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     Apply Now
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -270,6 +271,7 @@ const AboutPage: React.FC = () => {
                   <Link 
                     to="/contact"
                     className="inline-flex items-center justify-center px-8 py-4 border border-white text-white hover:bg-white/10 font-medium rounded-lg transition-colors"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   >
                     Contact Us
                   </Link>

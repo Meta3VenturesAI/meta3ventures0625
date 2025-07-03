@@ -13,17 +13,17 @@ export const Partners: React.FC = () => {
   const partners: Partner[] = [
     {
       name: "HubSpot for Startups",
-      imageUrl: "/logos/hubspot-logo.png",
+      imageUrl: "/logos/png-clipart-hubspot-logo-hubspot-logo-icons-logos-emojis-tech-companies.png",
       description: "CRM and marketing platform for growing startups"
     },
     {
       name: "NVIDIA Inception",
-      imageUrl: "/logos/nvidia-inception.png",
+      imageUrl: "/logos/20181218-Nvidia-Inception.webp",
       description: "AI computing platform and startup acceleration program"
     },
     {
       name: "Google for Startups",
-      imageUrl: "/logos/google-for-startups.png",
+      imageUrl: "/logos/Logo_for_Google_for_Startups_page.png",
       description: "Cloud credits and startup support from Google"
     },
     {
@@ -63,52 +63,52 @@ export const Partners: React.FC = () => {
     },
     {
       name: "Atlassian",
-      imageUrl: "/logos/atlassian-logo.png",
+      imageUrl: "/logos/Atlassian-Logo.png",
       description: "Team collaboration and productivity tools"
     },
     {
       name: "Slack",
-      imageUrl: "/logos/slack-logo.png",
+      imageUrl: "/logos/slack-logo-PNG-large-size-900x230.png",
       description: "Business communication and collaboration platform"
     },
     {
       name: "Zoom",
-      imageUrl: "/logos/zoom-logo.png",
+      imageUrl: "/logos/zoom-logo-png-video-meeting-call-software.png",
       description: "Video communications and virtual meetings"
     },
     {
       name: "Notion",
-      imageUrl: "/logos/notion-logo.png",
+      imageUrl: "/logos/notion-symbol.png",
       description: "All-in-one workspace for notes, docs, and collaboration"
     },
     {
       name: "Figma",
-      imageUrl: "/logos/figma-logo.png",
+      imageUrl: "/logos/figma.png",
       description: "Collaborative design and prototyping platform"
     },
     {
       name: "Databricks",
-      imageUrl: "/logos/databricks-logo.png",
+      imageUrl: "/logos/Databricks_Logo.png",
       description: "Unified analytics platform for big data and machine learning"
     },
     {
       name: "MongoDB",
-      imageUrl: "/logos/mongodb-logo.png",
+      imageUrl: "/logos/MongoDB_forStartups_ForestGreen.png",
       description: "Document database for modern applications"
     },
     {
       name: "Snowflake",
-      imageUrl: "/logos/snowflake-logo.png",
+      imageUrl: "/logos/ibsi_snowflake.jpg",
       description: "Cloud data platform for data warehousing"
     },
     {
       name: "Stripe",
-      imageUrl: "/logos/stripe-logo.png",
+      imageUrl: "/logos/new-stripe-logo-png.png",
       description: "Payment processing platform for internet businesses"
     },
     {
       name: "Salesforce",
-      imageUrl: "/logos/salesforce-logo.png",
+      imageUrl: "/logos/salesforce.png",
       description: "Customer relationship management platform"
     }
   ];
