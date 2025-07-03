@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SEO } from '../components/SEO';
 import { Plus, Save, Trash2, Edit2, LogOut, BarChart, Search, Filter, Eye, Calendar, User, Tag } from 'lucide-react';
-import { BlogPost } from '../types/blog';
+import { BlogPost, BlogPostFormData } from '../types/blog';
 import { useAuth } from '../contexts/AuthContext';
 import LoginForm from '../components/LoginForm';
 import { BlogEditor } from '../components/BlogEditor';
@@ -10,6 +10,7 @@ import { getBlogPosts, deleteBlogPost } from '../lib/blog';
 import { ErrorFallback } from '../components/ErrorFallback';
 import { ErrorBoundary } from 'react-error-boundary';
 import { blogPosts } from '../utils/blog';
+import { BlogQuickActions } from '../components/BlogQuickActions';
 import toast from 'react-hot-toast';
 
 const BlogManagement: React.FC = () => {
@@ -43,11 +44,40 @@ const BlogManagement: React.FC = () => {
     }
   };
 
+  const handleCreatePost = (template?: Partial<BlogPostFormData>) => {
+    if (template) {
+      setSelectedPost({
+        id: 'new-' + Date.now(),
+        slug: '',
+        title: template.title || '',
+        excerpt: template.excerpt || '',
+        content: template.content || '',
+        image: template.image || 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+        author_id: template.author_id || 'default-author',
+        author: {
+          name: 'Liron Langer',
+          avatar: '/images/Liron1.jpg'
+        },
+        category_id: template.category_id || 'ai',
+        category: template.category_id || 'ai',
+        tags: template.tags || [],
+        read_time: template.read_time || '5 min read',
+        readTime: template.read_time || '5 min read',
+        published: template.published || false,
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      } as BlogPost);
+    } else {
+      setSelectedPost(null);
+    }
+    setIsEditing(true);
+  };
+
   const handleDelete = async (id: string) => {
     if (!window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) return;
     
     try {
-      await deleteBlogPost(id);
+      // In a real implementation, this would call the API
+      // await deleteBlogPost(id);
       setPosts(posts.filter(post => post.id !== id));
       toast.success('Post deleted successfully');
     } catch (error) {
@@ -59,12 +89,38 @@ const BlogManagement: React.FC = () => {
   const handleDuplicate = (post: BlogPost) => {
     const duplicatedPost: Partial<BlogPost> = {
       ...post,
-      id: undefined,
+      id: 'new-' + Date.now(),
       title: `${post.title} (Copy)`,
       published: false
     };
     setSelectedPost(duplicatedPost as BlogPost);
     setIsEditing(true);
+  };
+
+  const handleSavePost = () => {
+    // In a real implementation, this would save to the database
+    // For now, we'll simulate adding/updating the post in our local state
+    if (selectedPost) {
+      const isNew = selectedPost.id.startsWith('new-');
+      
+      if (isNew) {
+        // Create new post
+        const newPost = {
+          ...selectedPost,
+          id: 'post-' + Date.now(),
+          slug: selectedPost.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, ''),
+          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+        };
+        setPosts([newPost, ...posts]);
+      } else {
+        // Update existing post
+        setPosts(posts.map(post => post.id === selectedPost.id ? selectedPost : post));
+      }
+    }
+    
+    setIsEditing(false);
+    setSelectedPost(null);
+    toast.success('Post saved successfully!');
   };
 
   const filteredPosts = posts.filter(post => {
@@ -190,11 +246,7 @@ const BlogManagement: React.FC = () => {
               {isEditing ? (
                 <BlogEditor
                   initialData={selectedPost || undefined}
-                  onSave={() => {
-                    setIsEditing(false);
-                    setSelectedPost(null);
-                    loadPosts();
-                  }}
+                  onSave={handleSavePost}
                   onCancel={() => {
                     setIsEditing(false);
                     setSelectedPost(null);
@@ -202,10 +254,19 @@ const BlogManagement: React.FC = () => {
                 />
               ) : (
                 <>
+                  {/* Quick Actions */}
+                  <BlogQuickActions 
+                    onCreatePost={handleCreatePost}
+                    onViewAnalytics={() => setShowAnalytics(true)}
+                    totalPosts={posts.length}
+                    publishedPosts={posts.filter(p => p.published).length}
+                    draftPosts={posts.filter(p => !p.published).length}
+                  />
+
                   {/* Action Bar */}
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <button
-                      onClick={() => setIsEditing(true)}
+                      onClick={() => handleCreatePost()}
                       className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
                     >
                       <Plus className="w-5 h-5 mr-2" />
@@ -250,34 +311,6 @@ const BlogManagement: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Stats */}
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                      <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
-                        {posts.length}
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">Total Posts</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                      <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                        {posts.filter(p => p.published).length}
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">Published</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                      <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
-                        {posts.filter(p => !p.published).length}
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">Drafts</div>
-                    </div>
-                    <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                      <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                        {filteredPosts.length}
-                      </div>
-                      <div className="text-sm text-gray-600 dark:text-gray-300">Filtered</div>
-                    </div>
-                  </div>
-
                   {/* Posts List */}
                   <div className="space-y-6">
                     {filteredPosts.length > 0 ? (
@@ -297,11 +330,11 @@ const BlogManagement: React.FC = () => {
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
                                   if (post.category === 'ai') {
-                                    target.src = "/images/innovation.jpg";
+                                    target.src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
                                   } else if (post.category === 'blockchain') {
-                                    target.src = "/images/blockchain-tech.jpg";
+                                    target.src = "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
                                   } else {
-                                    target.src = "/images/venture-capital.jpg";
+                                    target.src = "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
                                   }
                                 }}
                               />
@@ -414,7 +447,7 @@ const BlogManagement: React.FC = () => {
                               setFilterStatus('all');
                               setFilterCategory('all');
                             } else {
-                              setIsEditing(true);
+                              handleCreatePost();
                             }
                           }}
                           className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
