@@ -12,6 +12,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { blogPosts } from '../utils/blog';
 import { BlogQuickActions } from '../components/BlogQuickActions';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const BlogManagement: React.FC = () => {
   const { isAuthenticated, logout } = useAuth();
@@ -33,7 +34,6 @@ const BlogManagement: React.FC = () => {
   const loadPosts = async () => {
     try {
       // For now, use the static blog posts data
-      // In a real implementation, this would fetch from Supabase
       setPosts(blogPosts || []);
     } catch (error) {
       console.error('Error loading posts:', error);
@@ -112,15 +112,16 @@ const BlogManagement: React.FC = () => {
           date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
         };
         setPosts([newPost, ...posts]);
+        toast.success('Post created successfully!');
       } else {
         // Update existing post
         setPosts(posts.map(post => post.id === selectedPost.id ? selectedPost : post));
+        toast.success('Post updated successfully!');
       }
     }
     
     setIsEditing(false);
     setSelectedPost(null);
-    toast.success('Post saved successfully!');
   };
 
   const filteredPosts = posts.filter(post => {
@@ -386,15 +387,15 @@ const BlogManagement: React.FC = () => {
                             
                             {/* Actions */}
                             <div className="flex lg:flex-col gap-2 lg:w-auto">
-                              <a
-                                href={`/blog/${post.slug}`}
+                              <Link
+                                to={`/blog/${post.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-2 text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                                 title="View Post"
                               >
                                 <Eye className="w-5 h-5" />
-                              </a>
+                              </Link>
                               <button
                                 onClick={() => {
                                   setSelectedPost(post);

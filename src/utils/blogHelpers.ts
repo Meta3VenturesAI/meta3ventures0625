@@ -23,6 +23,7 @@ Artificial intelligence continues to evolve at an unprecedented pace, reshaping 
 ## Conclusion
 
 [Summarize key takeaways and future outlook]`,
+    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800",
     category_id: "ai",
     tags: ["Artificial Intelligence", "Innovation", "Future Tech"]
   },
@@ -52,6 +53,7 @@ Blockchain technology continues to mature, offering new solutions for [specific 
 ## Looking Ahead
 
 [Discuss future potential and challenges]`,
+    image: "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800",
     category_id: "blockchain",
     tags: ["Blockchain", "Web3", "Innovation"]
   },
@@ -85,6 +87,7 @@ The venture capital landscape is constantly evolving. Here's our analysis of cur
 ## Conclusion
 
 [Summarize key insights and recommendations]`,
+    image: "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800",
     category_id: "venture-capital",
     tags: ["Venture Capital", "Investment", "Market Analysis"]
   }
