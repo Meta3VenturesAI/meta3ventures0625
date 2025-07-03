@@ -31,7 +31,7 @@ export const imageConfig = {
     'Snowflake': '/logos/snowflake-logo.png',
     'Stripe': '/logos/stripe-logo.png',
     'Salesforce': '/logos/salesforce-logo.png'
-  } as Record<string, string>,
+  } as const,
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
@@ -127,8 +127,9 @@ export const isValidImageUrl = (url: string): boolean => {
 // Get partner logo by name
 export const getPartnerLogo = (partnerName: string): string => {
   // First try to get from the partnerLogos map
-  if (partnerName in imageConfig.partnerLogos) {
-    return imageConfig.partnerLogos[partnerName as keyof typeof imageConfig.partnerLogos];
+  const logoKey = partnerName as keyof typeof imageConfig.partnerLogos;
+  if (logoKey in imageConfig.partnerLogos) {
+    return imageConfig.partnerLogos[logoKey];
   }
   
   // If not found, return a fallback image
@@ -203,6 +204,7 @@ export const debugCheckAllImages = async () => {
     
     // Team images
     '/images/liron-langer.jpg',
+    '/images/team-collaboration.jpg',
     
     // Blog images
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',

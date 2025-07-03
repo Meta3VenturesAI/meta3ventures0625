@@ -67,6 +67,10 @@ export const About: React.FC = () => {
               alt="Team collaboration" 
               className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
               loading="lazy"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800";
+              }}
             />
           </div>
         </div>

@@ -117,6 +117,10 @@ const AboutPage: React.FC = () => {
                   alt="Team collaboration" 
                   className="relative z-10 rounded-xl shadow-xl w-full h-auto transform hover:scale-105 transition-transform duration-500"
                   loading="eager"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800";
+                  }}
                 />
               </div>
             </div>
@@ -172,6 +176,10 @@ const AboutPage: React.FC = () => {
                       alt="Liron Langer - Managing Director"
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=800";
+                      }}
                     />
                   </div>
                   <div className="p-8">
