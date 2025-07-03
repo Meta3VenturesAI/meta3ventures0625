@@ -35,7 +35,7 @@ export const imageConfig = {
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
-    // Team/About images
+    // Team/About images - using the correct uploaded image
     lironLanger: '/images/liron-langer.jpg',
     teamCollaboration: '/images/team-collaboration.jpg',
     
