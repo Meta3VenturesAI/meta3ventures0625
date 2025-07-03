@@ -152,6 +152,7 @@ const BlogPost: React.FC = () => {
                   <div className="text-xl text-gray-600 dark:text-gray-300 mb-8 font-medium leading-relaxed">
                     {post.excerpt}
                   </div>
+                  
                   <ReactMarkdown 
                     components={{
                       h1: ({children}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{children}</h1>,
