@@ -5,6 +5,7 @@ import { useForm } from '@formspree/react';
 import { filterPosts, getAllCategories } from '../utils/blog';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { imageConfig } from '../utils/imageUtils';
 
 const BlogPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,12 +33,14 @@ const BlogPage: React.FC = () => {
 
   // Get appropriate image based on category
   const getImageForPost = (post: any) => {
+    if (post.image) return post.image;
+    
     if (post.category === 'ai') {
-      return "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.aiFuture;
     } else if (post.category === 'blockchain') {
-      return "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.blockchain;
     } else {
-      return "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.ventureCapital;
     }
   };
 
@@ -137,6 +140,10 @@ const BlogPage: React.FC = () => {
                       alt={post.title}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.src = imageConfig.fallbackImages.blog;
+                      }}
                     />
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-indigo-600 text-white text-xs font-medium rounded-full">
@@ -181,7 +188,7 @@ const BlogPage: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded-full overflow-hidden">
                           <img
-                            src="/images/Liron1.jpg"
+                            src={imageConfig.optimizedUrls.lironLanger}
                             alt={post.author.name}
                             className="w-full h-full object-cover"
                             onError={(e) => {

@@ -3,7 +3,7 @@ export const imageConfig = {
   // Reliable image sources with proper URLs
   fallbackImages: {
     hero: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    team: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+    team: '/images/team-collaboration.jpg',
     blog: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
     technology: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800',
     business: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800'
@@ -35,9 +35,9 @@ export const imageConfig = {
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
-    // Team/About images - using the correct uploaded image
+    // Team/About images - using the correct uploaded images
     lironLanger: '/images/Liron1.jpg',
-    teamCollaboration: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
+    teamCollaboration: '/images/team-collaboration.jpg',
     
     // Blog images
     aiFuture: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -203,6 +203,7 @@ export const debugCheckAllImages = async () => {
     
     // Team images
     '/images/Liron1.jpg',
+    '/images/team-collaboration.jpg',
     
     // External images (these should always work)
     'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',

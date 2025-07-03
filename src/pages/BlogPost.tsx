@@ -3,6 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, User, Tag, Share2, BookOpen } from 'lucide-react';
 import { SEO } from '../components/SEO';
 import { getBlogPost, getRelatedPosts } from '../utils/blog';
+import { imageConfig } from '../utils/imageUtils';
 import ReactMarkdown from 'react-markdown';
 
 const BlogPost: React.FC = () => {
@@ -68,11 +69,11 @@ const BlogPost: React.FC = () => {
     if (post.image) return post.image;
     
     if (post.category === 'ai') {
-      return "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.aiFuture;
     } else if (post.category === 'blockchain') {
-      return "https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.blockchain;
     } else {
-      return "https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800";
+      return imageConfig.optimizedUrls.ventureCapital;
     }
   };
 
@@ -111,6 +112,10 @@ const BlogPost: React.FC = () => {
                   alt={post.title}
                   className="w-full h-full object-cover"
                   loading="eager"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = imageConfig.fallbackImages.blog;
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-6 left-6">
@@ -205,7 +210,7 @@ const BlogPost: React.FC = () => {
                 <div className="mt-12 p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
                   <div className="flex items-center gap-4">
                     <img
-                      src="/images/Liron1.jpg"
+                      src={imageConfig.optimizedUrls.lironLanger}
                       alt={post.author.name}
                       className="w-16 h-16 rounded-full object-cover"
                       loading="lazy"
@@ -264,6 +269,10 @@ const BlogPost: React.FC = () => {
                           alt={relatedPost.title}
                           className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
                           loading="lazy"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.src = imageConfig.fallbackImages.blog;
+                          }}
                         />
                       </div>
                       <div className="p-6">
