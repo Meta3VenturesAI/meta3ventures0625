@@ -258,14 +258,14 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
           </button>
         </div>
         
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg">
           <div className="relative h-64">
             <img
               src={formData.image}
               alt={formData.title}
               className="w-full h-full object-cover"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800';
+                (e.target as HTMLImageElement).src = "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800";
               }}
             />
             <div className="absolute bottom-4 left-4">
