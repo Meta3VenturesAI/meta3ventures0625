@@ -290,7 +290,34 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
               <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
                 {formData.excerpt}
               </p>
-              <ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  h1: ({children}) => <h1 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{children}</h1>,
+                  h2: ({children}) => <h2 className="text-2xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">{children}</h2>,
+                  h3: ({children}) => <h3 className="text-xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{children}</h3>,
+                  p: ({children}) => <p className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">{children}</p>,
+                  ul: ({children}) => <ul className="mb-4 space-y-2 list-disc pl-5">{children}</ul>, 
+                  ol: ({children}) => <ol className="mb-4 space-y-2 list-decimal pl-5">{children}</ol>,
+                  li: ({children}) => <li className="text-gray-700 dark:text-gray-300">{children}</li>,
+                  strong: ({children}) => <strong className="font-semibold text-gray-900 dark:text-white">{children}</strong>,
+                  em: ({children}) => <em className="italic text-gray-700 dark:text-gray-300">{children}</em>,
+                  blockquote: ({children}) => (
+                    <blockquote className="border-l-4 border-indigo-500 pl-4 my-6 italic text-gray-600 dark:text-gray-400">
+                      {children}
+                    </blockquote>
+                  ),
+                  code: ({children}) => (
+                    <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm font-mono">
+                      {children}
+                    </code>
+                  ),
+                  pre: ({children}) => (
+                    <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto my-6">
+                      {children}
+                    </pre>
+                  )
+                }}
+              >
                 {formData.content}
               </ReactMarkdown>
             </div>
@@ -367,7 +394,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({ initialData, onSave, onC
       {/* Content Editor */}
       <div>
         <label className="form-label">
-          Content *
+          Content * (Markdown supported)
         </label>
         
         {/* Markdown Toolbar */}

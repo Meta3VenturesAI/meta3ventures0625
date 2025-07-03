@@ -17,6 +17,13 @@ export const Blog: React.FC = () => {
     return categoryMap[categoryId] || categoryId;
   };
 
+  const handleNavigation = () => {
+    // Scroll to top when navigating to a new page
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
+
   return (
     <section id="blog" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 md:px-6">
@@ -65,7 +72,7 @@ export const Blog: React.FC = () => {
                 </div>
 
                 <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                  <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                  <Link to={`/blog/${post.slug}`} onClick={handleNavigation}>{post.title}</Link>
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {post.excerpt}
@@ -77,6 +84,7 @@ export const Blog: React.FC = () => {
                   <Link 
                     to={`/blog/${post.slug}`}
                     className="text-indigo-600 dark:text-indigo-400 font-medium flex items-center group-hover:underline"
+                    onClick={handleNavigation}
                   >
                     Read More
                     <ArrowRight className="ml-1 w-4 h-4" />
@@ -91,6 +99,7 @@ export const Blog: React.FC = () => {
           <Link 
             to="/blog"
             className="bg-white dark:bg-gray-800 border border-indigo-600 dark:border-indigo-400 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-gray-700 px-6 py-3 rounded-lg font-medium inline-flex items-center transition-colors"
+            onClick={handleNavigation}
           >
             View All Articles
             <ArrowRight className="ml-2 h-5 w-5" />

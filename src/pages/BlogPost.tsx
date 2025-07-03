@@ -158,10 +158,11 @@ const BlogPost: React.FC = () => {
                       h2: ({children}) => <h2 className="text-2xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">{children}</h2>,
                       h3: ({children}) => <h3 className="text-xl font-bold mt-4 mb-2 text-gray-900 dark:text-white">{children}</h3>,
                       p: ({children}) => <p className="mb-4 text-gray-700 dark:text-gray-300 leading-relaxed">{children}</p>,
-                      ul: ({children}) => <ul className="mb-4 space-y-2">{children}</ul>,
-                      ol: ({children}) => <ol className="mb-4 space-y-2">{children}</ol>,
+                      ul: ({children}) => <ul className="mb-4 space-y-2 list-disc pl-5">{children}</ul>, 
+                      ol: ({children}) => <ol className="mb-4 space-y-2 list-decimal pl-5">{children}</ol>,
                       li: ({children}) => <li className="text-gray-700 dark:text-gray-300">{children}</li>,
                       strong: ({children}) => <strong className="font-semibold text-gray-900 dark:text-white">{children}</strong>,
+                      em: ({children}) => <em className="italic text-gray-700 dark:text-gray-300">{children}</em>,
                       blockquote: ({children}) => (
                         <blockquote className="border-l-4 border-indigo-500 pl-4 my-6 italic text-gray-600 dark:text-gray-400">
                           {children}
