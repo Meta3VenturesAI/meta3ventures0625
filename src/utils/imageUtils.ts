@@ -3,10 +3,10 @@ export const imageConfig = {
   // Reliable image sources with proper URLs
   fallbackImages: {
     hero: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    team: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1200',
-    blog: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    technology: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800',
-    business: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800'
+    team: '/images/team collaboration-pexels-photo-3183197.jpeg',
+    blog: '/images/blog1-pexels-photo-8386440.webp',
+    technology: '/images/blog3-pexels-photo-7567443.jpeg',
+    business: '/images/blog2-pexels-photo-8370752.jpeg'
   },
   
   // Partner logos - using only the actual uploaded files
@@ -35,14 +35,15 @@ export const imageConfig = {
   
   // Optimized image URLs for different use cases
   optimizedUrls: {
-    // Team/About images - using reliable Pexels images
+    // Team/About images - using the new uploaded images
     lironLanger: '/images/Liron1.jpg',
-    teamCollaboration: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800',
+    teamCollaboration: '/images/team collaboration-pexels-photo-3183197.jpeg',
     
-    // Blog images - using reliable Pexels images
-    aiFuture: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-    blockchain: 'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?auto=compress&cs=tinysrgb&w=800',
-    ventureCapital: 'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg?auto=compress&cs=tinysrgb&w=800'
+    // Blog images - using the new uploaded images
+    aiFuture: '/images/blog1-pexels-photo-8386440.webp',
+    blockchain: '/images/blog2-pexels-photo-8370752.jpeg',
+    ventureCapital: '/images/blog3-pexels-photo-7567443.jpeg',
+    verticalAgentic: '/images/verical agentic.jpeg'
   }
 };
 
@@ -201,14 +202,13 @@ export const debugCheckAllImages = async () => {
     '/logos/new-stripe-logo-png.png',
     '/logos/salesforce.png',
     
-    // Team images - only check Liron's image which exists
+    // Team and blog images - check the new uploaded images
     '/images/Liron1.jpg',
-    
-    // External images (these should always work)
-    'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg',
-    'https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg',
-    'https://images.pexels.com/photos/7567443/pexels-photo-7567443.jpeg',
-    'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg'
+    '/images/team collaboration-pexels-photo-3183197.jpeg',
+    '/images/blog1-pexels-photo-8386440.webp',
+    '/images/blog2-pexels-photo-8370752.jpeg',
+    '/images/blog3-pexels-photo-7567443.jpeg',
+    '/images/verical agentic.jpeg'
   ];
   
   const results = await Promise.all(
