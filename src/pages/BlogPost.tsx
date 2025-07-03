@@ -152,7 +152,7 @@ const BlogPost: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {post.tags.map((tag, index) => (
+                  {post.tags.map((tag: string, index: number) => (
                     <span
                       key={index}
                       className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
